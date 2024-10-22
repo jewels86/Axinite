@@ -1,6 +1,3 @@
-import axinite
-
-print(axinite.Km3(1) + axinite.units.m3(4))
-print(axinite.Km3(1) / axinite.s(2))
-print(axinite.Km(2) * axinite.Km(4))
-print(axinite.min(60) - axinite.s(120))
+from axinite import Body, Vector3, Km3, Kg
+from trimesh import Trimesh
+primary = Body("primary", Trimesh(), Vector3(0, 0, 0), Km3())
