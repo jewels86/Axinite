@@ -1,4 +1,4 @@
 import axinite
 
-km3 = axinite.Km3(20)
-m3 = axinite.Meter3()
+print(axinite.Km3(1) + axinite.m(4))
+print(axinite.Km3(1) / axinite.s(2))

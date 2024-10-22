@@ -1,7 +1,7 @@
-from axinite.measurements import Measurement
+from axinite.units import Unit
 
 class Vector3:
-    def __init__(self, x: Measurement, y: Measurement, z: Measurement):
+    def __init__(self, x: Unit, y: Unit, z: Unit):
         self.x = x
         self.y = y
         self.z = z

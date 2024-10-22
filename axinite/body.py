@@ -1,4 +1,4 @@
-from axinite.measurements import Volume, Mass, Km, Km2, Km3, Kg, Celsius, MetersPerSecond, Second
+from axinite.units import Volume, Mass, Km, Km2, Km3, Kg, Celsius, mPs, s
 from axinite.quantities import Vector3
 from axinite.formulas import escape_velocity
 from trimesh import Trimesh
@@ -26,5 +26,5 @@ class Body:
         self.area = Km2(0)
         self.temperature = Celsius(0)
         self.escape_velocity = escape_velocity(self.mass + Kg(0), self.radius)
-        self.age = Second(0)
+        self.age = s(0)
         
