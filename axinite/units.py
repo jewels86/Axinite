@@ -1,4 +1,4 @@
-from axinite.functions import e, conversions
+from axinite.functions import e, conversions, conversions_distance
 
 class Unit:
     def __init__(self, value: int, label: str):
@@ -45,8 +45,8 @@ class Km3(Volume):
     def __init__(self, value: int = 0): 
         super(Km3, self).__init__(value, "Km^3")
         self.conversions = {
-            Km3: conversions(1), 
-            m3: conversions(e(1, 3)),
+            Km3: conversions(self, 1), 
+            m3: conversions(self, e(1, -3)),
             s: self.s
         }
     
@@ -61,7 +61,12 @@ class Kg(Mass):
     def __init__(self, value: int = 0): super(Kg, self).__init__(value, "Kg")
     
 class Km(Distance):
-    def __init__(self, value: int = 0): super(Km, self).__init__(value, "Km")
+    def __init__(self, value: int = 0): 
+        super(Km, self).__init__(value, "Km")
+        self.conversions = {
+            Km: conversions_distance(self, 1, Km2),
+            m: conversions_distance(self, e(1, -3), m2)
+        }
 
 class m(Distance):
     def __init__(self, value: int = 0): super(m, self).__init__(value, "m")
@@ -79,10 +84,26 @@ class mPs(Velocity):
     def __init__(self, value: int = 0): super(mPs, self).__init__(value, "m/s")
 
 class s(Time):
-    def __init__(self, value: int = 0): super(s, self).__init__(value, "s")
+    def __init__(self, value: int = 0): 
+        super(s, self).__init__(value, "s")
+        self.conversions = {
+            s: conversions(self, 1),
+            min: conversions(self, 60)
+        }
 
 class m3(Volume):
     def __init__(self, value: int = 0): super(m3, self).__init__(value, "m^3")
     
+class m2(Area):
+    def __init__(self, value: int = 0): super(m2, self).__init__(value, "m^2")
+    
 class m3Ps(Velocity):
     def __init__(self, value: int = 0): super(m3Ps, self).__init__(value, "m^3/s")
+
+class min(Time):
+    def __init__(self, value: int = 0): 
+        super(min, self).__init__(value, "min")
+        self.conversions = {
+            s: conversions(self, (1 / 60)),
+            min: conversions(self, 1)
+        }
