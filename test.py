@@ -8,6 +8,7 @@ first = CompoundM(units.m(2), units.Km(2), units.s(30))
 second = CompoundM(units.m2(82), units.m(0.5))
 third = CompoundD(units.m(40), units.Km(4))
 fourth = CompoundD(first, second)
+fifth = CompoundM(units.m(2), units.m(4))
 
 print(first)
 print(second)

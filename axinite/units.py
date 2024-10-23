@@ -39,6 +39,15 @@ class CompoundM(Unit):
             self.label += f" {v.label}"
         if value != None: self.value = value
         
+    def simplify(self):
+        reft = {}
+        refv = {}
+        
+        for u in self.units:
+            if type(u) not in reft: reft[type(u)] = 0
+            reft[type(u)] += 1
+            refv[type(u)]
+        
     def __add__(self, other):
         if type(other) != CompoundM | self.units != other.units: raise Exception()
         return CompoundM(self.units, value = self.value + other.value)
@@ -51,6 +60,11 @@ class CompoundM(Unit):
     def __truediv__(self, other):
         if type(other) == CompoundM: return CompoundM(self.units + other.units, value=self.value / other.value)
         return CompoundM(self.units + [other], value = self.value / other.value)
+    
+    def __contains__(self, type):
+        for u in self.untis:
+            if type(u) == type: return True
+        return False
     
 class CompoundD(Unit):
     def __init__(self, above: Unit, below: Unit):
