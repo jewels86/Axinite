@@ -26,7 +26,7 @@ class Body:
         self.radius = Km(0)
         self.area = Km2(0)
         self.temperature = Celsius(0)
-        self.escape_velocity = escape_velocity(self.mass + Kg(0), self.radius)
+        self.escape_velocity = escape_velocity(self.mass.to(Kg), self.radius)
         self.age = s(0)
         
         scale = (self.volume.value / mesh.volume) ** 1/3

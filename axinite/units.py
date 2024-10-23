@@ -5,6 +5,7 @@ class Unit:
         self.value = value
         self.label = label
         self.conversions = {}
+        self.scales = {}
         self.exponential_units = {}
     def __add__(self, other):
         if type(other) not in self.conversions: return self.value + other.value
@@ -19,38 +20,14 @@ class Unit:
         if type(other) not in self.conversions: return self.value / other.value
         return self.conversions[type(other)](other, 'div') 
     
+    def to(self, type):
+        return type(self.scales[type] * self.value)
+    
     def __str__(self): return f"{self.value}{self.label}"
     def __repr__(self): return self.__str__()
     def __eq__(self, other): 
         if type(other) not in self.conversions: raise Exception(f"{self} cannot be converted to {other}.")
         return type(other)(self.conversions[type(other)]).value == self.value
-    
-class CompoundM(Unit):
-    def __init__(self, *values, value=None):
-        super(CompoundM, self).__init__(1, "")
-        self.units = []
-        for v in values: 
-            self.units.append(type(v))
-            self.value *= v.value
-            self.labels += f" {v.label}"
-        if value != None: self.value = value
-        
-    def __add__(self, other):
-        if type(other) != CompoundM | self.units != other.units: raise Exception()
-        return CompoundM(self.units, value = self.value + other.value)
-    def __sub__(self, other):
-        if type(other) != CompoundM | self.units != other.units: raise Exception()
-        return CompoundM(self.units, value = self.value - other.value)
-    def __mul__(self, other):
-        if type(other) == CompoundM: return CompoundM(self.units + other.units, value=self.value * other.value)
-        return CompoundM(self.units + [other], value = self.value * other.value)
-    def __truediv__(self, other):
-        if type(other) == CompoundM: return CompoundM(self.units + other.units, value=self.value / other.value)
-        return CompoundM(self.units + [other], value = self.value / other.value)
-    
-class CompoundD(Unit):
-    def __init__(self, value1, value2):
-        pass
     
 class Volume(Unit):
     def __init__(self, value: int, label: str): super(Volume, self).__init__(value, label)
@@ -86,7 +63,11 @@ class Km2(Area):
     def __init__(self, value: int = 0): super(Km2, self).__init__(value, "Km^2")
     
 class Kg(Mass):
-    def __init__(self, value: int = 0): super(Kg, self).__init__(value, "Kg")
+    def __init__(self, value: int = 0): 
+        super(Kg, self).__init__(value, "Kg")
+        self.scales = {
+            Kg: 1
+        }
     
 class Km(Distance):
     def __init__(self, value: int = 0): 
