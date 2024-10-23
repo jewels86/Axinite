@@ -29,6 +29,33 @@ class Unit:
         if type(other) not in self.conversions: raise Exception(f"{self} cannot be converted to {other}.")
         return type(other)(self.conversions[type(other)]).value == self.value
     
+class CompoundM(Unit):
+    def __init__(self, *values, value=None):
+        super(CompoundM, self).__init__(1, "")
+        self.units = []
+        for v in values: 
+            self.units.append(type(v))
+            self.value *= v.value
+            self.label += f" {v.label}"
+        if value != None: self.value = value
+        
+    def __add__(self, other):
+        if type(other) != CompoundM | self.units != other.units: raise Exception()
+        return CompoundM(self.units, value = self.value + other.value)
+    def __sub__(self, other):
+        if type(other) != CompoundM | self.units != other.units: raise Exception()
+        return CompoundM(self.units, value = self.value - other.value)
+    def __mul__(self, other):
+        if type(other) == CompoundM: return CompoundM(self.units + other.units, value=self.value * other.value)
+        return CompoundM(self.units + [other], value = self.value * other.value)
+    def __truediv__(self, other):
+        if type(other) == CompoundM: return CompoundM(self.units + other.units, value=self.value / other.value)
+        return CompoundM(self.units + [other], value = self.value / other.value)
+    
+class CompoundD(Unit):
+    def __init__(self, above: Unit, below: Unit):
+        super(CompoundD, self).__init__(above.value / below.value, f"{above.label} /{below.label}")
+    
 class Volume(Unit):
     def __init__(self, value: int, label: str): super(Volume, self).__init__(value, label)
 class Area(Unit):
