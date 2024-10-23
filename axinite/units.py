@@ -32,27 +32,50 @@ class Unit:
 class CompoundM(Unit):
     def __init__(self, *values, value=None):
         super(CompoundM, self).__init__(1, "")
-        self.units = []
+        self.units_t = []
+        self.units_v = []
         for v in values: 
-            self.units.append(type(v))
+            self.units_t.append(type(v))
+            self.units_v.append(v)
             self.value *= v.value
             self.label += f" {v.label}"
         if value != None: self.value = value
+        self.simplify()
         
     def simplify(self):
-        reft = {}
+        refn = {}
         refv = {}
         
-        for u in self.units:
-            if type(u) not in reft: reft[type(u)] = 0
-            reft[type(u)] += 1
-            refv[type(u)]
+        for u in self.units_v:
+            if type(u) not in refn: 
+                refn[type(u)] = 0
+                refv[type(u)] = []
+            refn[type(u)] += 1
+            refv[type(u)] = u
+            
+        _units_v = []
+        _units_t = []
+        v = 1
+
+        
+        for k, v in refn.items():
+            value = 1
+            t = k(0).exponential_units[v]
+            for u in refv[k]: value *= u.value
+            _units_v.append(t(value))
+            _units_t.append(t)
+            v *= value
+            
+        self.units_v = _units_v
+        self.units_t = _units_t
+        self.value = v
+            
         
     def __add__(self, other):
-        if type(other) != CompoundM | self.units != other.units: raise Exception()
+        if type(other) != CompoundM | self.units_t != other.units_t: raise Exception()
         return CompoundM(self.units, value = self.value + other.value)
     def __sub__(self, other):
-        if type(other) != CompoundM | self.units != other.units: raise Exception()
+        if type(other) != CompoundM | self.units_t != other.units_t: raise Exception()
         return CompoundM(self.units, value = self.value - other.value)
     def __mul__(self, other):
         if type(other) == CompoundM: return CompoundM(self.units + other.units, value=self.value * other.value)
