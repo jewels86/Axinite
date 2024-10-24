@@ -109,11 +109,16 @@ class CompoundD(Unit):
         super(CompoundD, self).__init__(above.value / below.value, f"{above.label} /{below.label} ")
         if not hasattr(self, 'label'):
             self._isclass = True
-            self.label = ""
+            self.label = f" {above.label}/{below.label}"
         else: self._isclass = True
         
         self.above = above
         self.below = below
+        self.simplify()
+        
+    def simplify(self):
+        self.simplified_a = self.above / self.below
+        self.simplified_b = type(self.below)(1)
     
     def __eq__(self, other):
         if self.above != other.above: return False
@@ -124,12 +129,20 @@ class CompoundD(Unit):
     def __add__(self, other):
         if type(self.above) != type(other.above): raise Exception()
         if type(self.below) != type(other.below): raise Exception()
-        return CompoundD(self.above + other.above, type(self.below)(value=0))
+        return CompoundD(type(self.above)(self.simplified_a + other.simplified_a), type(self.below)(value=1))
+    def __sub__(self, other):
+        if type(self.above) != type(other.above): raise Exception()
+        if type(self.below) != type(other.below): raise Exception()
+        return CompoundD(type(self.above)(self.simplified_a - other.simplified_a), type(self.below)(value=1))
+    def __mul__(self, other):
+        if type(self.above) != type(other.above): raise Exception()
+        if type(self.below) != type(other.below): raise Exception()
+        return CompoundD(self.above * other.above, self.below * other.below)
     
 class Volume(CompoundM):
     def __init__(self, unit1: Unit, unit2: Unit, unit3: Unit, value: int = None, negative: bool = False): super(Volume, self).__init__(unit1, unit2, unit3, value=value)
 class Area(Unit):
-    def __init__(self, value: int): super(Area, self).__init__(value)
+    def __init__(self, value: int, negative = False): super(Area, self).__init__(value)
 class Hypervolume(CompoundM):
     def __init__(self, unit1: Unit, unit2: Unit, unit3: Unit, unit4: Unit, value: int = None, negative: bool = False): super(Hypervolume, self).__init__(unit1, unit2, unit3, unit4, value=value)
 class Mass(Unit):
