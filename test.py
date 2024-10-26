@@ -7,9 +7,6 @@ from trimesh import Trimesh
 first = CompoundD(m(2), s(1))
 second = CompoundD(m(32), s(4))
 
-print(first.above, first.below, first)
-print(second.above, second.below, second)
-
 print("+", first + second, second + first)
 print("-", first - second, second - first)
 print("*", first * second, second * first)

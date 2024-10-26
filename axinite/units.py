@@ -9,16 +9,16 @@ class Unit:
         self.negative = negative
         self.exponent = 1
     def __add__(self, other):
-        if type(other) not in self.conversions: return self.value + other.value
+        if type(other) not in self.conversions: return CompoundA(self, other)
         return self.conversions[type(other)](other, 'add') 
     def __sub__(self, other):
         if type(other) not in self.conversions: return self.value - other.value
         return self.conversions[type(other)](other, 'sub') 
     def __mul__(self, other):
-        if type(other) not in self.conversions: return self.value * other.value
+        if type(other) not in self.conversions: return CompoundM(self, other)
         return self.conversions[type(other)](other, 'mul')
     def __truediv__(self, other):
-        if type(other) not in self.conversions: return self.value / other.value
+        if type(other) not in self.conversions: return CompoundD(self, other)
         return self.conversions[type(other)](other, 'div')
     def __neg__(self):
         return type(self)(value=-self.value, negative=True)
@@ -31,8 +31,45 @@ class Unit:
     def __eq__(self, other): 
         if type(other) not in self.conversions: raise Exception(f"{self} cannot be converted to {other}.")
         return type(other)(self.conversions[type(other)]).value == self.value
-    
-class CompoundM(Unit):
+
+class Compound(Unit):
+    def __init__(self, value): super(Compound, self).__init__(value)
+
+class CompoundA(Compound):
+    def __init__(self, *values):
+        super(CompoundA, self).__init__(-1)
+        if not hasattr(self, 'label'): 
+            self._isclass = False
+            self.label = ""
+        else: self._isclass = True
+        self.values = values
+        self.value = values[0].value
+        self.label = values[0].label
+        for v in values:
+            self.label += f" + {v}"
+            self.value = self.value + v.value
+            
+        def __add__(self, other):
+            if type(other) == CompoundA: return CompoundA(*(self.values + other.values))
+            else: return CompoundA(*(self.values + [other]))
+        def __sub__(self, other):
+            if type(other) == CompoundA: pass
+
+class CompoundS(Compound):
+    def __init__(self, *values):
+        super(CompoundS, self).__init__(-1)
+        if not hasattr(self, 'label'): 
+            self._isclass = False
+            self.label = ""
+        else: self._isclass = True
+        self.values = values
+        self.value = values[0].value
+        self.label = values[0].label
+        for v in values:
+            self.label += f" - {v}"
+            self.value = self.value - v.value
+
+class CompoundM(Compound):
     def __init__(self, *values, value=None):
         super(CompoundM, self).__init__(1)
         if not hasattr(self, 'label'): 
@@ -104,40 +141,36 @@ class CompoundM(Unit):
             if t == type: return True
         return False
     
-class CompoundD(Unit):
-    def __init__(self, above: Unit, below: Unit):
-        super(CompoundD, self).__init__(above.value / below.value, f"{above.label} /{below.label} ")
+class CompoundD(Compound):
+    def __init__(self, *values):
+        super(CompoundD, self).__init__(1)
         if not hasattr(self, 'label'):
-            self._isclass = True
-            self.label = f" {above.label}/{below.label}"
+            self._isclass = False
+            self.label = f" "
         else: self._isclass = True
         
-        self.above = above
-        self.below = below
+        self.value = values[0].value
+        self.label = values[0].label
+        for v in values[1:]:
+            self.value = self.value / v.value
+            self.label += f"/{v.label}"
         self.simplify()
         
     def simplify(self):
-        self.simplified_a = self.above / self.below
-        self.simplified_b = type(self.below)(1)
+        pass
     
     def __eq__(self, other):
-        if self.above != other.above: return False
-        if self.below != other.below: return False
-        if self.value != other.value: return False
+       
         return True
     
     def __add__(self, other):
-        if type(self.above) != type(other.above): raise Exception()
-        if type(self.below) != type(other.below): raise Exception()
-        return CompoundD(type(self.above)(self.simplified_a + other.simplified_a), type(self.below)(value=1))
+        return CompoundA(self, other)
     def __sub__(self, other):
-        if type(self.above) != type(other.above): raise Exception()
-        if type(self.below) != type(other.below): raise Exception()
-        return CompoundD(type(self.above)(self.simplified_a - other.simplified_a), type(self.below)(value=1))
+        return CompoundS(self, other)
     def __mul__(self, other):
-        if type(self.above) != type(other.above): raise Exception()
-        if type(self.below) != type(other.below): raise Exception()
-        return CompoundD(self.above * other.above, self.below * other.below)
+        return CompoundM(self, other)
+    def __truediv__(self, other):
+        return CompoundD(self, other)
     
 class Volume(CompoundM):
     def __init__(self, unit1: Unit, unit2: Unit, unit3: Unit, value: int = None, negative: bool = False): super(Volume, self).__init__(unit1, unit2, unit3, value=value)
