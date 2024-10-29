@@ -168,6 +168,7 @@ class CompoundD(Compound):
     def __sub__(self, other):
         return CompoundS(self, other)
     def __mul__(self, other):
+        print(self, other)
         return CompoundM(self, other)
     def __truediv__(self, other):
         return CompoundD(self, other)
