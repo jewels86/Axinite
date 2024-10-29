@@ -1,2 +1,2 @@
-# Axinite-
+# Axinite
 A celestial physics simulation.
