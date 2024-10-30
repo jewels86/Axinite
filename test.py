@@ -1,13 +1,9 @@
-from axinite import Body, Vector3, Km3, Kg, e, formulas, CompoundM, units, CompoundD, m, s
-from trimesh import Trimesh
+import axinite
 
-#primary = Body("primary", Trimesh(), Vector3(0, 0, 0), Km3(e(1.083, 12)), Kg(e(5.97, 24)))
-#secondary = Body("secondary", Trimesh(), Vector3(1, 1, 1), Km3(e(1.083, 12)), Kg(e(5.97, 24)))
+cmpdA1 = axinite.CompoundA(axinite.m(1), axinite.m(2), axinite.m(3))
+cmpdA2 = axinite.CompoundA(axinite.km(1))
 
-first = CompoundD(m(2), s(1))
-second = CompoundD(m(32), s(4))
-
-print("+ |", first + second, "|", second + first)
-print("- |", first - second,"|", second - first)
-print("*", first * second, second * first)
-print("/", first / second, second / first)
+print(cmpdA1)
+print(cmpdA2)
+print(cmpdA1 + cmpdA2)
+print(axinite.m(1) + axinite.km(1))
