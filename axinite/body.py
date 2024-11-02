@@ -1,13 +1,15 @@
 from misura.quantities import quantity
 from trimesh import Trimesh
+from axinite.vector import Vector3
 
 class Body:
-    def __init__(self, mesh: Trimesh, mass: quantity, volume: quantity, label: str, ):
-        self.mesh = mesh.apply_scale((volume / mesh.volume) ** (1/3))
-        
+    def __init__(self, name: str, mass: quantity, position: Vector3, velocity: quantity, mesh: Trimesh):
+        self.name = name
         self.mass = mass
-        self.volume = volume
-        self.density = mass / volume
+        self.position = position
+        self.velocity = velocity
+        self.mesh = Trimesh
         
-        self.average_radius = (mesh.bounding_sphere.primitive.radius + mesh.bounding_box_oriented.primitive.extents.max() / 2) / 2
-        self.label = label
+    def gravitational_force(self, other):
+        G = quantity(6.67430e-11, 'm3 kg-1 s-2')
+        return G * ((self.mass * other.mass) / (abs(self.position - other.position)))
