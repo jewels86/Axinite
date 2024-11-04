@@ -26,8 +26,9 @@ class Body:
         self.density = self.mass / self.volume
         
     def gravitational_force(self, other: 'Body'):
-        r_dist = other.position - self.position # distance vector between A and B
-        r = r_dist.norm() # magnitude of rAB
-        uv = r_dist / r
-        
-        return -((G * self.mass) / r**2) * uv
+        r_vector = other.position - self.position
+        r = r_vector.norm()
+        uv = r_vector / r
+        g_magnitude = (G * self.mass * r**2).to(u.meter / u.second**2)
+        g_vector = -g_magnitude * uv
+        return CartesianRepresentation(g_vector.x, g_vector.y, g_vector.z)
