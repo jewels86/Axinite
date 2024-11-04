@@ -9,22 +9,23 @@ import math
 
 A = ax.Body(
     "A", 
-    const.M_earth.to(u.kg), 
-    CartesianRepresentation([0, 0, 0] * u.kilometer), 
-    CartesianRepresentation([0, 0, 0] * u.kilometer / u.second),
-    const.R_earth.to(u.kilometer)
+    1 * u.kg,
+    CartesianRepresentation([1, 1, 1] * u.kilometer),
+    CartesianRepresentation([0.1, 0, 0] * u.kilometer / u.second),
+    0.1 * u.kilometer
 )
 B = ax.Body(
     "B",
-    7.342e22 * u.kg,
-    CartesianRepresentation([405500, 0, 0] * u.kilometer),
-    CartesianRepresentation([100, 100, 0] * u.kilometer / u.second),
-    1737.4 * u.kilometer
+    1 * u.kg,
+    CartesianRepresentation([-1, -1, -1] * u.kilometer),
+    CartesianRepresentation([-0.1, 0, 0] * u.kilometer / u.second),
+    0.1 * u.kilometer
 )
 
 t = 0
-delta_t = 10 * u.second
-dt_val = 10
+delta_t = 1200 * u.second
+dt_val = delta_t.value
+length = delta_t / 3600
 
 rB = {
     0: B.position
@@ -39,32 +40,15 @@ aB = {
 print("Computing simulation...")
 
 try:
-    for i in range(0, 2628000):
+    for i in range(0, round(length.value)):
         aB[t + dt_val] = A.gravitational_force(B)
-        rB[t + dt_val] = (rB[t]) + (vB[t] * delta_t) + (0.5 * aB[t] * delta_t**2)
-        vB[t + dt_val] = vB[t] + ((0.5 * (aB[t] + aB[t + dt_val])) * delta_t)
+        vB[t + dt_val] = vB[t] + (aB[t + dt_val] * delta_t)
+        rB[t + dt_val] = rB[t] + (vB[t + dt_val] * delta_t)
+
         t += dt_val
-        print(f"Timestep: {t} ({round(t / 26200)}%)", end="\r")
+        print(f"Timestep: {t} ({round(i / 3.6)}% - {i})", end="\r")
 except KeyboardInterrupt as e:
     pass
 
-print("\nReady.")
+print(f"\nReady with {t / dt_val} frames.")
 
-def update(num, x_vals, y_vals, z_vals, line):
-    line.set_data(x_vals[:num], y_vals[:num])
-    line.set_3d_properties(z_vals[:num])
-    return line,
-
-fig = plt.figure()
-ax = plt.axes(projection='3d')
-x_vals = [pos.x.value for pos in rB.values()]
-y_vals = [pos.y.value for pos in rB.values()]
-z_vals = [pos.z.value for pos in rB.values()]
-
-line, = ax.plot3D(x_vals, y_vals, z_vals, 'gray')
-ax.set_xlabel('X (km)')
-ax.set_ylabel('Y (km)')
-ax.set_zlabel('Z (km)')
-
-ani = animation.FuncAnimation(fig, update, frames=len(x_vals), fargs=(x_vals, y_vals, z_vals, line), interval=10, blit=False)
-plt.show()
