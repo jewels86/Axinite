@@ -1,5 +1,6 @@
 from astropy.coordinates import CartesianRepresentation
 from astropy.constants import G
+from axinite.functions import vector_to, apply_to_vector
 import astropy.units as u
 from math import pi
 
@@ -26,9 +27,8 @@ class Body:
         self.density = self.mass / self.volume
         
     def gravitational_force(self, other: 'Body'):
-        r_vector = other.position - self.position
-        r = r_vector.norm()
-        uv = r_vector / r
-        g_magnitude = (G * self.mass * r**2).to(u.meter / u.second**2)
-        g_vector = -g_magnitude * uv
-        return CartesianRepresentation(g_vector.x, g_vector.y, g_vector.z)
+        r_vector = vector_to(other.position, u.meter) - vector_to(self.position, u.meter)
+        r_mag = r_vector.norm()
+        uv = r_vector / r_mag
+        a_mag = G * self.mass / r_mag**2
+        return uv * a_mag
