@@ -2,3 +2,4 @@ numpy
 matplotlib
 astropy[recommended]
 pyglet<2
+sympy

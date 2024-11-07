@@ -1,70 +1,51 @@
+import matplotlib.pyplot as plt
+import numpy as np
 import axinite as ax
 from astropy import units as u
-from astropy import constants as const
 from astropy.coordinates import CartesianRepresentation
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-import numpy as np
 import math
+import sympy as sp
 
-A = ax.Body(
-    "A", 
-    const.M_earth.to(u.kg), 
-    CartesianRepresentation([0, 0, 0] * u.kilometer), 
-    CartesianRepresentation([0, 0, 0] * u.kilometer / u.second),
-    const.R_earth.to(u.kilometer)
+h = 1.5 * u.meter
+v_inital = 800 * (u.meter / u.second)
+theta = 45
+g = 9.8 * u.meter / u.second**2
+
+r0 = CartesianRepresentation(0 * u.meter, h, 0 * u.meter)
+v0 = CartesianRepresentation(math.cos(theta) * v_inital, math.sin(theta) * v_inital, 0 * u.meter / u.second)
+a = CartesianRepresentation(0 * u.meter / u.second**2, -g, 0 * u.meter / u.second**2)
+
+rt = lambda t: CartesianRepresentation(
+    v_inital * math.cos(theta) * t, 
+    h + ((v_inital * math.sin(theta) * t) - (0.5 * g * t**2)),
+    0 * u.meter
 )
-B = ax.Body(
-    "B",
-    7.342e22 * u.kg,
-    CartesianRepresentation([405500, 0, 0] * u.kilometer),
-    CartesianRepresentation([100, 100, 0] * u.kilometer / u.second),
-    1737.4 * u.kilometer
-)
 
-t = 0
-delta_t = 10 * u.second
-dt_val = 10
+delta_t = 1 * u.second
+t = delta_t
+dt_val = delta_t.value
 
-rB = {
-    0: B.position
-}
-vB = {
-    0: B.velocity
-}
-aB = {
-    0: A.gravitational_force(B)
+r = {
+    0: rt(0 * u.second)
 }
 
-print("Computing simulation...")
+while True:
+    r[t] = rt(t)
+    if r[t].y <= 0: break
+    t = t + delta_t
+    print("Timestep: ", t, end="\r")
 
-try:
-    for i in range(0, 2628000):
-        aB[t + dt_val] = A.gravitational_force(B)
-        rB[t + dt_val] = (rB[t]) + (vB[t] * delta_t) + (0.5 * aB[t] * delta_t**2)
-        vB[t + dt_val] = vB[t] + ((0.5 * (aB[t] + aB[t + dt_val])) * delta_t)
-        t += dt_val
-        print(f"Timestep: {t} ({round(t / 26200)}%)", end="\r")
-except KeyboardInterrupt as e:
-    pass
+print(f"Calculated {len(r)} timesteps.")
+print("Starting position: ", r[0])
+print("Ending position: ", r[t])
+# Extract x and y positions for plotting
+x_positions = [r[time].x.value for time in r]
+y_positions = [r[time].y.value for time in r]
 
-print("\nReady.")
-
-def update(num, x_vals, y_vals, z_vals, line):
-    line.set_data(x_vals[:num], y_vals[:num])
-    line.set_3d_properties(z_vals[:num])
-    return line,
-
-fig = plt.figure()
-ax = plt.axes(projection='3d')
-x_vals = [pos.x.value for pos in rB.values()]
-y_vals = [pos.y.value for pos in rB.values()]
-z_vals = [pos.z.value for pos in rB.values()]
-
-line, = ax.plot3D(x_vals, y_vals, z_vals, 'gray')
-ax.set_xlabel('X (km)')
-ax.set_ylabel('Y (km)')
-ax.set_zlabel('Z (km)')
-
-ani = animation.FuncAnimation(fig, update, frames=len(x_vals), fargs=(x_vals, y_vals, z_vals, line), interval=10, blit=False)
+plt.figure(figsize=(10, 5))
+plt.plot(x_positions, y_positions, marker='o')
+plt.title('Projectile Motion')
+plt.xlabel('X Position (meters)')
+plt.ylabel('Y Position (meters)')
+plt.grid(True)
 plt.show()
