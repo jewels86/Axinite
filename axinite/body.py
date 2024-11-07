@@ -26,6 +26,8 @@ class Body:
         self.escape_velocity = (2 * G * self.mass.to(u.kilogram) / self.avg_radius.to(u.meter))
         self.density = self.mass / self.volume
         
+        self.accelerations = []
+        
     def gravitational_force(self, other: 'Body'):
         r_vector = vector_to(other.position, u.meter) - vector_to(self.position, u.meter)
         r_mag = r_vector.norm()
