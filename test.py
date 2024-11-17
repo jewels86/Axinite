@@ -1,51 +1,37 @@
-import matplotlib.pyplot as plt
-import numpy as np
 import axinite as ax
-from astropy import units as u
+import numpy as np
+import matplotlib.pyplot as plt
+import astropy.units as u
 from astropy.coordinates import CartesianRepresentation
-import math
-import sympy as sp
+from astropy.constants import G
 
-h = 1.5 * u.meter
-v_inital = 800 * (u.meter / u.second)
-theta = 45
-g = 9.8 * u.meter / u.second**2
+m_earth = 5.972e24 * u.kg
+r0_earth = CartesianRepresentation([0, 0, 0] * u.meter)
+v0_earth = CartesianRepresentation([0, 0, 0] * u.meter / u.s)
 
-r0 = CartesianRepresentation(0 * u.meter, h, 0 * u.meter)
-v0 = CartesianRepresentation(math.cos(theta) * v_inital, math.sin(theta) * v_inital, 0 * u.meter / u.second)
-a = CartesianRepresentation(0 * u.meter / u.second**2, -g, 0 * u.meter / u.second**2)
+m_moon = 7.342e22 * u.kg
+r0_moon = CartesianRepresentation([3.844e8, 0, 0] * u.meter)
+v0_moon = CartesianRepresentation([0, 1022, 0] * u.meter / u.s)
 
-rt = lambda t: CartesianRepresentation(
-    v_inital * math.cos(theta) * t, 
-    h + ((v_inital * math.sin(theta) * t) - (0.5 * g * t**2)),
-    0 * u.meter
-)
+def g(r: CartesianRepresentation): 
+    return -((G * m_earth) / r.magnitude**3) * r
 
-delta_t = 1 * u.second
-t = delta_t
-dt_val = delta_t.value
-
-r = {
-    0: rt(0 * u.second)
+r_moon = {
+    0 * u.s: r0_moon,
+}
+v_moon = {
+    0 * u.s: v0_moon,
+}
+a = {
+    0 * u.s: CartesianRepresentation([0, 0, 0] * u.meter / u.s**2),
+}
+f = {
+    0: g(r0_moon) * m_moon,
 }
 
-while True:
-    r[t] = rt(t)
-    if r[t].y <= 0: break
-    t = t + delta_t
-    print("Timestep: ", t, end="\r")
+t = 0 * u.second
+delta = (1 * u.hour).to(u.second)
+limit = (30 * u.day).to(u.second)
 
-print(f"Calculated {len(r)} timesteps.")
-print("Starting position: ", r[0])
-print("Ending position: ", r[t])
-# Extract x and y positions for plotting
-x_positions = [r[time].x.value for time in r]
-y_positions = [r[time].y.value for time in r]
-
-plt.figure(figsize=(10, 5))
-plt.plot(x_positions, y_positions, marker='o')
-plt.title('Projectile Motion')
-plt.xlabel('X Position (meters)')
-plt.ylabel('Y Position (meters)')
-plt.grid(True)
-plt.show()
+while t < limit:
+    
