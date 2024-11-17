@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import astropy.units as u
 from astropy.coordinates import CartesianRepresentation
 from astropy.constants import G
+from scipy import signal
 import json
 
 m_earth = 5.972e24 * u.kg
@@ -43,14 +44,9 @@ while t < limit:
     print(f"Timestep: {t} - {t.to(u.day).value:.2f} days ({r[t + delta].x.value:.2f}, {r[t + delta].y.value:.2f}, {r[t + delta].z.value:.2f})", end="\r")
     
     i += 1
-    t += delta
-print(f"Computed {i} timesteps ({t.to(u.day).value} days).")
-data = {
-    'f': {str(k): v.xyz.value.tolist() for k, v in f.items()},
-    'a': {str(k): v.xyz.value.tolist() for k, v in a.items()},
-    'v': {str(k): v.xyz.value.tolist() for k, v in v.items()},
-    'r': {str(k): v.xyz.value.tolist() for k, v in r.items()},
-}
+    t = t + delta
 
-with open('text.ax', 'w') as file:
-    json.dump(data, file)
+fig = plt.figure(figsize=(8, 8))
+axes = fig.axes(projection = '3d')
+t = np.linspace(0, 1, 1000, endpoint=True)
+axes.plot3D(t, signal.square(2 * np * 5 * t))
