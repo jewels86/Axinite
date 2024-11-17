@@ -1,11 +1,14 @@
 import axinite as ax
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 import astropy.units as u
 from astropy.coordinates import CartesianRepresentation
 from astropy.constants import G
 from scipy import signal
 import json
+import os
+from mpl_toolkits.mplot3d import Axes3D
 
 m_earth = 5.972e24 * u.kg
 r0_earth = CartesianRepresentation([0, 0, 0] * u.meter)
@@ -28,7 +31,7 @@ a = {
     0 * u.s: CartesianRepresentation([0, 0, 0] * u.meter / u.s**2),
 }
 f = {
-    0: g(r0_moon) * m_moon,
+    0 * u.s: g(r0_moon) * m_moon,
 }
 
 t = 0 * u.second
@@ -36,17 +39,52 @@ delta = 10 * u.second
 limit = (30 * u.day).to(u.second)
 i = 0
 print("Starting...")
-while t < limit:
-    f[t + delta] = g(r[t]) * m_moon
-    a[t + delta] = f[t + delta] / m_moon
-    v[t + delta] = v[t] + (a[t + delta] * delta)
-    r[t + delta] = r[t] + (v[t + delta] * delta)
-    print(f"Timestep: {t} - {t.to(u.day).value:.2f} days ({r[t + delta].x.value:.2f}, {r[t + delta].y.value:.2f}, {r[t + delta].z.value:.2f})", end="\r")
-    
-    i += 1
-    t = t + delta
+
+if os.path.exists('./test.ax'):
+    print("Loading from file...")
+    with open('test.ax', 'r') as file:
+        data = json.load(file)
+        r = {u.Quantity(float(k), u.s): CartesianRepresentation(np.array(v) * u.meter) for k, v in data['r'].items()}
+        v = {u.Quantity(float(k), u.s): CartesianRepresentation(np.array(v) * u.meter / u.s) for k, v in data['v'].items()}
+        a = {u.Quantity(float(k), u.s): CartesianRepresentation(np.array(v) * u.meter / u.s**2) for k, v in data['a'].items()}
+        f = {u.Quantity(float(k), u.s): CartesianRepresentation(np.array(v) * u.meter / u.s**2) for k, v in data['f'].items()}
+else:
+    while t < limit:
+        f[t + delta] = g(r[t]) * m_moon
+        a[t + delta] = f[t + delta] / m_moon
+        v[t + delta] = v[t] + (a[t + delta] * delta)
+        r[t + delta] = r[t] + (v[t + delta] * delta)
+        print(f"Timestep: {t} - {t.to(u.day).value:.2f} days ({r[t + delta].x.value:.2f}, {r[t + delta].y.value:.2f}, {r[t + delta].z.value:.2f})", end="\r")
+        
+        i += 1
+        t = t + delta
+
+    with open('test.ax', 'w') as file:
+        data = {
+            'r': {str(k.value): [v.x.value, v.y.value, v.z.value] for k, v in r.items()},
+            'v': {str(k.value): [v.x.value, v.y.value, v.z.value] for k, v in v.items()},
+            'a': {str(k.value): [v.x.value, v.y.value, v.z.value] for k, v in a.items()},
+            'f': {str(k.value): [v.x.value, v.y.value, v.z.value] for k, v in f.items()},
+        }
+        json.dump(data, file)
 
 fig = plt.figure(figsize=(8, 8))
-axes = fig.axes(projection = '3d')
-t = np.linspace(0, 1, 1000, endpoint=True)
-axes.plot3D(t, signal.square(2 * np * 5 * t))
+axes = fig.add_subplot(111, projection='3d')
+
+x_positions = [r[time].x.value for time in r]
+y_positions = [r[time].y.value for time in r]
+z_positions = [r[time].z.value for time in r]
+
+line, = axes.plot3D(x_positions[0], y_positions[0], z_positions[0], 'b', label="Moon")
+
+def update(frame):
+    x = x_positions[:frame]
+    y = y_positions[:frame]
+    z = z_positions[:frame]
+    line.set_xdata(x)
+    line.set_ydata(y)
+    line.set_3d_properties(z)
+    return line
+
+ani = animation.FuncAnimation(fig, update, frames=len(x_positions), repeat=False, interval=1)
+plt.show()
