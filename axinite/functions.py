@@ -10,3 +10,6 @@ def vector_to(vector: CartesianRepresentation, unit: Quantity):
 
 def vector_magnitude(vector: CartesianRepresentation):
     return math.sqrt(vector.x.value**2 + vector.y.value**2 + vector.z.value**2) * vector.x.unit
+
+def unit_vector(vector: CartesianRepresentation):
+    return vector / vector_magnitude(vector)
