@@ -57,8 +57,7 @@ else:
         data = {
             'r': {str(k.value): [v.x.value, v.y.value, v.z.value] for k, v in r.items()},
             'v': {str(k.value): [v.x.value, v.y.value, v.z.value] for k, v in v.items()},
-            'a': {str(k.value): [v.x.value, v.y.value, v.z.value] for k, v in a.items()},
-            'f': {str(k.value): [v.x.value, v.y.value, v.z.value] for k, v in f.items()},
+            'a': {str(k.value): [v.x.value, v.y.value, v.z.value] for k, v in a.items()}
         }
         json.dump(data, file)
 
