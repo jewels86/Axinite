@@ -15,8 +15,8 @@ r0_earth = CartesianRepresentation([0, 0, 0] * u.meter)
 v0_earth = CartesianRepresentation([0, 0, 0] * u.meter / u.s)
 
 m_moon = 7.342e22 * u.kg
-r0_moon = CartesianRepresentation([3.844e8, 0, 0] * u.meter)
-v0_moon = CartesianRepresentation([-1022, -1022, -1022] * u.meter / u.s)
+r0_moon = CartesianRepresentation([4.055e8, 0, 0] * u.meter)
+v0_moon = CartesianRepresentation([0, 4022, 4022] * u.meter / u.s)
 
 r = {
     0 * u.s: r0_moon,
@@ -30,7 +30,7 @@ a = {
 
 t = 0 * u.second
 delta = 60 * u.second
-limit = (80 * u.day).to(u.second)
+limit = (100 * u.day).to(u.second)
 i = 0
 print("Starting...")
 
@@ -65,8 +65,20 @@ fig = plt.figure(figsize=(12, 12))  # Increased figure size
 axes = fig.add_subplot(111, projection='3d')
 
 x_positions = [r[time].x.value for time in r]
+y_positions = [r[time].y.value for time in r]
 z_positions = [r[time].z.value for time in r]
 
+r_earth_radius = 6.371e6 * u.meter
+
 line, = axes.plot3D(x_positions, y_positions, z_positions, 'b', label="Moon")
+earth_point, = axes.plot3D(
+    [r0_earth.x.value, r0_earth.x.value + r_earth_radius.value],
+    [r0_earth.y.value, r0_earth.y.value],
+    [r0_earth.z.value, r0_earth.z.value],
+    'ro', label="Earth"
+)
+axes.legend()
+
+plt.style.use('dark_background')
 
 plt.show()
