@@ -27,6 +27,9 @@ v = {
 a = {
     0 * u.s: CartesianRepresentation([0, 0, 0] * u.meter / u.s**2),
 }
+f = {
+	0 * u.s: CartesianRepresentation([0, 0, 0] * u.kg * (u.meter / u.s**2)),
+}
 
 t = 0 * u.second
 delta = 60 * u.second
@@ -40,10 +43,11 @@ if os.path.exists('./test.ax'):
         data = json.load(file)
         r = {u.Quantity(float(k), u.s): CartesianRepresentation(np.array(v) * u.meter) for k, v in data['r'].items()}
         v = {u.Quantity(float(k), u.s): CartesianRepresentation(np.array(v) * u.meter / u.s) for k, v in data['v'].items()}
-        a = {u.Quantity(float(k), u.s): CartesianRepresentation(np.array(v) * u.meter / u.s**2) for k, v in data['a'].items()}
+
 else:
     while t < limit:
-        a[t + delta] = ((-G * m_earth) / ax.vector_magnitude(r[t])**3) * r[t]
+	    f[t + delta] = -G * (m_earth / ax.vector_magnitude(r[t])**3) * r[t]
+        a[t + delta] = f[t + delta] / m_moon
         v[t + delta] = v[t] + (a[t + delta] * delta)
         r[t + delta] = r[t] + (v[t + delta] * delta)
         print(f"Timestep: {t} - {t.to(u.day).value:.2f} days ({r[t + delta].x.value:.2f}, {r[t + delta].y.value:.2f}, {r[t + delta].z.value:.2f})", end="\r")
@@ -57,7 +61,6 @@ else:
         data = {
             'r': {str(k.value): [v.x.value, v.y.value, v.z.value] for k, v in r.items()},
             'v': {str(k.value): [v.x.value, v.y.value, v.z.value] for k, v in v.items()},
-            'a': {str(k.value): [v.x.value, v.y.value, v.z.value] for k, v in a.items()}
         }
         json.dump(data, file)
 
