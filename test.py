@@ -68,23 +68,26 @@ else:
         }
         json.dump(data, file)
 
+last_entry = list(r.items())[-1]
+print(f"Last entry in r: Time = {last_entry[0]}, Position = ({last_entry[1].x.value}, {last_entry[1].y.value}, {last_entry[1].z.value})")
+
 fig = plt.figure(figsize=(8, 8))
-axes = fig.add_subplot(111, projection='3d')
+axes = fig.add_subplot(111)
 
 x_positions = [r[time].x.value for time in r]
-y_positions = [r[time].y.value for time in r]
 z_positions = [r[time].z.value for time in r]
 
-line, = axes.plot3D(x_positions[0], y_positions[0], z_positions[0], 'b', label="Moon")
+line, = axes.plot(x_positions[0], z_positions[0], 'b', label="Moon")
 
 def update(frame):
     x = x_positions[:frame]
-    y = y_positions[:frame]
     z = z_positions[:frame]
     line.set_xdata(x)
-    line.set_ydata(y)
-    line.set_3d_properties(z)
+    line.set_ydata(z)
     return line
 
 ani = animation.FuncAnimation(fig, update, frames=len(x_positions), repeat=False, interval=1)
+plt.xlabel('X Position (meters)')
+plt.ylabel('Z Position (meters)')
+plt.legend()
 plt.show()
