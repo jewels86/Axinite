@@ -16,7 +16,7 @@ v0_earth = CartesianRepresentation([0, 0, 0] * u.meter / u.s)
 
 m_moon = 7.342e22 * u.kg
 r0_moon = CartesianRepresentation([3.844e8, 0, 0] * u.meter)
-v0_moon = CartesianRepresentation([-1022, -1022, 1022] * u.meter / u.s)
+v0_moon = CartesianRepresentation([-1022, -1022, -1022] * u.meter / u.s)
 
 r = {
     0 * u.s: r0_moon,
@@ -29,8 +29,8 @@ a = {
 }
 
 t = 0 * u.second
-delta = 10 * u.second
-limit = (30 * u.day).to(u.second)
+delta = 60 * u.second
+limit = (80 * u.day).to(u.second)
 i = 0
 print("Starting...")
 
@@ -61,23 +61,13 @@ else:
         }
         json.dump(data, file)
 
-fig = plt.figure(figsize=(8, 8))
+fig = plt.figure(figsize=(12, 12))  # Increased figure size
 axes = fig.add_subplot(111, projection='3d')
 
 x_positions = [r[time].x.value for time in r]
 y_positions = [r[time].y.value for time in r]
 z_positions = [r[time].z.value for time in r]
 
-line, = axes.plot3D(x_positions[0], y_positions[0], z_positions[0], 'b', label="Moon")
+line, = axes.plot3D(x_positions, y_positions, z_positions, 'b', label="Moon")
 
-def update(frame):
-    x = x_positions[:frame]
-    y = y_positions[:frame]
-    z = z_positions[:frame]
-    line.set_xdata(x)
-    line.set_ydata(y)
-    line.set_3d_properties(z)
-    return line
-
-ani = animation.FuncAnimation(fig, update, frames=len(x_positions), repeat=False, interval=1)
-plt.show
+plt.show()
