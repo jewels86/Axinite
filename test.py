@@ -31,7 +31,7 @@ while t < limit:
     for i, body in enumerate(bodies):
         others = [x for j, x in enumerate(bodies) if j != i]
         F_net = CartesianRepresentation([0, 0, 0] * u.kg * u.m/u.s**2)
-        for o in others: F_net += o.gravitational_force(body.r[t])
+        for o in others: F_net += o.gravitational_force(o.r[t] - body.r[t])
 
         a = F_net / body.mass
         body.v[t + delta] = body.v[t] + delta * a
