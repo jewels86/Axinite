@@ -7,22 +7,31 @@ import json
 with open("test.ax", "r") as f:
     data = json.load(f)
 
-    fig = plt.figure(figsize=(8, 8))
+    fig = plt.figure(figsize=(8, 8), facecolor='black')
     axes = fig.add_subplot(111, projection='3d')
+    axes.set_facecolor('black')
+    axes.xaxis.label.set_color('white')
+    axes.yaxis.label.set_color('white')
+    axes.zaxis.label.set_color('white')
+    axes.tick_params(axis='x', colors='white')
+    axes.tick_params(axis='y', colors='white')
+    axes.tick_params(axis='z', colors='white')
+    axes.grid(color='black')
     lines = []
     animations = []
+    
     for name, body in data["bodies"].items():
         x_pos = [r[0] for r in body["r"]]
         y_pos = [r[2] for r in body["r"]]
         z_pos = [r[1] for r in body["r"]]
 
-        line = axes.plot3D(x_pos, y_pos, z_pos, label=name)
+        line = axes.plot3D(x_pos, y_pos, z_pos, label=name, color='cyan')
         lines.append(line)
-        
-        # Plot initial position
-        axes.scatter(x_pos[0], y_pos[0], z_pos[0], color='green', marker='o')
-        # Plot end position
-        axes.scatter(x_pos[-1], y_pos[-1], z_pos[-1], color='red', marker='x')
-    
-    axes.legend()
-    plt.show()
+
+axes.set_facecolor('black')
+axes.set_xlabel('X')
+axes.set_ylabel('Z')
+axes.set_zlabel('Y')
+
+axes.legend(facecolor='black', edgecolor='white', labelcolor='white')
+plt.show()

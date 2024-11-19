@@ -12,7 +12,7 @@ class Body:
         self.name = name
 
     def gravitational_acceleration(self, r: CartesianRepresentation):
-        return -((G * self.mass) / vector_magnitude(r)**2) * unit_vector(r)
+        return -((G * self.mass) / vector_magnitude(r)**3) * r
     
     def gravitational_force(self, r: CartesianRepresentation, m: u.Quantity):
         return m * self.gravitational_acceleration(r)

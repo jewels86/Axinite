@@ -18,13 +18,13 @@ earth = ax.Body("earth",
 moon = ax.Body("moon",
     7.342e22 * u.kg,
     CartesianRepresentation([3.844e8 + earth.r[0 * u.s].x.value, 0, 0] * u.m),
-    CartesianRepresentation([0, 1.095e3, 1.095e3] * u.m/u.s)
+    CartesianRepresentation([0, 1.095e4, 1.095e4] * u.m/u.s)
 )
 
 bodies = [earth, sun, moon]
 
 t = 0 * u.s
-delta = (4 * u.hour).to(u.s)
+delta = (2 * u.hour).to(u.s)
 limit = (360 * u.day).to(u.s)
 
 while t < limit:
@@ -36,9 +36,8 @@ while t < limit:
         a = F_net / body.mass
         body.v[t + delta] = body.v[t] + delta * a
         body.r[t + delta] = body.r[t] + delta * body.v[t + delta]
-
+    print(f"Timestep:  ({((t / limit).value * 100):.2f})", t, end="\r")
     t += delta
-    print(f"{((t / limit).value * 100):.2f}% - Position: x={body.r[t].x.value:.2f}, y={body.r[t].y.value:.2f}, z={body.r[t].z.value:.2f}, Velocity: vx={body.v[t].x.value:.2f}, vy={body.v[t].y.value:.2f}, vz={body.v[t].z.value:.2f}", end="\r")
 
 with open("test.ax", "w") as f:
     data = {
