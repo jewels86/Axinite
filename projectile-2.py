@@ -55,8 +55,8 @@ print(f"Calculated {len(r)} timesteps.")
 fig = plt.figure()
 ax = plt.axes(projection='3d')
 x_positions = [r[time].x.value for time in r]
-y_positions = [r[time].z.value for time in r]
-z_positions = [r[time].y.value for time in r]
+y_positions = [r[time].y.value for time in r]
+z_positions = [r[time].z.value for time in r]
 
 plt.xlabel('X Position (meters)')
 plt.ylabel('Y Position (meters)')
@@ -65,14 +65,4 @@ plt.title('Projectile Motion')
 
 line, = ax.plot3D(x_positions[0], y_positions[0], z_positions[0], label='Trajectory')
 
-def update(frame):
-    x = x_positions[:frame]
-    y = y_positions[:frame]
-    z = z_positions[:frame]
-    line.set_xdata(x)
-    line.set_ydata(y)
-    line.set_3d_properties(z)
-    return line
-
-ani = animation.FuncAnimation(fig, update, frames=len(x_positions), repeat=False)
 plt.show()
