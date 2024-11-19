@@ -24,7 +24,7 @@ moon = ax.Body("moon",
 bodies = [earth, sun, moon]
 
 t = 0 * u.s
-delta = (12 * u.hour).to(u.s)
+delta = (4 * u.hour).to(u.s)
 limit = (360 * u.day).to(u.s)
 
 while t < limit:
