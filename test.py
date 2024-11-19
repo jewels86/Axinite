@@ -28,7 +28,7 @@ a = {
     0 * u.s: CartesianRepresentation([0, 0, 0] * u.meter / u.s**2),
 }
 
-t = 0 * u.second
+t = 0 * u.seconds
 delta = 60 * u.second
 limit = (80 * u.day).to(u.second)
 i = 0
