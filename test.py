@@ -31,14 +31,14 @@ while t < limit:
     for i, body in enumerate(bodies):
         others = [x for j, x in enumerate(bodies) if j != i]
         F_net = CartesianRepresentation([0, 0, 0] * u.kg * u.m/u.s**2)
-        for o in others: F_net += o.gravitational_force(o.r[t] - body.r[t])
+        for o in others: F_net += o.gravitational_force(body.r[t] - o.r[t], body.mass)
 
         a = F_net / body.mass
         body.v[t + delta] = body.v[t] + delta * a
         body.r[t + delta] = body.r[t] + delta * body.v[t + delta]
 
     t += delta
-    print("Timestep: ", t, end="\r")
+    print(f"{((t / limit).value * 100):.2f}% - Position: x={body.r[t].x.value:.2f}, y={body.r[t].y.value:.2f}, z={body.r[t].z.value:.2f}, Velocity: vx={body.v[t].x.value:.2f}, vy={body.v[t].y.value:.2f}, vz={body.v[t].z.value:.2f}", end="\r")
 
 with open("test.ax", "w") as f:
     data = {
