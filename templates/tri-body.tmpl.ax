@@ -1,5 +1,5 @@
 {
-    "name": "Tri-Body System",
+    "name": "tri-body",
     "limit": "365d",
     "delta": "1hr",
     "bodies": {

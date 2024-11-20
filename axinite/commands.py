@@ -4,6 +4,7 @@ import numpy as np
 import astropy.units as u
 import axinite as ax
 from astropy.coordinates import CartesianRepresentation
+from itertools import cycle
 
 def show(path):
     with open(path, "r") as f:
@@ -24,19 +25,20 @@ def show(path):
         axes.set_xlabel('X')
         axes.set_ylabel('Z')
         axes.set_zlabel('Y')
-        axes.legend(facecolor='black', edgecolor='white', labelcolor='white')
 
         lines = []
         animations = []
+        colors = cycle(['red', 'lime', 'blue', 'yellow', 'cyan', 'magenta', 'orange', 'purple'])
 
         for name, body in data["bodies"].items():
             x_pos = [r[0] for r in body["r"]]
             y_pos = [r[2] for r in body["r"]]
             z_pos = [r[1] for r in body["r"]]
 
-            line = axes.plot3D(x_pos, y_pos, z_pos, label=name)
+            line = axes.plot3D(x_pos, y_pos, z_pos, label=name, color=next(colors))
             lines.append(line)
 
+        axes.legend(facecolor='black', edgecolor='white', labelcolor='white')
         plt.show()
 
 def load(path):
@@ -48,9 +50,9 @@ def load(path):
         t = 0 * u.s
         bodies = []
         
-        for name, body in data["bodies"]:
+        for name, body in data["bodies"].items():
             bodies.append(ax.Body(name,
-                body["m"] * u.kg,
+                body["mass"] * u.kg,
                 ax.functions.to_vector(body["r"], u.m),
                 ax.functions.to_vector(body["v"], u.m / u.s)
             ))
@@ -68,7 +70,7 @@ def load(path):
             t += delta
         print(f"Finished with {t / delta} timesteps")
 
-        with open("test.ax", "w") as f:
+        with open(f"{data["name"]}.ax", "w") as f:
             data = {
                 "delta": delta.value,
                 "limit": limit.value,

@@ -2,7 +2,6 @@ import axinite as ax
 import sys
 
 args = sys.argv
-print(args)
 
 if len(args) < 3:
     print("Usage: python main.py <command> <file>")
