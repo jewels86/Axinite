@@ -14,7 +14,7 @@ def show(path):
     with open(path, "r") as f:
         data = json.load(f)
 
-        fig = plt.figure(figsize=(8, 8), facecolor='black')
+        fig = plt.figure(figsize=(12, 6), facecolor='black')
         axes = fig.add_subplot(111, projection='3d')
 
         axes.set_facecolor('black')
@@ -69,8 +69,8 @@ def load(path):
         for name, body in data["bodies"].items():
             bodies.append(ax.Body(name,
                 body["mass"] * u.kg,
-                ax.functions.to_vector(body["r"], u.m),
-                ax.functions.to_vector(body["v"], u.m / u.s),
+                ax.functions.to_vector(body["initial_position"], u.m),
+                ax.functions.to_vector(body["initial_velocity"], u.m / u.s),
                 body["radius"] * u.m
             ))
         

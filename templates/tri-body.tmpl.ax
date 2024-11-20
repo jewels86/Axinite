@@ -6,12 +6,12 @@
         "Sun": {
             "mass": 1.989e30,
             "radius": 6.95e8,
-            "r": {
+            "initial_position": {
                 "x": 0,
                 "y": 0,
                 "z": 0
             },
-            "v": {
+            "initial_velocity": {
                 "x": 0,
                 "y": 0,
                 "z": 0
@@ -20,12 +20,12 @@
         "Earth": {
             "mass": 5.972e24,
             "radius": 6.371e6,
-            "r": {
+            "initial_position": {
                 "x": 1.471e11,
                 "y": 0,
                 "z": 0
             },
-            "v": {
+            "initial_velocity": {
                 "x": 0,
                 "y": 0,
                 "z": 9.03e3
@@ -34,12 +34,12 @@
         "Moon": {
             "mass": 7.342e22,
             "radius": 1.737e6,
-            "r": {
+            "initial_position": {
                 "x": 1.472844e11,
                 "y": 0,
                 "z": 0
             },
-            "v": {
+            "initial_velocity": {
                 "x": 0,
                 "y": 0,
                 "z": 1.095e4
