@@ -1,5 +1,6 @@
 from astropy.coordinates import CartesianRepresentation
 from astropy.units import Quantity
+import astropy.units as u
 import math
 import numpy as np
 
@@ -23,3 +24,14 @@ def array_to_vectors(array, unit):
     for a in array:
         arr.append(to_vector(a, unit))
     return arr
+
+def interpret_time(string: str):
+    if string.endswith("min"):
+        string = string.removesuffix("min")
+        return float(string) * 60 * u.s 
+    elif string.endswith("hr"): 
+        string = string.removesuffix("hr")
+        return float(string) * 3600 * u.s
+    elif string.endswith("d"):
+        string  = string.removesuffix("d")
+        return float(string) * 86400 * u.s
