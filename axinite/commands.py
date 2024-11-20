@@ -37,7 +37,7 @@ def show(path):
             z_pos = [r[1] for r in body["r"]]
             color = next(colors)
             line, = axes.plot3D(x_pos, y_pos, z_pos, label=name, color=color)
-            axes.scatter(x_pos[0], y_pos[0], z_pos[0], color=color, s=100, edgecolor='white')
+            axes.scatter(x_pos[0], y_pos[0], z_pos[0], color=color, s=100)
             lines.append(line)
 
         def update(num):
