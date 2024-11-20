@@ -5,6 +5,7 @@ import astropy.units as u
 import axinite as ax
 from astropy.coordinates import CartesianRepresentation
 from itertools import cycle
+from matplotlib.animation import FuncAnimation
 
 def show(path):
     with open(path, "r") as f:
@@ -34,9 +35,21 @@ def show(path):
             x_pos = [r[0] for r in body["r"]]
             y_pos = [r[2] for r in body["r"]]
             z_pos = [r[1] for r in body["r"]]
-
-            line = axes.plot3D(x_pos, y_pos, z_pos, label=name, color=next(colors))
+            color = next(colors)
+            line, = axes.plot3D(x_pos, y_pos, z_pos, label=name, color=color)
+            axes.scatter(x_pos[0], y_pos[0], z_pos[0], color=color, s=100, edgecolor='white')
             lines.append(line)
+
+        def update(num):
+            for line, body in zip(lines, data["bodies"].values()):
+                x_pos = [r[0] for r in body["r"][:num]]
+                y_pos = [r[2] for r in body["r"][:num]]
+                z_pos = [r[1] for r in body["r"][:num]]
+                line.set_data(x_pos, y_pos)
+                line.set_3d_properties(z_pos)
+            return lines
+
+        ani = FuncAnimation(fig, update, frames=len(data["bodies"][list(data["bodies"].keys())[0]]["r"]), interval=5, blit=False)
 
         axes.legend(facecolor='black', edgecolor='white', labelcolor='white')
         plt.show()
