@@ -15,5 +15,11 @@ def vector_magnitude(vector: CartesianRepresentation):
 def unit_vector(vector: CartesianRepresentation):
     return vector / vector_magnitude(vector)
 
-def to_vector(data):
-    return CartesianRepresentation(data)
+def to_vector(data, unit):
+    return CartesianRepresentation(data["x"] * unit, data["y"] * unit, data["z"] * unit)
+
+def array_to_vectors(array, unit):
+    arr = []
+    for a in array:
+        arr.append(to_vector(a, unit))
+    return arr

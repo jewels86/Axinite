@@ -1,5 +1,8 @@
 import json
 import matplotlib.pyplot as plt
+import numpy as np
+import astropy.units as u
+import axinite as ax
 
 def show(path):
     with open(path, "r") as f:
@@ -39,4 +42,19 @@ def load(path):
     with open(path, "r") as f:
         data = json.load(f)
 
-        bodies = 
+        delta = data["delta"] * u.s
+        limit = data["limit"] * u.s
+        t = 0 * u.s
+        bodies = []
+        
+        for name, body in data["bodies"]:
+            bodies.append(ax.Body(name,
+                body["m"] * u.kg,
+                ax.functions.to_vector(body["r"], u.m),
+                ax.functions.to_vector(body["v"], u.m / u.s)
+            ))
+        
+        
+
+def create():
+    
