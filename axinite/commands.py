@@ -1,11 +1,14 @@
 import json
 import matplotlib.pyplot as plt
+import matplotlib
 import numpy as np
 import astropy.units as u
 import axinite as ax
 from astropy.coordinates import CartesianRepresentation
 from itertools import cycle
 from matplotlib.animation import FuncAnimation
+
+matplotlib.use("Qt5Agg")
 
 def show(path):
     with open(path, "r") as f:
@@ -49,7 +52,7 @@ def show(path):
                 line.set_3d_properties(z_pos)
             return lines
 
-        ani = FuncAnimation(fig, update, frames=len(data["bodies"][list(data["bodies"].keys())[0]]["r"]), interval=5, blit=False)
+        ani = FuncAnimation(fig, update, frames=len(data["bodies"][list(data["bodies"].keys())[0]]["r"]), interval=1, blit=True)
 
         axes.legend(facecolor='black', edgecolor='white', labelcolor='white')
         plt.show()
@@ -67,7 +70,8 @@ def load(path):
             bodies.append(ax.Body(name,
                 body["mass"] * u.kg,
                 ax.functions.to_vector(body["r"], u.m),
-                ax.functions.to_vector(body["v"], u.m / u.s)
+                ax.functions.to_vector(body["v"], u.m / u.s),
+                body["radius"] * u.m
             ))
         
         while t < limit:
