@@ -14,3 +14,6 @@ def vector_magnitude(vector: CartesianRepresentation):
 
 def unit_vector(vector: CartesianRepresentation):
     return vector / vector_magnitude(vector)
+
+def to_vector(data):
+    return CartesianRepresentation(data)

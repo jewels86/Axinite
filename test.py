@@ -13,7 +13,7 @@ sun = ax.Body("sun",
 earth = ax.Body("earth",
     5.972e24 * u.kg,
     CartesianRepresentation([1.471e11, 0, 0] * u.m),
-    CartesianRepresentation([0, 0, 3.03e4] * u.m/u.s)
+    CartesianRepresentation([0, 0, 9.03e3] * u.m/u.s)
 )
 moon = ax.Body("moon",
     7.342e22 * u.kg,
@@ -36,7 +36,7 @@ while t < limit:
         a = F_net / body.mass
         body.v[t + delta] = body.v[t] + delta * a
         body.r[t + delta] = body.r[t] + delta * body.v[t + delta]
-    print(f"Timestep:  ({((t / limit).value * 100):.2f})", t, end="\r")
+    print(f"Timestep:  ({((t / limit).value * 100):.2f}%)", t, end="\r")
     t += delta
 
 with open("test.ax", "w") as f:

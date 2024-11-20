@@ -9,6 +9,7 @@ with open("test.ax", "r") as f:
 
     fig = plt.figure(figsize=(8, 8), facecolor='black')
     axes = fig.add_subplot(111, projection='3d')
+
     axes.set_facecolor('black')
     axes.xaxis.label.set_color('white')
     axes.yaxis.label.set_color('white')
@@ -17,6 +18,7 @@ with open("test.ax", "r") as f:
     axes.tick_params(axis='y', colors='white')
     axes.tick_params(axis='z', colors='white')
     axes.grid(color='black')
+
     lines = []
     animations = []
     
@@ -25,7 +27,7 @@ with open("test.ax", "r") as f:
         y_pos = [r[2] for r in body["r"]]
         z_pos = [r[1] for r in body["r"]]
 
-        line = axes.plot3D(x_pos, y_pos, z_pos, label=name, color='cyan')
+        line = axes.plot3D(x_pos, y_pos, z_pos, label=name)
         lines.append(line)
 
 axes.set_facecolor('black')
