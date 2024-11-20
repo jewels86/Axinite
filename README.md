@@ -1,5 +1,9 @@
 # Axinite
 A celestial physics simulation.
+## Command Line Interface
+Commands:
+- `main.py load <TEMPLATE-FILE>`
+- `main.py show <SIMULATION-FILE>`
 ## Interpretable Strings
 Axinite can interpret other units through interpretable string. By defalt, axinite accepts floats as the **standard SI units** for the type of unit needed. Supported suffixes:
 - `d`: day (value * 86400 to convert to seconds)
@@ -34,3 +38,8 @@ These suffixes can be used to increase readability and make it easier to plot ou
 ```
 ## Simulation Files
 `*.ax`
+```json
+{
+    
+}
+```
