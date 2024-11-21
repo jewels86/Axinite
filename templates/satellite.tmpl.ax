@@ -1,33 +1,33 @@
 {
-    "name": "dual-body",
-    "limit": "365d",
-    "delta": "1hr",
+    "name": "satellite",
+    "limit": "30d",
+    "delta": "30min",
     "bodies": {
-        "body1": {
+        "Earth": {
             "mass": 5.972e24,
             "radius": 6371000,
             "initial_position": {
-                "x": 1e7,
+                "x": 0,
                 "y": 0,
                 "z": 0
             },
             "initial_velocity": {
                 "x": 0,
-                "y": 1e3,
+                "y": 0,
                 "z": 0
             }
         },
-        "body2": {
-            "mass": 5.972e24,
-            "radius": 6371000,
+        "Satellite": {
+            "mass": 1000,
+            "radius": 2,
             "initial_position": {
-                "x": -1e7,
-                "y": 0,
+                "x": 0,
+                "y": 6771000,
                 "z": 0
             },
             "initial_velocity": {
-                "x": 0,
-                "y": -1e3,
+                "x": 7660,
+                "y": 3660,
                 "z": 0
             }
         }

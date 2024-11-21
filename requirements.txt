@@ -4,3 +4,4 @@ astropy[recommended]
 pyglet<2
 sympy
 scipy
+PyQt5

@@ -85,7 +85,7 @@ def load(path):
                 a = F_net / body.mass
                 body.v[t + delta] = body.v[t] + delta * a
                 body.r[t + delta] = body.r[t] + delta * body.v[t + delta]
-            print(f"Timestep:  ({((t / limit).value * 100):.2f}%)", t, end="\r")
+            print(f"Timestep: {int(t / delta)} ({((t / limit).value * 100):.2f}%)", t, end="\r")
             t += delta
         print(f"Finished with {t / delta} timesteps")
 
