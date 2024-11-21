@@ -1,17 +1,17 @@
 {
     "name": "dual-body",
-    "limit": "365d",
+    "limit": "730d",
     "delta": "1hr",
     "bodies": {
         "Solaris": {
             "mass": 2.0e30,
             "radius": 7.0e8,
-            "r": {
+            "initial_position": {
                 "x": -1.0e11,
                 "y": -1.0e11,
                 "z": -1.0e11
             },
-            "v": {
+            "initial_velocity": {
                 "x": 0,
                 "y": 0,
                 "z": 5.0e5
@@ -20,12 +20,12 @@
         "Lunaris": {
             "mass": 1.0e30,
             "radius": 3.5e8,
-            "r": {
+            "initial_position": {
                 "x": 1.0e11,
                 "y": 0,
                 "z": 0
             },
-            "v": {
+            "initial_velocity": {
                 "x": 0,
                 "y": 0,
                 "z": -5.0e5

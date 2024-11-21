@@ -50,6 +50,8 @@ def show(path):
                 z_pos = [r[1] for r in body["r"][:num]]
                 line.set_data(x_pos, y_pos)
                 line.set_3d_properties(z_pos)
+            if num == len(data["bodies"][list(data["bodies"].keys())[0]]["r"]) - 1:
+                axes.text2D(0.05, 0.95, "Simulation Finished", transform=axes.transAxes, color='white')
             return lines
 
         ani = FuncAnimation(fig, update, frames=len(data["bodies"][list(data["bodies"].keys())[0]]["r"]), interval=1, blit=True)
