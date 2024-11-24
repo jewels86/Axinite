@@ -40,6 +40,13 @@ These suffixes can be used to increase readability and make it easier to plot ou
 `*.ax`
 ```json
 {
-    
+    "name": string,
+    "bodies": {
+        "name": {
+            "name": string,
+            "r": array<vector-array>,
+            "v": array<vector-array>
+         }
+    }
 }
 ```
