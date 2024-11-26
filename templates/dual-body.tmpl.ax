@@ -13,7 +13,7 @@
             },
             "initial_velocity": {
                 "x": 0,
-                "y": 1e3,
+                "y": 1e2,
                 "z": 0
             }
         },
@@ -27,7 +27,7 @@
             },
             "initial_velocity": {
                 "x": 0,
-                "y": -1e3,
+                "y": -1e2,
                 "z": 0
             }
         }
