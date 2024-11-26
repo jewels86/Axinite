@@ -1,6 +1,7 @@
 # Axinite
 A celestial physics simulation.
 ## Installation
+Download the (Axinite source code)[https://github.com/jewels86/Axinite/releases/tag/stable] and extract it.
 For now, you will need to install `python` and all the packages Axinite needs to function.
 You can install the packages using `pip install -r requirements.txt` after opening the command line in the folder with Axinite.
 ## Command Line Interface
