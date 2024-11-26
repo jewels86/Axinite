@@ -11,26 +11,27 @@ Axinite can interpret other units through interpretable string. By defalt, axini
 - `m`: minute (value * 60 to convert to seconds)
 These suffixes can be used to increase readability and make it easier to plot out templates.
 ## File Types
+All files ending in `.ax` use JSON format to serialize ddata.
 ### Template Files
 `*.tmpl.ax`
 ```json
 {
-    "name": string,
-    "limit": interpretable string,
-    "delta": interpretable string,
+    "name": "string",
+    "limit": "interpretable string",
+    "delta": "interpretable string",
     "bodies": {
         "name": {
-            "mass": float (kilograms),
-            "radius": float (meters),
+            "mass": "float (kilograms)",
+            "radius": "float (meters)",
             "initial_position": {
-                "x": float (meters),
-                "y": float (meters),
-                "z": float (meters)
+                "x": "float (meters)",
+                "y": "float (meters)",
+                "z": "float (meters)"
             },
             "initial_velocity": {
-                "x": float (meters / seconds),
-                "y": float (meters / seconds),
-                "z": float (meters / seconds)
+                "x": "float (meter / second)",
+                "y": "float (meter / second)",
+                "z": "float (meters / seconds)"
             }
         }
     }
@@ -40,12 +41,12 @@ These suffixes can be used to increase readability and make it easier to plot ou
 `*.ax`
 ```json
 {
-    "name": string,
+    "name": "string",
     "bodies": {
         "name": {
-            "name": string,
-            "r": array<vector-array>,
-            "v": array<vector-array>
+            "name": "string",
+            "r": "array<vector-array>",
+            "v": "array<vector-array>"
          }
     }
 }
