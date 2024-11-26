@@ -1,7 +1,7 @@
 # Axinite
 A celestial physics simulation.
 ## Installation
-Download the (Axinite source code)[https://github.com/jewels86/Axinite/releases/tag/stable] and extract it.
+Download the [Axinite source code](https://github.com/jewels86/Axinite/releases/tag/stable) and extract it.
 For now, you will need to install `python` and all the packages Axinite needs to function.
 You can install the packages using `pip install -r requirements.txt` after opening the command line in the folder with Axinite.
 ## Command Line Interface
@@ -15,7 +15,7 @@ Axinite can interpret other units through interpretable string. By defalt, axini
 - `m`: minute (value * 60 to convert to seconds)
 These suffixes can be used to increase readability and make it easier to plot out templates.
 ## Contributing
-Create an (issue)[https://github.com/jewels86/Axinite/issues] or a (pull request)[https://github.com/jewels86/Axinite/pulls] to contribute to the project.
+Create an [issue](https://github.com/jewels86/Axinite/issues) or a [pull request](https://github.com/jewels86/Axinite/pulls) to contribute to the project.
 Issues and pull requests will be reviewed within the week.
 ## File Types
 All files ending in `.ax` use JSON format to serialize ddata.
