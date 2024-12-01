@@ -5,3 +5,4 @@ pyglet<2
 sympy
 scipy
 dearpygui
+moderngl
