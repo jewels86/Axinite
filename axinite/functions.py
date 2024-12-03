@@ -18,20 +18,3 @@ def unit_vector(vector: CartesianRepresentation):
 
 def to_vector(data, unit):
     return CartesianRepresentation(data["x"] * unit, data["y"] * unit, data["z"] * unit)
-
-def array_to_vectors(array, unit):
-    arr = []
-    for a in array:
-        arr.append(to_vector(a, unit))
-    return arr
-
-def interpret_time(string: str):
-    if string.endswith("min"):
-        string = string.removesuffix("min")
-        return float(string) * 60 * u.s 
-    elif string.endswith("hr"): 
-        string = string.removesuffix("hr")
-        return float(string) * 3600 * u.s
-    elif string.endswith("d"):
-        string  = string.removesuffix("d")
-        return float(string) * 86400 * u.s

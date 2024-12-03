@@ -2,34 +2,37 @@
     "name": "dual-body",
     "limit": "365d",
     "delta": "1hr",
-    "bodies": {
-        "body1": {
+    "t": 0,
+    "bodies": [
+        {
+            "name": "Body1",
             "mass": 5.972e24,
             "radius": 6371000,
-            "initial_position": {
+            "r": {
                 "x": 1e7,
                 "y": 0,
                 "z": 0
             },
-            "initial_velocity": {
+            "v": {
                 "x": 0,
                 "y": 1e3,
                 "z": 0
             }
         },
-        "body2": {
+        {
+            "name": "Body2",
             "mass": 5.972e24,
             "radius": 6371000,
-            "initial_position": {
+            "r": {
                 "x": -1e7,
                 "y": 0,
                 "z": 0
             },
-            "initial_velocity": {
+            "v": {
                 "x": 0,
                 "y": -1e3,
                 "z": 0
             }
         }
-    }
+    ]
 }

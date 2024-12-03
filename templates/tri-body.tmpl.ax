@@ -2,48 +2,52 @@
     "name": "tri-body",
     "limit": "365d",
     "delta": "1hr",
-    "bodies": {
-        "Sun": {
+    "t": 0,
+    "bodies": [
+        {
+            "name": "Sun",
             "mass": 1.989e30,
             "radius": 6.95e8,
-            "initial_position": {
+            "r": {
                 "x": 0,
                 "y": 0,
                 "z": 0
             },
-            "initial_velocity": {
+            "v": {
                 "x": 0,
                 "y": 0,
                 "z": 0
             }
         },
-        "Earth": {
+        {
+            "name": "Earth",
             "mass": 5.972e24,
             "radius": 6.371e6,
-            "initial_position": {
+            "r": {
                 "x": 1.471e11,
                 "y": 1e4,
                 "z": 0
             },
-            "initial_velocity": {
+            "v": {
                 "x": 0,
                 "y": 0,
                 "z": 9.03e3
             }
         },
-        "Moon": {
+        {
+            "name": "Moon",
             "mass": 7.342e22,
             "radius": 1.737e6,
-            "initial_position": {
+            "r": {
                 "x": 1.472844e11,
                 "y": 1e4,
                 "z": 0
             },
-            "initial_velocity": {
+            "v": {
                 "x": 0,
                 "y": 0,
                 "z": 1.095e4
             }
         }
-    }
+    ]
 }

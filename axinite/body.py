@@ -3,12 +3,13 @@ from astropy.constants import G
 from axinite.functions import vector_to, apply_to_vector, vector_magnitude, unit_vector
 import astropy.units as u
 from math import pi
+from numpy import float64
 
 class Body:
     def __init__(self, name, mass: u.Quantity, position: CartesianRepresentation, velocity: CartesianRepresentation, radius: u.Quantity):
         self.mass = mass
-        self.r = { 0 * u.s: position}
-        self.v = { 0 * u.s: velocity}
+        self.r = { float64(0): position}
+        self.v = { float64(0): velocity}
         self.name = name
         self.radius = radius
 
@@ -23,7 +24,7 @@ class Body:
         for body in others: F_net += body.gravitational_force(self.r[t.value], self.mass)
         a = F_net / self.mass
         v = body.v[t.value] + delta * a
-        r = body.r[t.value] + delta * body.v[t.value + delta.value]
+        r = body.r[t.value] + delta * v
         return r, v
         
         
