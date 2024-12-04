@@ -13,6 +13,7 @@ def load(args: AxiniteArgs, path: str):
             data = {
                 "delta": args.delta.value,
                 "limit": args.limit.value,
+                "t": args.t.value,
                 "bodies": []
             }
 
@@ -26,4 +27,4 @@ def load(args: AxiniteArgs, path: str):
                 })
 
             json.dump(data, f, indent=4)
-            return bodies
+            return args.limit.value, bodies

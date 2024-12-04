@@ -21,7 +21,7 @@ class Body:
     
     def compute(self, t, delta, *others: 'Body'):
         F_net = CartesianRepresentation([0, 0, 0] * u.kg * u.m/u.s**2)
-        for body in others: F_net += body.gravitational_force(body.r[t.value] - self.r[t.value], self.mass)
+        for body in others: F_net += body.gravitational_force(self.r[t.value] - body.r[t.value], self.mass)
         a = F_net / self.mass
         v = body.v[t.value] + delta * a
         r = body.r[t.value] + delta * v
