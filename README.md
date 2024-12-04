@@ -19,8 +19,8 @@ Create an [issue](https://github.com/jewels86/Axinite/issues) or a [pull request
 Issues and pull requests will be reviewed within the week.
 ## File Types
 All files ending in `.ax` use JSON format to serialize ddata.
-### Template Files
-`*.tmpl.ax`
+### File Structure
+`*.tmpl.ax` or `*.ax`
 ```json
 {
     "name": "string",
@@ -41,28 +41,6 @@ All files ending in `.ax` use JSON format to serialize ddata.
                 "z": "float (meters / seconds)"
             }
         }
-    }
-}
-```
-## Simulation Files
-`*.ax`
-```json
-{
-    "name": "string",
-    "bodies": {
-        "name": {
-            "name": "string",
-            "r": {
-                "x": "float (meters)",
-                "y": "float (meters)",
-                "z": "float (meters)"
-            },
-            "v": {
-                "x": "float (meter / second)",
-                "y": "float (meter / second)",
-                "z": "float (meter / second)"
-            },
-         }
     }
 }
 ```
