@@ -9,7 +9,7 @@ def load(args: AxiniteArgs, path: str):
 
     if path == "": return bodies
     else: 
-        with open(path, 'x+') as f:
+        with open(path, 'w+') as f:
             data = {
                 "delta": args.delta.value,
                 "limit": args.limit.value,
