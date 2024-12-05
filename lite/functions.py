@@ -23,7 +23,7 @@ def array_to_vectors(array, unit):
         arr.append(ax.to_vector(a, unit))
     return arr
 
-def data_to_body(data):
+def data_to_body(data, delta):
     name = data["name"]
     mass = data["mass"] * u.kg
     
@@ -39,9 +39,9 @@ def data_to_body(data):
         body = ax.Body(name, mass, position[0], velocity[0], data["radius"] * u.m)
 
         for t, v in enumerate(position):
-            body.r[t] = v
+            body.r[t * delta] = v
         for t, v in enumerate(velocity):
-            body.v[t] = v
+            body.v[t * delta] = v
         
         return body
 

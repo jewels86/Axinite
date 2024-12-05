@@ -17,13 +17,13 @@ def show(limit, delta, *bodies: ax.Body):
         labels[body.name] = label(pos=spheres[body.name].pos, text=body.name, xoffset=15, yoffset=15, space=30, height=10, border=4, font='sans')
     
     t = to_float(0)
-    print(limit)
     while t < limit:
         rate(60)
         for body in bodies:
             spheres[body.name].pos = to_vec(body.r[t])
             labels[body.name].pos = spheres[body.name].pos
         t += delta
+        print(f"t = {t}", end='\r')
 
 
 

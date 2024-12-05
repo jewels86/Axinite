@@ -10,8 +10,7 @@ Axinite can interpret other units through interpretable string. By defalt, axini
 - `h`: hour (value * 3600 to convert to seconds)
 - `m`: minute (value * 60 to convert to seconds)
 These suffixes can be used to increase readability and make it easier to plot out templates.
-## File Types
-### Template Files
+## File Structure
 `*.tmpl.ax`
 ```json
 {
@@ -34,12 +33,5 @@ These suffixes can be used to increase readability and make it easier to plot ou
             }
         }
     }
-}
-```
-## Simulation Files
-`*.ax`
-```json
-{
-    
 }
 ```
