@@ -6,7 +6,7 @@ class AxiniteArgs:
         self.limit = None
         self.action = None
         self.t = None
-        self.bodies = []
+        self.bodies: list = []
 
     def unpack(self):
         return self.delta, self.limit, self.action, *self.bodies

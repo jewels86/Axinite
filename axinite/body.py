@@ -26,5 +26,3 @@ class Body:
         v = body.v[t.value] + delta * a
         r = body.r[t.value] + delta * v
         return r, v
-        
-        

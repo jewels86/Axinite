@@ -12,6 +12,7 @@ def read(path: str) -> AxiniteArgs:
         args.limit = interpret_time(data["limit"])
         args.t = data["t"] * u.s
 
-        for body in data["bodies"]: args.bodies.append(data_to_body(body))
+        for body in data["bodies"]: 
+            args.bodies.append(data_to_body(body))
 
         return args
