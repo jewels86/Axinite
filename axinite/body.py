@@ -19,4 +19,4 @@ class Body:
         return -((G * self.mass) / vector_magnitude(r)**3) * r
     
     def gravitational_force(self, r: CartesianRepresentation, m: u.Quantity):
-        return m * self.gravitational_acceleration(r) # G * ((m1 * m2) / r_mag**2) * unit_vector(r)
+        return G * ((self.mass * m) / vector_magnitude(r)**2) * unit_vector(r)
