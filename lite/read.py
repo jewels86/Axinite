@@ -12,10 +12,10 @@ def read(path: str) -> AxiniteArgs:
         args.limit = interpret_time(data["limit"])
         args.t = data["t"] * u.s
 
-        if "radiues_multiplier" in data:
-            args.radius_multiplier = data["radiues_multiplier"]
+        if "radius_multiplier" in data:
+            args.radius_multiplier = data["radius_multiplier"]
 
         for body in data["bodies"]: 
-            args.bodies.append(data_to_body(body, args.delta))
+            args.bodies.append(data_to_body(body))
 
         return args

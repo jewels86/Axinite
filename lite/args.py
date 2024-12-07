@@ -11,3 +11,6 @@ class AxiniteArgs:
 
     def unpack(self):
         return self.delta, self.limit, self.action, *self.bodies
+    
+    def kwargs(self):
+        return { "radius_multiplier": self.radius_multiplier }

@@ -1,8 +1,10 @@
 {
     "name": "tri-body",
     "limit": "365d",
-    "delta": "1hr",
+    "delta": "30min",
     "t": 0,
+    "radius_multiplier": 3,
+    "rate": 90,
     "bodies": [
         {
             "name": "Sun",
@@ -36,10 +38,10 @@
         },
         {
             "name": "Moon",
-            "mass": 7.342e22,
+            "mass": 7.348e22,
             "radius": 1.737e6,
             "r": {
-                "x": 1.472844e11,
+                "x": 1.471844e11,
                 "y": 1e4,
                 "z": 0
             },
