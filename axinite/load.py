@@ -4,7 +4,7 @@ import astropy.units as u
 import axinite as ax
 from astropy.coordinates import CartesianRepresentation
 
-def load(delta: u.Quantity, limit: u.Quantity, action, *bodies: ax.Body, t:u.Quantity=0):
+def load(delta: u.Quantity, limit: u.Quantity, action, *bodies: ax.Body, t:u.Quantity=0 * u.s):
     while t < limit:
         for body in bodies: 
             others = [b for b in bodies if b != body]
