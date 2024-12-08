@@ -1,5 +1,5 @@
 import axinite as ax
-from lite import AxiniteArgs, interpret_time, data_to_body
+from axtools import AxiniteArgs, interpret_time, data_to_body
 import astropy.units as u
 import json
 
@@ -14,6 +14,12 @@ def read(path: str) -> AxiniteArgs:
 
         if "radius_multiplier" in data:
             args.radius_multiplier = data["radius_multiplier"]
+
+        if "rate" in data:
+            args.rate = data["rate"]
+
+        if "retain" in data:
+            args.retain = data["retain"]
 
         for body in data["bodies"]: 
             args.bodies.append(data_to_body(body))

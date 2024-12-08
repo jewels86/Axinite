@@ -8,9 +8,8 @@ class AxiniteArgs:
         self.t = None
         self.bodies: list = []
         self.radius_multiplier = None
+        self.rate = None
+        self.retain = None
 
     def unpack(self):
         return self.delta, self.limit, self.action, *self.bodies
-    
-    def kwargs(self):
-        return { "radius_multiplier": self.radius_multiplier }

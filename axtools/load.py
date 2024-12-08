@@ -1,5 +1,5 @@
 import axinite as ax
-from lite import AxiniteArgs
+from axtools import AxiniteArgs
 import json
 
 def load(args: AxiniteArgs, path: str):
@@ -30,6 +30,12 @@ def load(args: AxiniteArgs, path: str):
 
             if args.radius_multiplier is not None:
                 data["radius_multiplier"] = args.radius_multiplier
+
+            if args.rate is not None:
+                data["rate"] = args.rate
+
+            if args.retain is not None:
+                data["retain"] = args.retain
 
             json.dump(data, f, indent=4)
             return args.limit.value, bodies
