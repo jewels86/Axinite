@@ -2,132 +2,143 @@
     "name": "solar-system",
     "limit": "365d",
     "delta": "1hr",
-    "bodies": {
-        "Sun": {
+    "t": 0,
+    "radius_multiplier": 4,
+    "bodies": [
+        {
+            "name": "Sun",
             "mass": 1.989e30,
             "radius": 6.95e8,
-            "initial_position": {
+            "r": {
                 "x": 0,
                 "y": 0,
                 "z": 0
             },
-            "initial_velocity": {
+            "v": {
                 "x": 0,
                 "y": 0,
                 "z": 0
             }
         },
-        "Mercury": {
+        {
+            "name": "Mercury",
             "mass": 3.301e23,
             "radius": 2.4397e6,
-            "initial_position": {
+            "r": {
                 "x": 5.791e10,
                 "y": 0,
                 "z": 0
             },
-            "initial_velocity": {
+            "v": {
                 "x": 0,
                 "y": 0,
                 "z": 4.79e4
             }
         },
-        "Venus": {
+        {
+            "name": "Venus",
             "mass": 4.867e24,
             "radius": 6.0518e6,
-            "initial_position": {
+            "r": {
                 "x": 1.082e11,
                 "y": 0,
                 "z": 0
             },
-            "initial_velocity": {
+            "v": {
                 "x": 0,
                 "y": 0,
                 "z": 3.5e4
             }
         },
-        "Earth": {
+        {
+            "name": "Earth",
             "mass": 5.972e24,
             "radius": 6.371e6,
-            "initial_position": {
+            "r": {
                 "x": 1.496e11,
                 "y": 0,
                 "z": 0
             },
-            "initial_velocity": {
+            "v": {
                 "x": 0,
                 "y": 0,
                 "z": 2.98e4
             }
         },
-        "Mars": {
+        {
+            "name": "Mars",
             "mass": 6.417e23,
             "radius": 3.3895e6,
-            "initial_position": {
+            "r": {
                 "x": 2.279e11,
                 "y": 0,
                 "z": 0
             },
-            "initial_velocity": {
+            "v": {
                 "x": 0,
                 "y": 0,
                 "z": 2.41e4
             }
         },
-        "Jupiter": {
+        {
+            "name": "Jupiter",
             "mass": 1.898e27,
             "radius": 6.9911e7,
-            "initial_position": {
+            "r": {
                 "x": 7.785e11,
                 "y": 0,
                 "z": 0
             },
-            "initial_velocity": {
+            "v": {
                 "x": 0,
                 "y": 0,
                 "z": 1.31e4
             }
         },
-        "Saturn": {
+        {
+            "name": "Saturn",
             "mass": 5.683e26,
             "radius": 5.8232e7,
-            "initial_position": {
+            "r": {
                 "x": 1.433e12,
                 "y": 0,
                 "z": 0
             },
-            "initial_velocity": {
+            "v": {
                 "x": 0,
                 "y": 0,
                 "z": 9.68e3
             }
         },
-        "Uranus": {
+        {
+            "name": "Uranus",
             "mass": 8.681e25,
             "radius": 2.5362e7,
-            "initial_position": {
+            "r": {
                 "x": 2.872e12,
                 "y": 0,
                 "z": 0
             },
-            "initial_velocity": {
+            "v": {
                 "x": 0,
                 "y": 0,
                 "z": 6.8e3
             }
         },
-        "Neptune": {
+        {
+            "name": "Neptune",
             "mass": 1.024e26,
             "radius": 2.4622e7,
-            "initial_position": {
+            "r": {
                 "x": 4.495e12,
                 "y": 0,
                 "z": 0
             },
-            "initial_velocity": {
+            "v": {
                 "x": 0,
                 "y": 0,
                 "z": 5.43e3
             }
         }
-    }
+    ]
 }

@@ -14,11 +14,12 @@ Axinite can interpret other units through interpretable string. By defalt, axini
 - `h`: hour (value * 3600 to convert to seconds)
 - `m`: minute (value * 60 to convert to seconds)
 These suffixes can be used to increase readability and make it easier to plot out templates.
+
+## File Structure
+`*.tmpl.ax`
 ## Contributing
 Create an [issue](https://github.com/jewels86/Axinite/issues) or a [pull request](https://github.com/jewels86/Axinite/pulls) to contribute to the project.
 Issues and pull requests will be reviewed within the week.
-## File Types
-All files ending in `.ax` use JSON format to serialize ddata.
 ### File Structure
 `*.tmpl.ax` or `*.ax`
 ```json

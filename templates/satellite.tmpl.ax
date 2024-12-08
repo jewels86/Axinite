@@ -2,34 +2,37 @@
     "name": "satellite",
     "limit": "365d",
     "delta": "30min",
-    "bodies": {
-        "Earth": {
+    "t": 0,
+    "bodies": [
+        {
+            "name": "Earth",
             "mass": 5.972e24,
             "radius": 6371000,
-            "initial_position": {
+            "r": {
                 "x": 0,
                 "y": 0,
                 "z": 0
             },
-            "initial_velocity": {
+            "v": {
                 "x": 0,
                 "y": 0,
                 "z": 0
             }
         },
-        "Satellite": {
+        {
+            "name": "Satellite",
             "mass": 1000,
             "radius": 2,
-            "initial_position": {
+            "r": {
                 "x": 0,
                 "y": 6771000,
                 "z": 0
             },
-            "initial_velocity": {
+            "v": {
                 "x": 7660,
                 "y": 3660,
                 "z": 0
             }
         }
-    }
+    ]
 }
