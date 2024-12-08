@@ -1,6 +1,6 @@
 {
     "name": "satellite",
-    "limit": "30d",
+    "limit": "365d",
     "delta": "30min",
     "t": 0,
     "bodies": [
