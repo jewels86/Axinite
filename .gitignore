@@ -4,3 +4,4 @@
 .venv
 venv
 *.ax
+test.py
