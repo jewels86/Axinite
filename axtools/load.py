@@ -38,4 +38,4 @@ def load(args: AxiniteArgs, path: str):
                 data["retain"] = args.retain
 
             json.dump(data, f, indent=4)
-            return args.limit.value, bodies
+            return bodies
