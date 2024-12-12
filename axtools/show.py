@@ -6,6 +6,13 @@ from itertools import cycle
 colors = cycle([color.red, color.blue, color.green, color.orange, color.purple, color.yellow])
 
 def show(limit, delta, *bodies: ax.Body, radius_multiplier=1, speed=100, retain=200):
+    if speed is None:
+        speed = 100
+    if radius_multiplier is None:
+        radius_multiplier = 1
+    if retain is None:
+        retain = 200
+    
     scene = canvas()
     scene.select()
 
