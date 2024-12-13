@@ -98,3 +98,8 @@ The additional parameters can also be entered in here.
 Axinite will soon be coming to executable format! 
 
 Development is still in progress.
+
+## Todos
+- Create executable
+    - Add GUI?
+- Add live mode
