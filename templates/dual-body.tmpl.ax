@@ -1,38 +1,40 @@
 {
-    "name": "dual-body",
-    "limit": "365d",
-    "delta": "1hr",
-    "t": 0,
-    "bodies": [
-        {
-            "name": "Body1",
-            "mass": 5.972e24,
-            "radius": 6371000,
-            "r": {
-                "x": 1e7,
-                "y": 0,
-                "z": 0
-            },
-            "v": {
-                "x": 0,
-                "y": 1e2,
-                "z": 0
-            }
-        },
-        {
-            "name": "Body2",
-            "mass": 5.972e24,
-            "radius": 6371000,
-            "r": {
-                "x": -1e7,
-                "y": 0,
-                "z": 0
-            },
-            "v": {
-                "x": 0,
-                "y": -1e2,
-                "z": 0
-            }
-        }
-    ]
+  "name": "dual-body",
+  "limit": "365d",
+  "delta": "15min",
+  "t": 0,
+  "radius_multiplier": 1,
+  "rate": 60,
+  "bodies": [
+    {
+      "name": "Earth",
+      "mass": 5.972e24,
+      "radius": 6371,
+      "r": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "v": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "name": "Moon",
+      "mass": 7.342e22,
+      "radius": 1737,
+      "r": {
+        "x": 384400,
+        "y": 0,
+        "z": 0
+      },
+      "v": {
+        "x": 0,
+        "y": 1.022,
+        "z": 0
+      }
+    }
+  ]
 }

@@ -24,7 +24,6 @@ def show(limit, delta, *bodies: ax.Body, radius_multiplier=1, speed=100, retain=
         labels[body.name] = label(pos=spheres[body.name].pos, text=body.name, xoffset=15, yoffset=15, space=30, height=10, border=4, font='sans')
     
     t = to_float(0)
-    print(t, limit)
     while t < limit:
         rate(speed)
         for body in bodies:
