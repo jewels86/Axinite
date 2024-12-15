@@ -4,12 +4,12 @@ A powerful open-source engine for advanced celestial mechanics.
 ## Overview
 **Axinite** is an engine for plotting, calculating and viewing celestial motion. 
 You can use it to design your own solar systems, predict trajectories of rockets, simulate the gravitational interactions and more.
-### What is AXTools?
-**AXTools** is a library to help abstract and simplify Axinite. With AXTools, Developers can deploy Axinite powered applications with ease.
+### What is `axtools`?
+`axtools` is a library to help abstract and simplify Axinite. With `axtools`, Developers can deploy Axinite powered applications with ease.
 
 ## Usage
 The `axinite` module can be downloaded from the [latest release](https://github.com/jewels86/Axinite/releases) and used in python code. 
-For using AXTools, head over to the [AXTools usage](#axtools-usage) section.
+For using `axtools`, head over to the [`axtools` usage](#axtools-usage) section.
 For using Axinite as an executable, see [executable usage](#executable).
 
 `axinite` uses the `Body` class to condense planet data so it can be processed. Once the bodies have been initialized, they can then be passed into the `load` function along with simulation parameters.
@@ -28,9 +28,9 @@ limit = ax.functions.interpret_time("30d")
 bodies = ax.load(delta, limit, lambda x: pass, earth, moon)
 ```
 
-## AXTools Usage
+## `axtools` Usage
 The `axtools` module can be used to significantly abstract `axinite`'s usage. 
-AXTools uses `.ax` files to load and show simulations.
+`axtools` uses `.ax` files to load and show simulations.
 Files that are used to load and compute new simulations are marked as `.tmpl.ax` files.
 
 Here's an example template file:
@@ -102,4 +102,4 @@ Development is still in progress.
 ## Todos
 - Create executable
     - Add GUI?
-- Add live mode
+- ~~Add live mode~~
