@@ -1,6 +1,8 @@
 # Axinite
 A powerful open-source engine for advanced celestial mechanics.
 
+![axinite-1](https://github.com/user-attachments/assets/bcd7bc7e-627e-44e5-bfc6-d2ddd787a208)
+
 ## Overview
 **Axinite** is an engine for calculating celestial motion. 
 You can use it to design your own solar systems, predict trajectories of rockets, simulate gravitational interactions and more.
@@ -98,6 +100,10 @@ The additional parameters can also be entered in here.
 Axinite will soon be coming to executable format! 
 
 Development is still in progress.
+
+## Gallery
+![axinite-2](https://github.com/user-attachments/assets/2e952d41-5585-484d-bc3b-05c92aeefe2d)
+![axinite-3](https://github.com/user-attachments/assets/ba434ce4-79a3-4a04-a7c4-45232d9fa11a)
 
 ## Todos
 - Create executable
