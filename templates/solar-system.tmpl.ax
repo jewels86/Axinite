@@ -3,6 +3,7 @@
     "limit": "365d",
     "delta": "1hr",
     "t": 0,
+    "rate": 90,
     "radius_multiplier": 4,
     "bodies": [
         {

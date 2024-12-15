@@ -3,5 +3,5 @@
 .vscode
 .venv
 venv
-*.ax
+./*.ax
 test.py

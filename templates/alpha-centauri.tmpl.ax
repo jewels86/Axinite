@@ -1,0 +1,54 @@
+{
+    "name": "alpha-centauri-system",
+    "limit": "1000yr",
+    "delta": "1d",
+    "t": 0,
+    "radius_multiplier": 1,
+    "bodies": [
+        {
+            "name": "Alpha Centauri A",
+            "mass": 2.1879e30,
+            "radius": 8.514e8,
+            "r": {
+                "x": -1.25e11,
+                "y": 0,
+                "z": 0
+            },
+            "v": {
+                "x": 0,
+                "y": -2.2e4,
+                "z": 5.0e3
+            }
+        },
+        {
+            "name": "Alpha Centauri B",
+            "mass": 1.804383e30,
+            "radius": 6.010e8,
+            "r": {
+                "x": 1.25e11,
+                "y": 0,
+                "z": 0
+            },
+            "v": {
+                "x": 0,
+                "y": 2.2e4,
+                "z": -5.0e3
+            }
+        },
+        {
+            "name": "Proxima Centauri",
+            "mass": 2.429679e29,
+            "radius": 1.073e8,
+            "r": {
+                "x": 1.5e12,
+                "y": 0,
+                "z": 0
+            },
+            "v": {
+                "x": 0,
+                "y": 3.0e3,
+                "z": 2.5e3
+            }
+        }
+    ]
+}

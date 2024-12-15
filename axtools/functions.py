@@ -15,6 +15,9 @@ def interpret_time(string: str):
     elif string.endswith("d"):
         string  = string.removesuffix("d")
         return float(string) * 86400 * u.s
+    elif string.endswith("yr"):
+        string = string.removesuffix("yr")
+        return float(string) * 31536000 * u.s
     else: return float(string) * u.s
 
 def array_to_vectors(array, unit):
