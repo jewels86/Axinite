@@ -2,8 +2,8 @@
 A powerful open-source engine for advanced celestial mechanics.
 
 ## Overview
-**Axinite** is an engine for plotting, calculating and viewing celestial motion. 
-You can use it to design your own solar systems, predict trajectories of rockets, simulate the gravitational interactions and more.
+**Axinite** is an engine for calculating celestial motion. 
+You can use it to design your own solar systems, predict trajectories of rockets, simulate gravitational interactions and more.
 ### What is `axtools`?
 `axtools` is a library to help abstract and simplify Axinite. With `axtools`, Developers can deploy Axinite powered applications with ease.
 
