@@ -43,22 +43,7 @@ Here's an example template file:
     "delta": "1hr",
     "t": 0,
     "radius_multiplier": 2,
-    "bodies": [
-        {
-            "name": "Earth",
-            "mass": 5.972e24,
-            "radius": 6.371e6,
-            "r": {"x": 0, "y": 0, "z": 0},
-            "v": {"x": 0, "y": 0, "z": 0}
-        },
-        {
-            "name": "Moon",
-            "mass": 7.342e22,
-            "radius": 1.737e6,
-            "r": {"x": 3.844e8, "y": 0, "z": 0},
-            "v": {"x": 0, "y": 1.022e3, "z": 0}
-        }
-    ]
+    "bodies": [...]
 }
 ```
 Additional simulation parameters, such as `radius_multiplier` and `rate` can be added to further customize simulations.
@@ -90,6 +75,6 @@ Development is still in progress.
 ![axinite-3](https://github.com/user-attachments/assets/ba434ce4-79a3-4a04-a7c4-45232d9fa11a)
 
 ## Todos
-- Create executable
-    - Add GUI?
+- Create `ax-cli` executable
+- Create `ax-gui` executable
 - ~~Add live mode~~
