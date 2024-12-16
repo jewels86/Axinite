@@ -3,12 +3,13 @@ from vpython import *
 from axtools import to_vec, to_float, string_to_color
 from itertools import cycle
 import axtools
+import vpython as vp
 
 colors = cycle([color.red, color.blue, color.green, color.orange, color.purple, color.yellow])
 
-def show(limit, delta, *bodies: axtools.Body, radius_multiplier=1, speed=100, retain=200):
-    if speed is None:
-        speed = 100
+def show(limit, delta, *bodies: axtools.Body, radius_multiplier=1, rate=100, retain=200):
+    if rate is None:
+        rate = 100
     if radius_multiplier is None:
         radius_multiplier = 1
     if retain is None:
@@ -28,7 +29,7 @@ def show(limit, delta, *bodies: axtools.Body, radius_multiplier=1, speed=100, re
     
     t = to_float(0)
     while t < limit:
-        rate(speed)
+        vp.rate(rate)
         for body in bodies:
             spheres[body.name].pos = to_vec(body.r[t])
             labels[body.name].pos = spheres[body.name].pos
