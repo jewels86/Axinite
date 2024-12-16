@@ -21,8 +21,8 @@ Here's an example of the `axinite` module:
 import axinite as ax
 import astropy.units as u
 
-earth = ax.Body("Earth", 5.972e24 * u.kg, ax.to_vector({"x": 0, "y": 0, "z": 0}, u.m), ax.to_vector({"x": 0, "y": 0, "z": 0}, u.m/u.s), 6.371e6 * u.m)
-moon = ax.Body("Moon", 7.342e22 * u.kg, ax.to_vector({"x": 3.844e8, "y": 0, "z": 0}, u.m), ax.to_vector({"x": 0, "y": 1.022e3, "z": 0}, u.m/u.s), 1.737e6 * u.m)
+earth = ax.Body(5.972e24 * u.kg, ax.to_vector({"x": 0, "y": 0, "z": 0}, u.m), ax.to_vector({"x": 0, "y": 0, "z": 0}, u.m/u.s))
+moon = ax.Body(7.342e22 * u.kg, ax.to_vector({"x": 3.844e8, "y": 0, "z": 0}, u.m), ax.to_vector({"x": 0, "y": 1.022e3, "z": 0}, u.m/u.s))
 
 delta = ax.functions.interpret_time("1hr")
 limit = ax.functions.interpret_time("30d")
