@@ -20,13 +20,21 @@ def load(args: AxiniteArgs, path: str):
             }
 
             for body in bodies: 
-                data["bodies"].append({
+                body_data = {
                     "name": body.name,
                     "mass": body.mass.value,
                     "radius": body.radius.value,
                     "r": {k: [v.x.value, v.y.value, v.z.value] for k, v in body.r.items()},
                     "v": {k: [v.x.value, v.y.value, v.z.value] for k, v in body.v.items()}
-                })
+                }
+                if body.color != None:
+                    body_data["color"] = body.color
+                if body.retain != None:
+                    body_data["retain"] = body.retain
+                if body.light != None:
+                    body_data["light"] = body.light
+
+                data["bodies"].append(body_data)
 
             if args.radius_multiplier is not None:
                 data["radius_multiplier"] = args.radius_multiplier

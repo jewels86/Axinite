@@ -1,12 +1,12 @@
 import axinite as ax
-from axtools import AxiniteArgs, to_vec
+from axtools import AxiniteArgs, to_vec, Body
 from vpython import *
 from itertools import cycle
 import vpython as vp
 
 colors = cycle([color.red, color.blue, color.green, color.orange, color.purple, color.yellow])
 
-def live(limit, delta, t, *bodies: ax.Body, radius_multiplier=1, rate=100, retain=200):
+def live(limit, delta, t, *bodies: Body, radius_multiplier=1, rate=100, retain=200):
     if rate is None:
         rate = 100
     if radius_multiplier is None:
@@ -21,7 +21,9 @@ def live(limit, delta, t, *bodies: ax.Body, radius_multiplier=1, rate=100, retai
     labels = {}
 
     for body in bodies:
-        spheres[body.name] = sphere(pos=to_vec(body.r[0]), radius=body.radius.value * radius_multiplier, color=next(colors), make_trail=True, retain=retain, interval=10)
+        body_color = body.color if body.color != "" else next(colors)
+        body_retain = body.retain if body.retain != None else retain
+        spheres[body.name] = sphere(pos=to_vec(body.r[0]), radius=body.radius.value * radius_multiplier, color=body_color, make_trail=True, retain=body_retain, interval=10)
         labels[body.name] = label(pos=spheres[body.name].pos, text=body.name, xoffset=15, yoffset=15, space=30, height=10, border=4, font='sans')
 
     def fn(t, **kwargs):

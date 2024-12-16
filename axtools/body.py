@@ -6,7 +6,7 @@ from math import pi
 from numpy import float64
 
 class Body:
-    def __init__(self, name, mass: u.Quantity, position: CartesianRepresentation, velocity: CartesianRepresentation, radius: u.Quantity, color:str="", light:bool=False):
+    def __init__(self, name, mass: u.Quantity, position: CartesianRepresentation, velocity: CartesianRepresentation, radius: u.Quantity, color:str="", light:bool=False, retain=None):
         self.mass = mass
         self.r = { float64(0): position}
         self.v = { float64(0): velocity}
@@ -14,6 +14,7 @@ class Body:
         self.radius = radius
         self.color = color
         self.light = light
+        self.retain = retain
 
     def gravitational_force(self, r: CartesianRepresentation, m: u.Quantity):
         return -G * ((self.mass * m) / vector_magnitude(r)**2) * unit_vector(r)
