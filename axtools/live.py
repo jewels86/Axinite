@@ -1,5 +1,5 @@
 import axinite as ax
-from axtools import AxiniteArgs, to_vec, Body
+from axtools import AxiniteArgs, to_vec, Body, string_to_color
 from vpython import *
 from itertools import cycle
 import vpython as vp
@@ -19,18 +19,22 @@ def live(limit, delta, t, *bodies: Body, radius_multiplier=1, rate=100, retain=2
 
     spheres = {}
     labels = {}
+    lights = {}
 
     for body in bodies:
-        body_color = body.color if body.color != "" else next(colors)
+        body_color = string_to_color(body.color) if body.color != "" else next(colors)
         body_retain = body.retain if body.retain != None else retain
         spheres[body.name] = sphere(pos=to_vec(body.r[0]), radius=body.radius.value * radius_multiplier, color=body_color, make_trail=True, retain=body_retain, interval=10)
         labels[body.name] = label(pos=spheres[body.name].pos, text=body.name, xoffset=15, yoffset=15, space=30, height=10, border=4, font='sans')
+        if body.light == True: lights[body.name] = local_light(pos=to_vec(body.r[0]), color=body_color)
 
     def fn(t, **kwargs):
         vp.rate(rate)
         for body in kwargs["bodies"]:
             spheres[body.name].pos = to_vec(body.r[t.value])
             labels[body.name].pos = spheres[body.name].pos
+            try: lights[body.name].pos = spheres[body.name].pos
+            except: pass
         print(f"t = {t}", end='\r')
 
     ax.load(delta, limit, fn, *bodies, t=t)

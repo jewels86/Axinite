@@ -62,6 +62,8 @@ def data_to_body(data):
             body.light = data["light"]
         if "retain" in data:
             body.retain = data["retain"]
+        if "radius_multiplier" in data:
+            body.radius *= data["radius_multiplier"]
         
         return body
 

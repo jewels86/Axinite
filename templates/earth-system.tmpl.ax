@@ -9,6 +9,7 @@
             "name": "Earth",
             "mass": 5.972e24,
             "radius": 6.371e6,
+            "color": "green",
             "r": {
                 "x": 0,
                 "y": 0,
@@ -24,6 +25,7 @@
             "name": "Moon",
             "mass": 7.342e22,
             "radius": 1.737e6,
+            "color": "blue",
             "r": {
                 "x": 3.844e8,
                 "y": 0,

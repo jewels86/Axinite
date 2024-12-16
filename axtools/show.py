@@ -1,6 +1,6 @@
 import axinite as ax
 from vpython import *
-from axtools import to_vec, to_float
+from axtools import to_vec, to_float, string_to_color
 from itertools import cycle
 import axtools
 
@@ -21,7 +21,7 @@ def show(limit, delta, *bodies: axtools.Body, radius_multiplier=1, speed=100, re
     labels = {}
     
     for body in bodies:
-        body_color = body.color if body.color != "" else next(colors)
+        body_color = string_to_color(body.color) if body.color != "" else next(colors)
         body_retain = body.retain if body.retain != None else retain
         spheres[body.name] = sphere(pos=to_vec(body.r[0]), radius=body.radius.value * radius_multiplier, color=body_color, make_trail=True, retain=body_retain, interval=10)
         labels[body.name] = label(pos=spheres[body.name].pos, text=body.name, xoffset=15, yoffset=15, space=30, height=10, border=4, font='sans')
