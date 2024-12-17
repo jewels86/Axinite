@@ -12,44 +12,18 @@ Check out the docs [here](https://jewels86.gitbook.io/axinite/axinite/getting-st
 `axtools` is a library to help abstract and simplify Axinite. With `axtools`, Developers can deploy Axinite powered applications with ease. 
 You can find the docs [here](https://jewels86.gitbook.io/axinite/axtools/quickstart).
 
-## Usage
-The `axinite` module can be downloaded from the [latest release](https://github.com/jewels86/Axinite/releases) and used in python code. 
-`axinite` uses the `Body` class to condense planet data so it can be processed. Once the bodies have been initialized, they can then be passed into the `load` function along with simulation parameters.
-
-## `axtools` Usage
-The `axtools` module can be used to significantly abstract `axinite`'s usage. 
-`axtools` uses `.ax` files to load and show simulations.
-Files that are used to load and compute new simulations are marked as `.tmpl.ax` files.
-
-Here's an example template file:
-```json
-{
-    "name": "example-system",
-    "limit": "365d",
-    "delta": "1hr",
-    "t": 0,
-    "radius_multiplier": 2,
-    "bodies": [...]
-}
-```
-These files can be used through the module like this:
-```python
-import axtools
-args = axtools.read("example-system.tmpl.ax")
-bodies = axtools.load(args, "example-system.ax")
-```
-Now we can show it with:
-```python
-import axtools
-args = axtools.read("example-system.ax")
-axtools.show(args.limit.value, args.delta.value, *args.bodies)
-```
-The additional parameters can also be entered in here.
-
 ## Executable
 Axinite will soon be coming to executable format! 
 
 Development is still in progress.
+
+## Supporting Axinite
+### Contributing
+Feel free to open up a [pull request](https://github.com/jewels86/Axinite/pulls) or an [issue](https://github.com/jewels86/Axinite/issues) if there are any changes you'd like introduced to Axinite.
+Any help will be appricated!
+### Other ways to support
+- Giving this repository a star! This really helps me to get Axinite out into the world
+- Reaching out! I'd love to hear about your thoughts, ideas, and issues with Axinite.
 
 ## Gallery
 ![axinite-2](https://github.com/user-attachments/assets/2e952d41-5585-484d-bc3b-05c92aeefe2d)
