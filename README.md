@@ -6,29 +6,15 @@ A powerful open-source engine for advanced celestial mechanics.
 ## Overview
 **Axinite** is an engine for calculating celestial motion. 
 You can use it to design your own solar systems, predict trajectories of rockets, simulate gravitational interactions and more.
+
+Check out the docs [here](https://jewels86.gitbook.io/axinite/axinite/getting-started).
 ### What is `axtools`?
-`axtools` is a library to help abstract and simplify Axinite. With `axtools`, Developers can deploy Axinite powered applications with ease.
+`axtools` is a library to help abstract and simplify Axinite. With `axtools`, Developers can deploy Axinite powered applications with ease. 
+You can find the docs [here](https://jewels86.gitbook.io/axinite/axtools/quickstart).
 
 ## Usage
 The `axinite` module can be downloaded from the [latest release](https://github.com/jewels86/Axinite/releases) and used in python code. 
-For using `axtools`, head over to the [`axtools` usage](#axtools-usage) section.
-For using Axinite as an executable, see [executable usage](#executable).
-
 `axinite` uses the `Body` class to condense planet data so it can be processed. Once the bodies have been initialized, they can then be passed into the `load` function along with simulation parameters.
-
-Here's an example of the `axinite` module:
-```python
-import axinite as ax
-import astropy.units as u
-
-earth = ax.Body(5.972e24 * u.kg, ax.to_vector({"x": 0, "y": 0, "z": 0}, u.m), ax.to_vector({"x": 0, "y": 0, "z": 0}, u.m/u.s))
-moon = ax.Body(7.342e22 * u.kg, ax.to_vector({"x": 3.844e8, "y": 0, "z": 0}, u.m), ax.to_vector({"x": 0, "y": 1.022e3, "z": 0}, u.m/u.s))
-
-delta = ax.functions.interpret_time("1hr")
-limit = ax.functions.interpret_time("30d")
-
-bodies = ax.load(delta, limit, lambda x: pass, earth, moon)
-```
 
 ## `axtools` Usage
 The `axtools` module can be used to significantly abstract `axinite`'s usage. 
@@ -46,17 +32,12 @@ Here's an example template file:
     "bodies": [...]
 }
 ```
-Additional simulation parameters, such as `radius_multiplier` and `rate` can be added to further customize simulations.
-
 These files can be used through the module like this:
 ```python
 import axtools
 args = axtools.read("example-system.tmpl.ax")
 bodies = axtools.load(args, "example-system.ax")
 ```
-
-Once the template has been read, we load it using the `axtools.load` function, which computes the simulation and dumps it to file (unless `path == ""`)
-
 Now we can show it with:
 ```python
 import axtools
@@ -73,6 +54,9 @@ Development is still in progress.
 ## Gallery
 ![axinite-2](https://github.com/user-attachments/assets/2e952d41-5585-484d-bc3b-05c92aeefe2d)
 ![axinite-3](https://github.com/user-attachments/assets/ba434ce4-79a3-4a04-a7c4-45232d9fa11a)
+![axinite-4](https://github.com/user-attachments/assets/af13ee05-f6ef-4d24-8446-39e6544df2ca)
+![axinite-5](https://github.com/user-attachments/assets/c16db758-2ad2-47d8-9f1d-190727f9e881)
+
 
 ## Todos
 - Create `ax-cli` executable
