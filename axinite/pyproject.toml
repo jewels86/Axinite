@@ -1,0 +1,11 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "axinite"
+version = "1.0.0"
+dependencies = [
+    "astropy"
+]
+authors = [{ name = "Jewels", email = "jewels286@proton.me" }]

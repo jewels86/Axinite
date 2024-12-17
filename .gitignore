@@ -5,3 +5,7 @@
 venv
 ./*.ax
 test.py
+*.egg
+*.egg-info/
+dist/
+build/
