@@ -12,7 +12,7 @@ Check out the docs [here](https://jewels86.gitbook.io/axinite/axinite/getting-st
 `axtools` is a library to help abstract and simplify Axinite. With `axtools`, Developers can deploy Axinite powered applications with ease. 
 You can find the docs [here](https://jewels86.gitbook.io/axinite/axtools/quickstart).
 
-## Executable
+### Executable
 Axinite will soon be coming to executable format! 
 
 Development is still in progress.
