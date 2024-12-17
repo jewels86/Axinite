@@ -8,6 +8,7 @@ def read(path: str) -> AxiniteArgs:
         data = json.load(f)
         
         args = AxiniteArgs()
+        args.name = data["name"]
         args.delta = interpret_time(data["delta"])
         args.limit = interpret_time(data["limit"])
         args.t = data["t"] * u.s

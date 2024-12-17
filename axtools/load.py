@@ -12,6 +12,7 @@ def load(args: AxiniteArgs, path: str):
     else: 
         with open(path, 'w+') as f:
             data = {
+                "name": args.name,
                 "delta": args.delta.value,
                 "limit": args.limit.value,
                 "t": args.t.value,

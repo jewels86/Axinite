@@ -6,7 +6,7 @@ import vpython as vp
 
 colors = cycle([color.red, color.blue, color.green, color.orange, color.purple, color.yellow])
 
-def live(limit, delta, t, *bodies: Body, radius_multiplier=1, rate=100, retain=200):
+def live(limit, delta, t, *bodies: Body, radius_multiplier=1, rate=100, retain=200, name=None):
     if rate is None:
         rate = 100
     if radius_multiplier is None:
@@ -14,8 +14,18 @@ def live(limit, delta, t, *bodies: Body, radius_multiplier=1, rate=100, retain=2
     if retain is None:
         retain = 200
 
+    global pause
+    pause = False
+
     scene = canvas()
     scene.select()
+    if name: scene.title = name
+
+    def pause_fn():
+        global pause
+        pause = not pause
+
+    pause_btn = button(bind=pause_fn, text='Pause', pos=scene.caption_anchor)
 
     spheres = {}
     labels = {}
@@ -36,5 +46,7 @@ def live(limit, delta, t, *bodies: Body, radius_multiplier=1, rate=100, retain=2
             try: lights[body.name].pos = spheres[body.name].pos
             except: pass
         print(f"t = {t}", end='\r')
+        if pause: 
+            while pause: vp.rate(10)
 
     ax.load(delta, limit, fn, *bodies, t=t)

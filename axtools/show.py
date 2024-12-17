@@ -7,16 +7,26 @@ import vpython as vp
 
 colors = cycle([color.red, color.blue, color.green, color.orange, color.purple, color.yellow])
 
-def show(limit, delta, *bodies: axtools.Body, radius_multiplier=1, rate=100, retain=200):
+def show(limit, delta, *bodies: axtools.Body, radius_multiplier=1, rate=100, retain=200, name=None):
     if rate is None:
         rate = 100
     if radius_multiplier is None:
         radius_multiplier = 1
     if retain is None:
         retain = 200
+
+    global pause
+    pause = False
     
     scene = canvas()
     scene.select()
+    if name: scene.title = name
+
+    def pause_fn():
+        global pause
+        pause = not pause
+
+    pause_btn = button(bind=pause_fn, text='Pause', pos=scene.caption_anchor)
 
     spheres = {}
     labels = {}
@@ -35,6 +45,7 @@ def show(limit, delta, *bodies: axtools.Body, radius_multiplier=1, rate=100, ret
             labels[body.name].pos = spheres[body.name].pos
         t += delta
         print(f"t = {t}", end='\r')
+        while pause: vp.rate(10)
 
 
 

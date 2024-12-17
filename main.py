@@ -9,4 +9,4 @@ if sys.argv[1] == "show":
     axtools.show(args.limit.value, args.delta.value, *args.bodies, radius_multiplier=args.radius_multiplier, rate=args.rate, retain=args.retain)
 if sys.argv[1] == "live":
     args = axtools.read(sys.argv[2])
-    axtools.live(args.limit, args.delta, args.t, *args.bodies, radius_multiplier=args.radius_multiplier, rate=args.rate, retain=args.retain)
+    axtools.live(args.limit, args.delta, args.t, *args.bodies, radius_multiplier=args.radius_multiplier, rate=args.rate, retain=args.retain, name=args.name)

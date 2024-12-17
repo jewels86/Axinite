@@ -2,6 +2,7 @@ import axinite as ax
 
 class AxiniteArgs:
     def __init__(self):
+        self.name = None
         self.delta = None
         self.limit = None
         self.action = None
