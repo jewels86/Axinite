@@ -10,5 +10,5 @@ dependencies = [
 ]
 authors = [{ name = "Jewels", email = "jewels286@proton.me" }]
 
-[project.optional_dependencies]
+[project.optional-dependencies]
 tools = ["vpython"]
