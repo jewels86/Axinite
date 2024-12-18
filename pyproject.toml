@@ -14,9 +14,9 @@ description = "A powerful open-source engine for advanced celestial mechanics."
 readme = "README.md"
 license = { file = "LICENSE.md" }
 keywords = ["celestial-mechanics", "orbital-dynamics", "engine"]
-classifiers = {
+classifiers = [
 	"Development Status :: 4 - Beta"
-}
+]
 
 [project.urls]
 Homepage = "https://jewels86.me/axinite"
