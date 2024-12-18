@@ -1,8 +1,7 @@
 import axinite as ax
 from vpython import *
-from axtools import to_vec, to_float, string_to_color
+from tools import to_vec, to_float, string_to_color
 from itertools import cycle
-import axtools
 import vpython as vp
 
 colors = cycle([color.red, color.blue, color.green, color.orange, color.purple, color.yellow])

@@ -1,5 +1,5 @@
 import axinite as ax
-from axtools import AxiniteArgs, to_vec, Body, string_to_color
+from tools import AxiniteArgs, to_vec, Body, string_to_color
 from vpython import *
 from itertools import cycle
 import vpython as vp
