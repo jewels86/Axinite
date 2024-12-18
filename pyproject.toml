@@ -4,10 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "axinite"
-version = "1.1.8"
-dependencies = [
-    "astropy"
-]
+version = "1.1.9"
+dependencies = ["astropy", "numpy"]
 authors = [{ name = "Jewels", email = "jewels286@proton.me" }]
 maintainers = [{ name = "Jewels", email = "jewels286@proton.me" }]
 description = "A powerful open-source engine for advanced celestial mechanics."
@@ -24,4 +22,4 @@ Documentation = "https://jewels86.gitbook.io/axinite"
 Repository = "https://github.com/jewels86/axinite"
 
 [project.optional-dependencies]
-tools = ["vpython"]
+tools = ["vpython", "json", "itertools"]
