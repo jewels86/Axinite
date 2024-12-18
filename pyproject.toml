@@ -11,4 +11,4 @@ dependencies = [
 authors = [{ name = "Jewels", email = "jewels286@proton.me" }]
 
 [project.optional-dependencies]
-tools = ["vpython"]
+tools = ["axinite.tools", "vpython"]
