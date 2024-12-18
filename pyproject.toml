@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "axinite"
-version = "1.1.7"
+version = "1.1.8"
 dependencies = [
     "astropy"
 ]
@@ -12,7 +12,7 @@ authors = [{ name = "Jewels", email = "jewels286@proton.me" }]
 maintainers = [{ name = "Jewels", email = "jewels286@proton.me" }]
 description = "A powerful open-source engine for advanced celestial mechanics."
 readme = "README.md"
-license = { file = "LICENSE.md" }
+license = { file = "LICENSE" }
 keywords = ["celestial-mechanics", "orbital-dynamics", "engine"]
 classifiers = [
 	"Development Status :: 4 - Beta"
