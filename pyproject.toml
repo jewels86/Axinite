@@ -9,6 +9,19 @@ dependencies = [
     "astropy"
 ]
 authors = [{ name = "Jewels", email = "jewels286@proton.me" }]
+maintainers = [{ name = "Jewels", email = "jewels286@proton.me" }]
+description = "A powerful open-source engine for advanced celestial mechanics."
+readme = "README.md"
+license = { file = "LICENSE.md" }
+keywords = ["celestial-mechanics", "orbital-dynamics", "engine"]
+classifiers = {
+	"Development Status :: 4 - Beta"
+}
+
+[project.urls]
+Homepage = "https://jewels86.me/axinite"
+Documentation = "https://jewels86.gitbook.io/axinite"
+Repository = "https://github.com/jewels86/axinite"
 
 [project.optional-dependencies]
 tools = ["axinite.tools", "vpython"]
