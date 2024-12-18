@@ -3,7 +3,7 @@ import axinite as ax
 from astropy.coordinates import CartesianRepresentation
 import vpython as vp
 import numpy as np
-import tools
+import axinite.tools as axtools
 
 def interpret_time(string: str):
     if type(string) is float: return string * u.s

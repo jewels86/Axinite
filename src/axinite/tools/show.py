@@ -1,6 +1,6 @@
 import axinite as ax
 from vpython import *
-from tools import to_vec, to_float, string_to_color
+from axinite.tools import to_vec, to_float, string_to_color
 from itertools import cycle
 import vpython as vp
 
