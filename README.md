@@ -36,4 +36,4 @@ Any help will be appricated!
 - Create `ax-cli` executable
 - Create `ax-gui` executable
 - ~~Add live mode~~
-- Move actools into axinite.tools and add axinite[tools]
+- ~~Move actools into axinite.tools and add axinite[tools]~~
