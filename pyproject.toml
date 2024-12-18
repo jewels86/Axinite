@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "axinite"
-version = "1.1.4"
+version = "1.1.5"
 dependencies = [
     "astropy"
 ]
 authors = [{ name = "Jewels", email = "jewels286@proton.me" }]
 
 [project.optional-dependencies]
-tools = ["axinite.tools", "vpython"]
+tools = ["vpython"]
