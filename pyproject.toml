@@ -9,3 +9,6 @@ dependencies = [
     "astropy"
 ]
 authors = [{ name = "Jewels", email = "jewels286@proton.me" }]
+
+[project.optional_dependencies]
+tools = ["vpython"]
