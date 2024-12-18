@@ -1,4 +1,4 @@
-import axtools
+import axinite.tools as axtools
 import sys
 
 if sys.argv[1] == "load":
