@@ -1,5 +1,5 @@
 import axinite as ax
-from axtools import AxiniteArgs
+from axinite.tools import AxiniteArgs
 import json
 
 def load(args: AxiniteArgs, path: str):

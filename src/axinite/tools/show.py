@@ -1,13 +1,12 @@
 import axinite as ax
 from vpython import *
-from axtools import to_vec, to_float, string_to_color
+from axinite.tools import to_vec, to_float, string_to_color, Body
 from itertools import cycle
-import axtools
 import vpython as vp
 
 colors = cycle([color.red, color.blue, color.green, color.orange, color.purple, color.yellow])
 
-def show(limit, delta, *bodies: axtools.Body, radius_multiplier=1, rate=100, retain=200, name=None):
+def show(limit, delta, *bodies: Body, radius_multiplier=1, rate=100, retain=200, name=None):
     if rate is None:
         rate = 100
     if radius_multiplier is None:
