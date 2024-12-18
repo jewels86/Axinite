@@ -83,6 +83,7 @@ def string_to_color(color_name):
         'green': vp.color.green,
         'orange': vp.color.orange,
         'purple': vp.color.purple,
-        'yellow': vp.color.yellow
+        'yellow': vp.color.yellow,
+        'white': vp.color.white
     }
     return color_map.get(color_name, vp.color.white)
