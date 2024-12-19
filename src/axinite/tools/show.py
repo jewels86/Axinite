@@ -17,6 +17,8 @@ def show(_args):
 
     global pause
     pause = False
+    global _rate
+    _rate = args.rate
     
     scene = canvas()
     scene.select()
@@ -25,8 +27,12 @@ def show(_args):
     def pause_fn():
         global pause
         pause = not pause
+    def rate_change_fn(evt):
+        global _rate
+        args.rate = int(evt.value)
 
     pause_btn = button(bind=pause_fn, text='Pause', pos=scene.caption_anchor)
+    rate_slider = slider(bind=rate_change_fn, min=1, max=1000, value=_rate, step=5, pos=scene.caption_anchor, length=200)
 
     spheres = {}
     labels = {}
@@ -39,7 +45,7 @@ def show(_args):
     
     t = to_float(0)
     while t < args.limit:
-        vp.rate(args.rate)
+        vp.rate(_rate)
         for body in args.bodies:
             spheres[body.name].pos = to_vec(body.r[t])
             labels[body.name].pos = spheres[body.name].pos

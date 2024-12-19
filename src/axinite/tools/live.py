@@ -16,6 +16,8 @@ def live(_args: AxiniteArgs):
 
     global pause
     pause = False
+    global _rate
+    _rate = args.rate
 
     scene = canvas()
     scene.select()
@@ -25,7 +27,12 @@ def live(_args: AxiniteArgs):
         global pause
         pause = not pause
 
+    def rate_change_fn(evt):
+        global _rate
+        args.rate = int(evt.value)
+
     pause_btn = button(bind=pause_fn, text='Pause', pos=scene.caption_anchor)
+    rate_slider = slider(bind=rate_change_fn, min=1, max=1000, value=_rate, step=5, pos=scene.caption_anchor, length=200)
 
     spheres = {}
     labels = {}
@@ -39,7 +46,7 @@ def live(_args: AxiniteArgs):
         if body.light == True: lights[body.name] = local_light(pos=to_vec(body.r[0]), color=body_color)
 
     def fn(t, **kwargs):
-        rate(args.rate)
+        rate(_rate)
         for body in kwargs["bodies"]:
             spheres[body.name].pos = to_vec(body.r[t.value])
             labels[body.name].pos = spheres[body.name].pos
