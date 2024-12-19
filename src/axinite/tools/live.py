@@ -30,7 +30,6 @@ def live(_args: AxiniteArgs):
     def rate_change_fn(evt):
         global _rate
         _rate = int(evt.value)
-        print(f"Rate changed to {_rate}")
 
     pause_btn = button(bind=pause_fn, text='Pause', pos=scene.caption_anchor)
     rate_slider = slider(bind=rate_change_fn, min=1, max=1000, value=_rate, pos=scene.caption_anchor, length=250)
