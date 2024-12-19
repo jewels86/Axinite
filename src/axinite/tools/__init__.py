@@ -5,4 +5,4 @@ from axinite.tools.load import load
 from axinite.tools.read import read
 from axinite.tools.show import show
 from axinite.tools.live import live
-from axinite.tools.frontend import Frontend
+from axinite.tools.frontends.vpython import vpython_frontend

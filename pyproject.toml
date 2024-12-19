@@ -28,3 +28,7 @@ tools-vpython = ["json", "itertools"]
 tools-matplotlib = ["json", "itertools", "matplotlib"]
 tools-plotly = ["json", "itertools", "plotly"]
 tools-mayavi = ["json", "itertools", "vtk", "pyqt5", "mayavi"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+exclude = ["test.py"]
