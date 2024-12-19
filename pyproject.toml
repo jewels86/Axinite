@@ -22,4 +22,13 @@ Documentation = "https://jewels86.gitbook.io/axinite"
 Repository = "https://github.com/jewels86/axinite"
 
 [project.optional-dependencies]
-tools = ["vpython", "json", "itertools"]
+tools-no-frontends = ["json", "itertools"]
+tools = ["vpython", "matplotlib", "plotly", "vtk", "mayavi", "pyqt5", "json", "itertools"]
+tools-vpython = ["json", "itertools"]
+tools-matplotlib = ["json", "itertools", "matplotlib"]
+tools-plotly = ["json", "itertools", "plotly"]
+tools-mayavi = ["json", "itertools", "vtk", "pyqt5", "mayavi"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+exclude = ["test.py"]

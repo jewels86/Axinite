@@ -67,23 +67,32 @@ def data_to_body(data):
         
         return body
 
-def to_vec(vector: CartesianRepresentation):
-    return vp.vector(vector.x.value, vector.y.value, vector.z.value)
-
 def vector_from_list(vector: list, unit):
     return CartesianRepresentation(u.Quantity(float(vector[0]), unit), u.Quantity(float(vector[1]), unit), u.Quantity(float(vector[2]), unit))
 
 def to_float(val):
     return np.float64(val)
 
-def string_to_color(color_name):
-    color_map = {
-        'red': vp.color.red,
-        'blue': vp.color.blue,
-        'green': vp.color.green,
-        'orange': vp.color.orange,
-        'purple': vp.color.purple,
-        'yellow': vp.color.yellow,
-        'white': vp.color.white
-    }
-    return color_map.get(color_name, vp.color.white)
+def string_to_color(color_name, frontend: str):
+    if frontend == "vpython":
+        color_map = {
+            'red': vp.color.red,
+            'blue': vp.color.blue,
+            'green': vp.color.green,
+            'orange': vp.color.orange,
+            'purple': vp.color.purple,
+            'yellow': vp.color.yellow,
+            'white': vp.color.white
+        }
+        return color_map.get(color_name, vp.color.white)
+    elif frontend == "matplotlib":
+        color_map = {
+            'red': 'r',
+            'blue': 'b',
+            'green': 'g',
+            'orange': 'orange',
+            'purple': 'purple',
+            'yellow': 'yellow',
+            'white': 'white'
+        }
+        return color_map.get(color_name, 'white')
