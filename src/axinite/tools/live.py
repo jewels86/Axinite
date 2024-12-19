@@ -29,10 +29,11 @@ def live(_args: AxiniteArgs):
 
     def rate_change_fn(evt):
         global _rate
-        args.rate = int(evt.value)
+        _rate = int(evt.value)
+        print(f"Rate changed to {_rate}")
 
     pause_btn = button(bind=pause_fn, text='Pause', pos=scene.caption_anchor)
-    rate_slider = slider(bind=rate_change_fn, min=1, max=1000, value=_rate, step=5, pos=scene.caption_anchor, length=200)
+    rate_slider = slider(bind=rate_change_fn, min=1, max=1000, value=_rate, pos=scene.caption_anchor, length=250)
 
     spheres = {}
     labels = {}
@@ -46,6 +47,7 @@ def live(_args: AxiniteArgs):
         if body.light == True: lights[body.name] = local_light(pos=to_vec(body.r[0]), color=body_color)
 
     def fn(t, **kwargs):
+        global _rate
         rate(_rate)
         for body in kwargs["bodies"]:
             spheres[body.name].pos = to_vec(body.r[t.value])
