@@ -56,5 +56,5 @@ def live(_args: AxiniteArgs):
         if pause: 
             while pause: rate(10)
 
-    args.function = fn
+    args.action = fn
     ax.load(*args.unpack(), t=args.t)
