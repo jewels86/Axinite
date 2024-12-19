@@ -14,5 +14,6 @@ def live(_args: axtools.AxiniteArgs, frontend):
     if args.retain is None:
        args.retain = 200
 
+
     args.action = frontend(args)
     ax.load(*args.unpack(), t=args.t)
