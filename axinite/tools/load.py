@@ -2,13 +2,17 @@ import axinite as ax
 from axinite.tools import AxiniteArgs
 import json
 
-def load(args: AxiniteArgs, path: str):
+def load(args: AxiniteArgs, path: str, dont_change_args: bool = False):
     args.action = lambda t, **kwargs: print(f"Timestep {t} ({((t / args.limit) * 100).value:.2f}% complete)", end="\r")
 
     bodies = ax.load(*args.unpack(), t=args.t)
     print(f"\nFinished with {len(bodies[0].r)} timesteps")
 
-    if path == "": return bodies
+    if path == "": 
+        if not dont_change_args:
+            args.t = args.limit
+            args.bodies = bodies
+        return bodies
     else: 
         with open(path, 'w+') as f:
             data = {
@@ -47,4 +51,7 @@ def load(args: AxiniteArgs, path: str):
                 data["retain"] = args.retain
 
             json.dump(data, f, indent=4)
+            if not dont_change_args:
+                args.t = args.limit
+                args.bodies = bodies
             return bodies
