@@ -6,3 +6,4 @@ from axinite.tools.read import read
 from axinite.tools.show import show
 from axinite.tools.live import live
 from axinite.tools.frontends.vpython import vpython_frontend
+from axinite.tools.frontends.plotly import plotly_frontend

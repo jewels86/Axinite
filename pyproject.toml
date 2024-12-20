@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "axinite"
-version = "1.3.0"
+version = "1.4.0"
 dependencies = ["astropy", "numpy"]
 authors = [{ name = "Jewels", email = "jewels286@proton.me" }]
 maintainers = [{ name = "Jewels", email = "jewels286@proton.me" }]
@@ -29,5 +29,5 @@ tools-plotly = ["json", "itertools", "plotly"]
 tools-mayavi = ["json", "itertools", "vtk", "pyqt5", "mayavi"]
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["axinite"]
 exclude = ["test.py"]
