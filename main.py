@@ -9,4 +9,4 @@ if sys.argv[1] == "show":
     axtools.show(args, axtools.vpython_frontend)
 if sys.argv[1] == "live":
     args = axtools.read(sys.argv[2])
-    axtools.live(args, axtools.vpython_frontend)
+    axtools.live(args, axtools.plotly_frontend)
