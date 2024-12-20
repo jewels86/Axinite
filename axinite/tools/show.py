@@ -6,7 +6,7 @@ import vpython as vp
 
 colors = cycle([color.red, color.blue, color.green, color.orange, color.purple, color.yellow])
 
-def show(_args, frontend=axtools.vpython_frontend):
+def show(_args, frontend):
     args = _args
     if args.rate is None:
         args.rate = 100

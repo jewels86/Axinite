@@ -5,7 +5,7 @@ from itertools import cycle
 
 colors = cycle([color.red, color.blue, color.green, color.orange, color.purple, color.yellow])
 
-def live(_args: axtools.AxiniteArgs, frontend=axtools.vpython_frontend):
+def live(_args: axtools.AxiniteArgs, frontend):
     args = _args
     if args.rate is None:
         args.rate = 100
