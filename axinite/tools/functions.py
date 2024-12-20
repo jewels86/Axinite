@@ -96,3 +96,15 @@ def string_to_color(color_name, frontend: str):
             'white': 'white'
         }
         return color_map.get(color_name, 'white')
+    
+
+def create_sphere(pos: CartesianRepresentation, radius: u.Quantity, n=20):
+    u1 = np.linspace(0, 2 * np.pi, n)
+    v1 = u1.copy()
+    uu, vv = np.meshgrid(u1, v1)
+
+    xx = pos.x.value + radius.value * np.cos(uu) * np.sin(vv)
+    yy = pos.y.value + radius.value * np.sin(uu) * np.sin(vv)
+    zz = pos.z.value + radius.value * np.cos(vv)
+
+    return xx, yy, zz
