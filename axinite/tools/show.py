@@ -7,6 +7,8 @@ import vpython as vp
 colors = cycle([color.red, color.blue, color.green, color.orange, color.purple, color.yellow])
 
 def show(_args, frontend):
+    """Statically display a preloaded simulation."""
+
     args = _args
     if args.rate is None:
         args.rate = 100
@@ -15,6 +17,11 @@ def show(_args, frontend):
     if args.retain is None:
         args.retain = 200
 
-    while args.t < args.limit:
-        frontend(args.t, bodies=args.bodies)
-        args.t += args.delta
+    for body in args.bodies:
+        frontend(body)
+
+    try:
+        while True:
+            pass
+    except KeyboardInterrupt:
+        pass

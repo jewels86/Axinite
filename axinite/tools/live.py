@@ -2,10 +2,12 @@ import axinite as ax
 import axinite.tools as axtools
 from vpython import *
 from itertools import cycle
+import astropy.units as u
 
 colors = cycle([color.red, color.blue, color.green, color.orange, color.purple, color.yellow])
 
 def live(_args: axtools.AxiniteArgs, frontend):
+    """Watch a preloaded simulation live."""
     args = _args
     if args.rate is None:
         args.rate = 100
@@ -14,6 +16,7 @@ def live(_args: axtools.AxiniteArgs, frontend):
     if args.retain is None:
        args.retain = 200
 
-
-    args.action = frontend(args)
-    ax.load(*args.unpack(), t=args.t)
+    t = 0 * u.s
+    while t < args.limit:
+        frontend(t, bodies=args.bodies)
+        t += args.delta
