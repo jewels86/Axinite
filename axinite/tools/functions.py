@@ -108,3 +108,25 @@ def create_sphere(pos: CartesianRepresentation, radius: u.Quantity, n=20):
     zz = pos.z.value + radius.value * np.cos(vv)
 
     return xx, yy, zz
+
+def max_axis_length(*bodies, radius_multiplier=1):
+    max_length = 0
+    for body in bodies:
+        x_length = max([v.x.value for k, v in body.r.items()]) + body.radius.value * radius_multiplier
+        y_length = max([v.y.value for k, v in body.r.items()]) + body.radius.value * radius_multiplier
+        z_length = max([v.z.value for k, v in body.r.items()]) + body.radius.value * radius_multiplier
+        
+        max_length = max(max_length, x_length, y_length, z_length)
+    
+    return max_length
+
+def min_axis_length(*bodies, radius_multiplier=1):
+    min_length = 0
+    for body in bodies:
+        x_length = min([v.x.value for k, v in body.r.items()]) - body.radius.value * radius_multiplier
+        y_length = min([v.y.value for k, v in body.r.items()]) - body.radius.value * radius_multiplier
+        z_length = min([v.z.value for k, v in body.r.items()]) - body.radius.value * radius_multiplier
+        
+        min_length = min(min_length, x_length, y_length, z_length)
+    
+    return min_length
