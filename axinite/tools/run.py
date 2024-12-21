@@ -13,5 +13,6 @@ def run(_args: axtools.AxiniteArgs, frontend):
     if args.retain is None:
        args.retain = 200
 
-    args.action = frontend
-    ax.load(*args.unpack(), t=args.t)
+    args.action = frontend[0]
+    try: ax.load(*args.unpack(), t=args.t)
+    finally: frontend[1]()

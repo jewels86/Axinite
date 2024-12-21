@@ -2,6 +2,7 @@ from axinite.tools import AxiniteArgs, string_to_color, Body
 from vpython import *
 from itertools import cycle
 from astropy.coordinates import CartesianRepresentation
+from vpython.no_notebook import stop_server
   
 def to_vec(cartesian_representation: CartesianRepresentation):
     return vector(cartesian_representation.x.value, cartesian_representation.y.value, cartesian_representation.z.value)
@@ -56,7 +57,7 @@ def vpython_rt(args: AxiniteArgs):
         if pause: 
             while pause: rate(10)
 
-    return fn
+    return fn, stop_server
 
 def vpython_static(args: AxiniteArgs):
     scene = canvas(title=args.name)
@@ -71,4 +72,4 @@ def vpython_static(args: AxiniteArgs):
         curve(pos=[to_vec(r) for r in body.r.values()], color=body_color)
         sphere(pos=to_vec(body.r[0]), radius=body.radius.value * args.radius_multiplier, color=body_color, opacity=0.2, make_trail=False)
 
-    return fn
+    return fn, None, stop_server

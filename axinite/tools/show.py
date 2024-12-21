@@ -18,10 +18,12 @@ def show(_args, frontend):
         args.retain = 200
 
     for body in args.bodies:
-        frontend(body)
+        frontend[0](body)
+
+    if frontend[1] != None: frontend[1]()
 
     try:
         while True:
             pass
     except KeyboardInterrupt:
-        pass
+        frontend[2]()

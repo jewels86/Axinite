@@ -16,6 +16,8 @@ def live(args: axtools.AxiniteArgs, frontend):
        args.retain = 200
 
     t = 0 * u.s
-    while t < args.limit:
-        frontend(t, bodies=args.bodies)
-        t += args.delta
+    try:
+        while t < args.limit:
+            frontend[0](t, bodies=args.bodies)
+            t += args.delta
+    finally: frontend[1]()
