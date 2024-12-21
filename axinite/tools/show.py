@@ -20,7 +20,8 @@ def show(_args, frontend):
     for body in args.bodies:
         frontend[0](body)
 
-    if frontend[1] != None: frontend[1]()
+    if frontend[1] != None: 
+        frontend[1]()
 
     try:
         while True:

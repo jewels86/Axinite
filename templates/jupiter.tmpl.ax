@@ -1,7 +1,7 @@
 {
     "name": "jupiter-system",
-    "limit": "300d",
-    "delta": "5min",
+    "limit": "30d",
+    "delta": "30min",
     "t": 0,
     "rate": 60,
     "bodies": [
@@ -9,6 +9,7 @@
             "name": "Jupiter",
             "mass": 1.898e27,
             "radius": 6.9911e7,
+            "color": "orange",
             "r": {"x": 0, "y": 0, "z": 0},
             "v": {"x": 0, "y": 0, "z": 0}
         },
@@ -16,6 +17,7 @@
             "name": "Io",
             "mass": 8.9319e22,
             "radius": 1.8216e6,
+            "color": "gray",
             "r": {"x": 4.217e8, "y": 0, "z": 0},
             "v": {"x": 0, "y": 0, "z": 1.73e4}
         },
@@ -23,6 +25,7 @@
             "name": "Europa",
             "mass": 4.7998e22,
             "radius": 1.5608e6,
+            "color": "gray",
             "r": {"x": 6.711e8, "y": 0, "z": 0},
             "v": {"x": 0, "y": 0, "z": 1.37e4}
         },
@@ -30,6 +33,7 @@
             "name": "Ganymede",
             "mass": 1.4819e23,
             "radius": 2.6341e6,
+            "color": "gray",
             "r": {"x": 1.0704e9, "y": 0, "z": 0},
             "v": {"x": 0, "y": 0, "z": 1.08e4}
         },
@@ -37,8 +41,17 @@
             "name": "Callisto",
             "mass": 1.0759e23,
             "radius": 2.4103e6,
+            "color": "gray",
             "r": {"x": 1.8827e9, "y": 0, "z": 0},
             "v": {"x": 0, "y": 0, "z": 8.20e3}
+        },
+        {
+            "name": "Amalthea",
+            "mass": 2.08e18,
+            "radius": 8.3e4,
+            "color": "gray",
+            "r": {"x": 1.819e8, "y": 0, "z": 0},
+            "v": {"x": 0, "y": 0, "z": 2.37e4}
         }
     ]
 }

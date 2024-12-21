@@ -15,4 +15,5 @@ def run(_args: axtools.AxiniteArgs, frontend):
 
     args.action = frontend[0]
     try: ax.load(*args.unpack(), t=args.t)
-    finally: frontend[1]()
+    finally:
+        frontend[1]()

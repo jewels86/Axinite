@@ -82,7 +82,8 @@ def string_to_color(color_name, frontend: str):
             'orange': vp.color.orange,
             'purple': vp.color.purple,
             'yellow': vp.color.yellow,
-            'white': vp.color.white
+            'white': vp.color.white,
+            'gray': vp.color.gray(0.5)
         }
         return color_map.get(color_name, vp.color.white)
     elif frontend == "matplotlib":
@@ -93,7 +94,8 @@ def string_to_color(color_name, frontend: str):
             'orange': 'orange',
             'purple': 'purple',
             'yellow': 'yellow',
-            'white': 'white'
+            'white': 'white',
+            'gray': 'gray'
         }
         return color_map.get(color_name, 'white')
     

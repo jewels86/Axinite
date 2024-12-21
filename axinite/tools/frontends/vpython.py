@@ -2,7 +2,7 @@ from axinite.tools import AxiniteArgs, string_to_color, Body
 from vpython import *
 from itertools import cycle
 from astropy.coordinates import CartesianRepresentation
-from vpython.no_notebook import stop_server
+import os, signal
   
 def to_vec(cartesian_representation: CartesianRepresentation):
     return vector(cartesian_representation.x.value, cartesian_representation.y.value, cartesian_representation.z.value)
@@ -47,19 +47,29 @@ def vpython_rt(args: AxiniteArgs):
             attach_light(spheres[body.name], lights[body.name])
 
     def fn(t, **kwargs):
-        rate(args.rate)
-        for body in kwargs["bodies"]:
-            spheres[body.name].pos = to_vec(body.r[t.value])
-            labels[body.name].pos = spheres[body.name].pos
-            try: lights[body.name].pos = spheres[body.name].pos
-            except: pass
-        print(f"t = {t}", end='\r')
-        if pause: 
-            while pause: rate(10)
+        try:
+            rate(args.rate)
+            for body in kwargs["bodies"]:
+                spheres[body.name].pos = to_vec(body.r[t.value])
+                labels[body.name].pos = spheres[body.name].pos
+                try: lights[body.name].pos = spheres[body.name].pos
+                except: pass
+            print(f"t = {t}", end='\r')
+            if pause: 
+                while pause: rate(10)
+        except KeyboardInterrupt:
+            os.kill(os.getpid(), signal.SIGINT)
 
-    return fn, stop_server
+    return fn, lambda: os.kill(os.getpid(), signal.SIGINT)
 
 def vpython_static(args: AxiniteArgs):
+    if args.rate is None:
+        args.rate = 100
+    if args.radius_multiplier is None:
+        args.radius_multiplier = 1
+    if args.retain is None:
+       args.retain = 200
+       
     scene = canvas(title=args.name)
     scene.select()
 
@@ -72,4 +82,4 @@ def vpython_static(args: AxiniteArgs):
         curve(pos=[to_vec(r) for r in body.r.values()], color=body_color)
         sphere(pos=to_vec(body.r[0]), radius=body.radius.value * args.radius_multiplier, color=body_color, opacity=0.2, make_trail=False)
 
-    return fn, None, stop_server
+    return fn, None, lambda: os.kill(os.getpid(), signal.SIGINT)

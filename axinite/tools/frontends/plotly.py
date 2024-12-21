@@ -1,9 +1,16 @@
 import axinite.tools as axtools
 import plotly.graph_objects as go
 from itertools import cycle
+import os, signal
 
 def plotly_frontend(args: axtools.AxiniteArgs, mode: str, theme="plotly_dark"):
     if mode != "show": raise Exception("plotly_frontend is only supported in show mode.")
+    if args.rate is None:
+        args.rate = 100
+    if args.radius_multiplier is None:
+        args.radius_multiplier = 1
+    if args.retain is None:
+       args.retain = 200
 
     minlen = axtools.min_axis_length(*args.bodies, radius_multiplier=args.radius_multiplier)
     maxlen = axtools.max_axis_length(*args.bodies, radius_multiplier=args.radius_multiplier)
@@ -60,5 +67,6 @@ def plotly_frontend(args: axtools.AxiniteArgs, mode: str, theme="plotly_dark"):
             name=f"{body.name} trajectory",
             showlegend=False
         ))
+
         
-    return fn, fig.show, None
+    return fn, fig.show, lambda: os.kill(os.getpid(), signal.SIGINT)
