@@ -13,6 +13,13 @@ def vpython_frontend(args: AxiniteArgs, mode: str, **kwargs):
         return vpython_static(args, **kwargs)
     
 def vpython_rt(args: AxiniteArgs):
+    if args.rate is None:
+        args.rate = 100
+    if args.radius_multiplier is None:
+        args.radius_multiplier = 1
+    if args.retain is None:
+       args.retain = 200
+    
     scene = canvas(title=args.name)
     scene.select()
 

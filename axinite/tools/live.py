@@ -6,9 +6,8 @@ import astropy.units as u
 
 colors = cycle([color.red, color.blue, color.green, color.orange, color.purple, color.yellow])
 
-def live(_args: axtools.AxiniteArgs, frontend):
+def live(args: axtools.AxiniteArgs, frontend):
     """Watch a preloaded simulation live."""
-    args = _args
     if args.rate is None:
         args.rate = 100
     if args.radius_multiplier is None:

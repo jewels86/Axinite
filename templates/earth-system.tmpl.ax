@@ -3,7 +3,7 @@
     "limit": "30d",
     "delta": "5min",
     "t": 0,
-    "radius_multiplier": 10,
+    "radius_multiplier": 4,
     "bodies": [
         {
             "name": "Earth",
