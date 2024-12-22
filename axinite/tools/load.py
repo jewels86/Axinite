@@ -49,6 +49,9 @@ def load(args: AxiniteArgs, path: str = "", dont_change_args: bool = False):
 
             if args.retain is not None:
                 data["retain"] = args.retain
+            
+            if args.frontend_args != {}:
+                data["frontend_args"] = args.frontend_args
 
             json.dump(data, f, indent=4)
             if not dont_change_args:

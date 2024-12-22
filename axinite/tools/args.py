@@ -12,6 +12,7 @@ class AxiniteArgs:
         self.rate = None
         self.retain = None
         self.modifiers = []
+        self.frontend_args = {}
 
     def unpack(self):
         return self.delta, self.limit, self.action, *self.bodies

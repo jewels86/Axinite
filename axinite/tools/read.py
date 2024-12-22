@@ -22,6 +22,9 @@ def read(path: str) -> AxiniteArgs:
         if "retain" in data:
             args.retain = data["retain"]
 
+        if "frontend_args" in data:
+            args.frontend_args = data["frontend_args"]
+
         for body in data["bodies"]: 
             args.bodies.append(data_to_body(body))
 
