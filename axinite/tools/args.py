@@ -11,6 +11,7 @@ class AxiniteArgs:
         self.radius_multiplier = None
         self.rate = None
         self.retain = None
+        self.modifiers = []
 
     def unpack(self):
         return self.delta, self.limit, self.action, *self.bodies

@@ -2,10 +2,10 @@ import axinite as ax
 from axinite.tools import AxiniteArgs
 import json
 
-def load(args: AxiniteArgs, path: str, dont_change_args: bool = False):
+def load(args: AxiniteArgs, path: str = "", dont_change_args: bool = False):
     args.action = lambda t, **kwargs: print(f"Timestep {t} ({((t / args.limit) * 100).value:.2f}% complete)", end="\r")
 
-    bodies = ax.load(*args.unpack(), t=args.t)
+    bodies = ax.load(*args.unpack(), t=args.t, modifiers=args.modifiers)
     print(f"\nFinished with {len(bodies[0].r)} timesteps")
 
     if path == "": 
