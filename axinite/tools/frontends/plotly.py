@@ -3,7 +3,7 @@ import plotly.graph_objects as go
 from itertools import cycle
 import os, signal
 
-def plotly_frontend(args: axtools.AxiniteArgs, mode: str, theme="plotly_dark"):
+def plotly_frontend(args: axtools.AxiniteArgs, mode: str, theme="plotly_dark", use_min=True):
     if mode != "show": raise Exception("plotly_frontend is only supported in show mode.")
     if args.rate is None:
         args.rate = 100
@@ -11,9 +11,16 @@ def plotly_frontend(args: axtools.AxiniteArgs, mode: str, theme="plotly_dark"):
         args.radius_multiplier = 1
     if args.retain is None:
        args.retain = 200
+    if args.frontend_args != {} and "plotly" in args.frontend_args:
+        if "theme" in args.frontend_args["plotly"]:
+            theme = args.frontend_args["plotly"]["theme"]
+        if "use_min" in args.frontend_args["plotly"]:
+            use_min = args.frontend_args["plotly"]["use_min"]
 
     minlen = axtools.min_axis_length(*args.bodies, radius_multiplier=args.radius_multiplier)
     maxlen = axtools.max_axis_length(*args.bodies, radius_multiplier=args.radius_multiplier)
+
+    range = [minlen if use_min else -maxlen, maxlen]
 
     colors = cycle(['red', 'blue', 'green', 'orange', 'purple', 'yellow'])
 
@@ -23,9 +30,9 @@ def plotly_frontend(args: axtools.AxiniteArgs, mode: str, theme="plotly_dark"):
         template=theme,
         scene=dict(
             aspectmode='cube',
-            xaxis=dict(range=[minlen, maxlen]),
-            yaxis=dict(range=[minlen, maxlen]),
-            zaxis=dict(range=[minlen, maxlen])
+            xaxis=dict(range=range),
+            yaxis=dict(range=range),
+            zaxis=dict(range=range)
         )
     )
     fig.update_layout(layout)
