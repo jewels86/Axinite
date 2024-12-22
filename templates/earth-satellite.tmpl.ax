@@ -1,0 +1,89 @@
+{
+    "name": "earth-satellites",
+    "limit": "30d",
+    "delta": "5min",
+    "t": 0,
+    "radius_multiplier": 2,
+    "bodies": [
+        {
+            "name": "Earth",
+            "mass": 5.972e24,
+            "radius": 6.371e6,
+            "color": "blue",
+            "r": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "v": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            }
+        },
+        {
+            "name": "Satellite",
+            "mass": 1000,
+            "radius": 2,
+            "color": "gray",
+            "r": {
+                "x": 2.828e7,
+                "y": 2.828e7,
+                "z": 0
+            },
+            "v": {
+                "x": -2.17e3,
+                "y": 2.17e3,
+                "z": 0
+            }
+        },
+        {
+            "name": "Satellite2",
+            "mass": 500,
+            "radius": 1,
+            "color": "gray",
+            "r": {
+                "x": 3.0e7,
+                "y": 3.0e7,
+                "z": 0
+            },
+            "v": {
+                "x": -2.0e3,
+                "y": 2.0e3,
+                "z": 0
+            }
+        },
+        {
+            "name": "Satellite3",
+            "mass": 750,
+            "radius": 1.5,
+            "color": "gray",
+            "r": {
+                "x": 3.5e7,
+                "y": 3.5e7,
+                "z": 0
+            },
+            "v": {
+                "x": -1.8e3,
+                "y": 1.8e3,
+                "z": 0
+            }
+        },
+        {
+            "name": "ISS",
+            "mass": 419725,
+            "radius": 109,
+            "color": "white",
+            "r": {
+                "x": 4.167e7,
+                "y": 0,
+                "z": 0
+            },
+            "v": {
+                "x": 0,
+                "y": 2.66e3,
+                "z": 0
+            }
+        }
+    ]
+}
