@@ -31,7 +31,14 @@ def vpython_rt(args: AxiniteArgs):
     def pause_handler():
         global pause
         pause = not pause
+
+    global _rate
+    _rate = args.rate
+    def rate_hander(evt):
+        global _rate
+        _rate = evt.value
     button(text='Pause', bind=pause_handler, pos=scene.caption_anchor)
+    slider(bind=rate_hander, min=1, max=1000, value=+_rate, step=1, right=15, length=200, pos=scene.caption_anchor)
 
     spheres = {}
     labels = {}
@@ -48,7 +55,8 @@ def vpython_rt(args: AxiniteArgs):
 
     def fn(t, **kwargs):
         try:
-            rate(args.rate)
+            global _rate, pause
+            rate(_rate)
             for body in kwargs["bodies"]:
                 spheres[body.name].pos = to_vec(body.r[t.value])
                 labels[body.name].pos = spheres[body.name].pos
