@@ -1,7 +1,7 @@
 {
     "name": "earth-satellites",
     "limit": "30d",
-    "delta": "5min",
+    "delta": "10min",
     "t": 0,
     "radius_multiplier": 2,
     "bodies": [
@@ -23,34 +23,34 @@
         },
         {
             "name": "Satellite",
-            "mass": 1000,
-            "radius": 2,
+            "mass": 750,
+            "radius": 1.5,
             "color": "gray",
             "r": {
-                "x": 2.828e7,
-                "y": 2.828e7,
-                "z": 2.828e7
+                "x": -3.2e7,
+                "y": -3.2e7,
+                "z": -3.2e7
             },
             "v": {
-                "x": -2.17e3,
-                "y": 2.17e3,
-                "z": -2.17e3
+                "x": 1.6e3,
+                "y": -1.6e3,
+                "z": 1.6e3
             }
         },
         {
             "name": "Satellite2",
-            "mass": 500,
-            "radius": 1,
+            "mass": 750,
+            "radius": 1.5,
             "color": "gray",
             "r": {
-                "x": 3.0e7,
-                "y": 3.0e7,
-                "z": 3.0e7
+                "x": 3.2e7,
+                "y": -3.2e7,
+                "z": 3.2e7
             },
             "v": {
-                "x": -2.0e3,
-                "y": 2.0e3,
-                "z": -2.0e3
+                "x": -1.6e3,
+                "y": -1.6e3,
+                "z": -1.6e3
             }
         },
         {
@@ -59,7 +59,7 @@
             "radius": 1.5,
             "color": "gray",
             "r": {
-                "x": 3.27,
+                "x": 3.2e7,
                 "y": 3.2e7,
                 "z": 3.2e7
             },
@@ -71,18 +71,18 @@
         },
         {
             "name": "Satellite4",
-            "mass": 100,
-            "radius": 3,
+            "mass": 750,
+            "radius": 1.5,
             "color": "gray",
             "r": {
-                "x": 2.5e7,
-                "y": 2.5e7,
-                "z": 2.5e7
+                "x": 3.2e7,
+                "y": -3.2e7,
+                "z": -3.2e7
             },
             "v": {
-                "x": -2e3,
-                "y": 2e3,
-                "z": -2e3
+                "x": -1.6e3,
+                "y": -1.6e3,
+                "z": 1.6e3
             }
         },
         {
