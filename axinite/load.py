@@ -1,25 +1,28 @@
-import json
-import numpy as np
-import astropy.units as u
 import axinite as ax
-from astropy.coordinates import CartesianRepresentation
+from axinite._load import _load
+from axinite._load_jit import _load_jit
+import numpy as np
 
-def load(delta: u.Quantity, limit: u.Quantity, action, *bodies: ax.Body, t: u.Quantity = 0 * u.s, modifiers: list = []):
-    while t < limit:
-        for body in bodies: 
-            others = [b for b in bodies if b != body]
-            f = CartesianRepresentation([0, 0, 0] * u.kg * u.m/u.s**2)
+def load(delta, limit, *bodies, t=0, modifiers=[], action=lambda *args, **kwargs: None, jit=True):
+    if jit:
+        body_dtype = np.dtype([
+            ("m", np.float64),
+            ("r", np.float64, (limit.value/delta.value, 3)),
+            ("v", np.float64, (limit.value/delta.value, 3))
+        ])
+        _bodies = np.array(dtype=body_dtype)
+        for body in bodies:
+            r = body.r.values()
+            v = body.v.values()
+            for i, _r in enumerate(r): r[i] = _r.value
+            for i, _v in enumerate(v): v[i] = _v.value
+            _bodies = np.append(_bodies, np.array([
+                (body.mass.value, r, v)
+            ]))
+        _bodies = _load_jit(delta.value, limit.value, _bodies)
+        __bodies = ()
+        for body in _bodies: 
             
-            for other in others: f += other.gravitational_force(body.r[t.value] - other.r[t.value], body.mass)
-            for modifier in modifiers: f += modifier(body, t, bodies=bodies, f=f)
 
-            a = f / body.mass
-            v = body.v[t.value] + delta * a
-            r = body.r[t.value] + delta * v
-
-            body.r[t.value + delta.value] = r
-            body.v[t.value + delta.value] = v
-        t += delta
-        action(t, limit=limit, bodies=bodies)
-        
-    return bodies
+    else:
+        return _load(delta, limit, action, *bodies, t=0, modifiers=modifiers)
