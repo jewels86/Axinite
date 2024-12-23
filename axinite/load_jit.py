@@ -21,4 +21,20 @@ def gravitational_force(m1, m2, r):
 
 @njit
 def _load_jit(delta, limit, bodies):
-    
+    t = 0.0 + delta
+    timestep = 1
+    while t < limit:
+        for i, body in enumerate(bodies):
+            f = np.zeros(3)
+            for j, other in enumerate[bodies]:
+                if i != j:
+                    r = body["r"][timestep - 1] - other["r"][timestep - 1]
+                    f += gravitational_force(body["m"], other["m"], r)
+            a = f / body["m"]
+            v = body["v"][timestep - 1] + a * delta
+            r = body["r"] [timestep - 1] + v * delta
+            body["v"][timestep] = v
+            body["r"][timestep] = r
+        t += delta
+        timestep += 1
+    return bodies
