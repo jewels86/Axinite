@@ -9,18 +9,26 @@ def load(delta, limit, *bodies, t=0 * u.s, modifiers=[], action=lambda *args, **
     if jit:
         body_dtype = np.dtype([
             ("m", np.float64),
-            ("r", np.float64, (limit.value/delta.value, 3)),
-            ("v", np.float64, (limit.value/delta.value, 3))
+            ("r", np.float64, (int(limit.value/delta.value), 3)),
+            ("v", np.float64, (int(limit.value/delta.value), 3))
         ])
-        _bodies = np.array(dtype=body_dtype)
+        _bodies = np.array([], dtype=body_dtype)
         for body in bodies:
-            r = body.r.values()
-            v = body.v.values()
-            for i, _r in enumerate(r): r[i] = _r.value
-            for i, _v in enumerate(v): v[i] = _v.value
-            _bodies = np.append(_bodies, np.array([
+            _r = body.r.values()
+            _v = body.v.values()
+            r = np.zeros((int(limit.value/delta.value), 3))
+            v = np.zeros((int(limit.value/delta.value), 3))
+            for i, __r in enumerate(_r): 
+                r[i][0] = __r.x.value
+                r[i][1] = __r.y.value
+                r[i][2] = __r.z.value
+            for i, __v in enumerate(_v):
+                v[i][0] = __v.x.value
+                v[i][1] = __v.y.value
+                v[i][2] = __v.z.value
+            np.append(_bodies, np.array([
                 (body.mass.value, r, v)
-            ]))
+            ], dtype=body_dtype))
         _bodies = _load_jit(delta.value, limit.value, _bodies)
         __bodies = ()
         for body in _bodies: 
@@ -33,4 +41,4 @@ def load(delta, limit, *bodies, t=0 * u.s, modifiers=[], action=lambda *args, **
         return __bodies
 
     else:
-        return _load_legacy(delta, limit, *bodies, t=t, modifiers=modifiers, action=action)
+        return _load_legacy(delta, limit, *bodies, t=t)

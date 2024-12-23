@@ -20,6 +20,6 @@ def _load_legacy(delta: u.Quantity, limit: u.Quantity, *bodies: ax.Body, t: u.Qu
             body.r[t.value + delta.value] = r
             body.v[t.value + delta.value] = v
         t += delta
-        action(t, limit=limit, bodies=bodies)
+        action(t, limit=limit, bodies=bodies, delta=delta, modifiers=modifiers)
         
     return bodies
