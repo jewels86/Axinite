@@ -20,7 +20,7 @@ def gravitational_force(m1, m2, r):
     return -G *((m1 * m2) / mag**2) * unit_vector(r)
 
 @njit
-def _load_jit(delta, limit, bodies):
+def _load_jit(delta, limit, bodies, action=None):
     t = 0.0 + delta
     timestep = 1
     while t < limit:
@@ -37,5 +37,5 @@ def _load_jit(delta, limit, bodies):
             body["r"][timestep] = r
         t += delta
         timestep += 1
-        #action(t, limit=limit, bodies=bodies, delta=delta)
+        if action is not None: action(t, limit=limit, bodies=bodies, delta=delta)
     return bodies

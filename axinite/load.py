@@ -4,9 +4,13 @@ from axinite._load_jit import _load_jit
 import numpy as np
 import astropy.units as u
 from astropy.coordinates import CartesianRepresentation
+from numba import njit
 
-def load(delta, limit, *bodies, t=0 * u.s, modifiers=[], action=lambda *args, **kwargs: None, jit=True):
+def load(delta, limit, *bodies, t=0 * u.s, modifiers=[], action=None, jit=True):
     if jit:
+        @njit
+        def jit_action(*args, **kwargs): return None
+        if not action: action = jit_action
         body_dtype = np.dtype([
             ("m", np.float64),
             ("r", np.float64, (int(limit.value/delta.value), 3)),
@@ -41,4 +45,5 @@ def load(delta, limit, *bodies, t=0 * u.s, modifiers=[], action=lambda *args, **
         return __bodies
 
     else:
+        if not action: action = lambda *args, **kwargs: None
         return _load_legacy(delta, limit, *bodies, t=t)
