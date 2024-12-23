@@ -1,5 +1,5 @@
 import numpy as np
-from numba import njit, typed, types
+from numba import njit, typed, types, jit
 
 G = 6.67430e-11
 
@@ -20,7 +20,7 @@ def gravitational_force(m1, m2, r):
     return -G *((m1 * m2) / mag**2) * unit_vector(r)
 
 @njit
-def _load_jit(delta, limit, bodies, action=None):
+def _load_jit(delta, limit, bodies, verbose=False):
     t = 0.0 + delta
     timestep = 1
     while t < limit:
@@ -37,5 +37,6 @@ def _load_jit(delta, limit, bodies, action=None):
             body["r"][timestep] = r
         t += delta
         timestep += 1
-        if action is not None: action(t, limit=limit, bodies=bodies, delta=delta)
+        if verbose: print("", timestep, t / limit * 100)
+    if verbose: print(f"\nFinished with {timestep} timesteps")
     return bodies
