@@ -7,6 +7,13 @@ from numpy import float64
 
 class Body:
     def __init__(self, mass: u.Quantity, position: CartesianRepresentation, velocity: CartesianRepresentation):
+        """Initializes a new Body object.
+
+        Args:
+            mass (u.Quantity): Mass of the object in kilograms.
+            position (CartesianRepresentation): The initial position of the object.
+            velocity (CartesianRepresentation): The initial velocity of the object.
+        """
         self.mass = mass
         self.r = { float64(0): position}
         self.v = { float64(0): velocity}

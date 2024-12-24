@@ -26,6 +26,7 @@ Any help will be appricated!
 ### Other ways to support
 - Giving this repository a star! This really helps me to get Axinite out to other developers.
 - Reaching out! I'd love to hear about your thoughts, ideas, and issues.
+- Share the project! Tell you physics/tech-inclined friends about the Axinite engine and see what they think.
 
 ## Gallery
 ![axinite-2](https://github.com/user-attachments/assets/2e952d41-5585-484d-bc3b-05c92aeefe2d)
@@ -42,3 +43,6 @@ Any help will be appricated!
 - ~~Move actools into axinite.tools and add axinite[tools]~~
 - Graceful load funciton exiting
 - Add a `save` function
+- Move `gravitational_force` out of `Body`
+- Phase out `astropy`
+- Add console updates every 100-1000 timesteps in `axtools.load(jit=True)`
