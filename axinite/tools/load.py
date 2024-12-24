@@ -5,11 +5,12 @@ import json
 from numba import jit
 _jit = jit
 
-def load(args: AxiniteArgs, path: str = "", dont_change_args: bool = False, jit: bool = True):
-    if jit == False: args.action = lambda t, **kwargs: print(f"Timestep {t} ({((t / args.limit) * 100).value:.2f}% complete)", end="\r")
+def load(args: AxiniteArgs, path: str = "", dont_change_args: bool = False, jit: bool = True, verbose: bool = True):
+    if not jit and verbose: args.action = lambda t, **kwargs: print(f"Timestep {t} ({((t / args.limit) * 100).value:.2f}% complete)", end="\r")
 
-    bodies = ax.load(*args.unpack(), t=args.t, modifier=args.modifier, action=args.action)
-    print(f"Finished with {len(bodies[0].r)} timesteps")
+    if jit: bodies = ax.load(*args.unpack(), t=args.t, modifier=args.modifier, action=args.action)
+    else: bodies = ax.load_legacy(*args.unpack(), t=args.t, modifier=args.modifier, action=args.action)
+    if verbose: print(f"Finished with {len(bodies[0].r)} timesteps")
 
     _bodies = []
     for i, body in enumerate(bodies):
