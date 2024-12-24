@@ -5,7 +5,7 @@ import axinite as ax
 from astropy.coordinates import CartesianRepresentation
 from numba import jit
 
-def load_legacy(delta: u.Quantity, limit: u.Quantity, bodies: ax.Body, t: u.Quantity = 0 * u.s, modifiers: list = [], action=lambda *args, **kwargs: None):
+def load_legacy(delta: u.Quantity, limit: u.Quantity, *bodies: ax.Body, t: u.Quantity = 0 * u.s, modifiers: list = [], action=lambda *args, **kwargs: None):
     while t < limit:
         for body in bodies: 
             others = [b for b in bodies if b != body]

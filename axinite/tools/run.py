@@ -14,6 +14,5 @@ def run(_args: axtools.AxiniteArgs, frontend):
        args.retain = 200
 
     args.action = frontend[0]
-    try: ax.load(*args.unpack(), t=args.t)
-    finally:
-        frontend[1]()
+    try: ax.load_legacy(*args.unpack(), t=args.t, action=args.action)
+    finally: frontend[1]()

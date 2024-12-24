@@ -31,7 +31,6 @@ def load(delta, limit, *bodies, t=0 * u.s, modifier=None, action=None):
     _bodies = _load_jit(delta.value, limit.value, _bodies, action=action, modifier=modifier, t=t.value)
     __bodies = ()
     for body in _bodies: 
-        #print(body["r"][0])
         _body = ax.Body(body["m"] * u.kg, CartesianRepresentation(*body["r"][0], u.m), CartesianRepresentation(*body["v"][0], u.m/u.s))
         for i, r in enumerate(body["r"]):
             _body.r[i * delta.value] = CartesianRepresentation(*r, u.m)
