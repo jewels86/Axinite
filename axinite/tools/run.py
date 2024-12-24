@@ -2,8 +2,16 @@ import axinite as ax
 import axinite.tools as axtools
 from vpython import *
 
-def run(_args: axtools.AxiniteArgs, frontend):
-    """Load and display a simulation simultaneously."""
+def run(_args: axtools.AxiniteArgs, frontend: function) -> tuple[axtools.Body, ...]:
+    """Load and display a simulation simultaneously.
+
+    Args:
+        _args (axtools.AxiniteArgs): The simulation parameters.
+        frontend (function): The frontend to use.
+
+    Returns:
+        tuple[axtools.Body, ...]: The bodies in the simulation
+    """
 
     args = _args
     if args.rate is None:
@@ -14,5 +22,7 @@ def run(_args: axtools.AxiniteArgs, frontend):
        args.retain = 200
 
     args.action = frontend[0]
-    try: ax.load_legacy(*args.unpack(), t=args.t, action=args.action)
-    finally: frontend[1]()
+    try: bodies = ax.load_legacy(*args.unpack(), t=args.t, action=args.action)
+    finally: 
+        frontend[1]()
+        return bodies

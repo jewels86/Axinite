@@ -41,3 +41,4 @@ Any help will be appricated!
 - ~~Add live mode~~
 - ~~Move actools into axinite.tools and add axinite[tools]~~
 - Graceful load funciton exiting
+- Add a `save` function

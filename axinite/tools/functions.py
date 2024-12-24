@@ -1,11 +1,20 @@
 import astropy.units as u
 import axinite as ax
 from astropy.coordinates import CartesianRepresentation
+from typing import Literal
 import vpython as vp
 import numpy as np
 import axinite.tools as axtools
 
-def interpret_time(string: str):
+def interpret_time(string: str) -> u.Quantity:
+    """Interprets a string as a time in seconds.
+
+    Args:
+        string (str): The string to interpret.
+
+    Returns:
+        u.Quantity: The time in seconds.
+    """
     if type(string) is float: return string * u.s
     if string.endswith("min"):
         string = string.removesuffix("min")
@@ -21,13 +30,31 @@ def interpret_time(string: str):
         return float(string) * 31536000 * u.s
     else: return float(string) * u.s
 
-def array_to_vectors(array, unit):
+def array_to_vectors(array: list[dict[str, np.float64]], unit: u.Unit) -> list[CartesianRepresentation]:
+    """Converts a list of dicts to a list of vectors.
+
+    Args:
+        array (list[dict[str, np.float64]]): A list of dicts to convert.
+        unit (u.Unit): The unit to convert to.
+
+    Returns:
+        list[CartesianRepresentation]: The list of vectors.
+    """
     arr = []
     for a in array:
         arr.append(ax.to_vector(a, unit))
     return arr
 
-def data_to_body(data):
+def data_to_body(data: dict[str, any]) -> axtools.Body:
+    """Converts a dict to a Body object.
+
+    Args:
+        data (dict[str, any]): The dict to convert.
+
+    Returns:
+        axtools.Body: The Body object.
+    """
+
     name = data["name"]
     mass = data["mass"] * u.kg
     
@@ -67,13 +94,41 @@ def data_to_body(data):
         
         return body
 
-def vector_from_list(vector: list, unit):
+def vector_from_list(vector: list[np.float64], unit: u.Unit) -> CartesianRepresentation:
+    """Converts a list to a vector.
+
+    Args:
+        vector (list[np.float64]): The list to convert
+        unit (u.Unit): The unit to convert to.
+
+    Returns:
+        CartesianRepresentation: The vector.
+    """
+
     return CartesianRepresentation(u.Quantity(float(vector[0]), unit), u.Quantity(float(vector[1]), unit), u.Quantity(float(vector[2]), unit))
 
-def to_float(val):
+def to_float(val: any) -> np.float64:
+    """Legacy shorthand for converting to np.float64.
+
+    Args:
+        val (any): The value to convert.
+
+    Returns:
+        np.float64: The result.
+    """
+
     return np.float64(val)
 
-def string_to_color(color_name, frontend: str):
+def string_to_color(color_name: str, frontend: Literal['vpython', 'mpl', 'plotly']) -> vp.color | str:
+    """Converts a string to a color object for a given frontend.
+
+    Args:
+        color_name (str): The name of the color.
+        frontend (str): The frontend to convert for.
+
+    Returns:
+        vp.color | str: The converted color.
+    """
     if frontend == "vpython":
         color_map = {
             'red': vp.color.red,
@@ -100,7 +155,17 @@ def string_to_color(color_name, frontend: str):
         return color_map.get(color_name, 'white')
     
 
-def create_sphere(pos: CartesianRepresentation, radius: u.Quantity, n=20):
+def create_sphere(pos: CartesianRepresentation, radius: u.Quantity, n=20) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Generates the vertices of a sphere.
+
+    Args:
+        pos (CartesianRepresentation): The position of the sphere.
+        radius (u.Quantity): The radius of the sphere.
+        n (int, optional): Number of segments used to generate verticies. Defaults to 20.
+
+    Returns:
+        tuple[np.ndarray, np.ndarray, np.ndarray]: The x, y, and z coordinates of the sphere.
+    """
     u1 = np.linspace(0, 2 * np.pi, n)
     v1 = u1.copy()
     uu, vv = np.meshgrid(u1, v1)
@@ -111,7 +176,16 @@ def create_sphere(pos: CartesianRepresentation, radius: u.Quantity, n=20):
 
     return xx, yy, zz
 
-def max_axis_length(*bodies, radius_multiplier=1):
+def max_axis_length(*bodies: axtools.Body, radius_multiplier: int = 1) -> np.float64:
+    """Finds the maximum axis length of a set of bodies.
+
+    Args:
+        radius_multiplier (int, optional): The radius multiplier to apply. Defaults to 1.
+
+    Returns:
+        np.float64: The longest axis length found.
+    """
+
     max_length = 0
     for body in bodies:
         x_length = max([v.x.value for k, v in body.r.items()]) + body.radius.value * radius_multiplier
@@ -122,7 +196,16 @@ def max_axis_length(*bodies, radius_multiplier=1):
     
     return max_length
 
-def min_axis_length(*bodies, radius_multiplier=1):
+def min_axis_length(*bodies: axtools.Body, radius_multiplier: int = 1) -> np.float64:
+    """Finds the minimum axis length of a set of bodies.
+
+    Args:
+        radius_multiplier (int, optional): The radius multiplier to apply. Defaults to 1.
+
+    Returns:
+        np.float64: The lowest axis length found.
+    """
+    
     min_length = 0
     for body in bodies:
         x_length = min([v.x.value for k, v in body.r.items()]) - body.radius.value * radius_multiplier

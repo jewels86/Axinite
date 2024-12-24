@@ -6,8 +6,13 @@ import vpython as vp
 
 colors = cycle([color.red, color.blue, color.green, color.orange, color.purple, color.yellow])
 
-def show(_args, frontend):
-    """Statically display a preloaded simulation."""
+def show(_args: axtools.AxiniteArgs, frontend: function) -> None:
+    """Statically display the bodies in the simulation.
+
+    Args:
+        _args (axtools.AxiniteArgs): The simulation parameters.
+        frontend (function): The frontend function.
+    """
 
     args = _args
     if args.rate is None:

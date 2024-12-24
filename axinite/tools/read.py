@@ -4,6 +4,15 @@ import astropy.units as u
 import json
 
 def read(path: str) -> AxiniteArgs:
+    """Read a simulation from a file.
+
+    Args:
+        path (str): The path to read from.
+
+    Returns:
+        AxiniteArgs: The simulation result.
+    """
+    
     with open(path, 'r') as f:
         data = json.load(f)
         
