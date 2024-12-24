@@ -5,9 +5,9 @@ from numba import jit
 _jit = jit
 
 def load(args: AxiniteArgs, path: str = "", dont_change_args: bool = False, jit: bool = True):
-    args.action = lambda t, **kwargs: print(f"Timestep {t} ({((t / args.limit) * 100).value:.2f}% complete)", end="\r")
+    if not jit: args.action = lambda t, **kwargs: print(f"Timestep {t} ({((t / args.limit) * 100).value:.2f}% complete)", end="\r")
 
-    bodies = ax.load(*args.unpack(), t=args.t, modifier=args.modifier, action=args.action, jit=jit)
+    bodies = ax.load(*args.unpack(), t=args.t, modifier=args.modifier, action=args.action)
     print(f"\nFinished with {len(bodies[0].r)} timesteps")
 
     if path == "": 
