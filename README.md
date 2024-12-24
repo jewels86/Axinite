@@ -40,3 +40,4 @@ Any help will be appricated!
 - Create `ax-cli` executable
 - ~~Add live mode~~
 - ~~Move actools into axinite.tools and add axinite[tools]~~
+- Graceful load funciton exiting
