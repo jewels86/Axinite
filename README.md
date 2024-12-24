@@ -25,7 +25,7 @@ Feel free to open up a [pull request](https://github.com/jewels86/Axinite/pulls)
 Any help will be appricated!
 ### Other ways to support
 - Giving this repository a star! This really helps me to get Axinite out to other developers.
-- Reaching out! I'd love to hear about your thoughts, ideas, and issues with Axinite.
+- Reaching out! I'd love to hear about your thoughts, ideas, and issues.
 
 ## Gallery
 ![axinite-2](https://github.com/user-attachments/assets/2e952d41-5585-484d-bc3b-05c92aeefe2d)
