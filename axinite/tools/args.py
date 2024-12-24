@@ -5,7 +5,7 @@ class AxiniteArgs:
         self.name = None
         self.delta = None
         self.limit = None
-        self.action = lambda *args, **kwargs: None
+        self.action = None
         self.t = None
         self.bodies: list = []
         self.radius_multiplier = None

@@ -25,16 +25,17 @@ def load(delta, limit, *bodies, t=0 * u.s, modifier=None, action=None):
             v[i][0] = __v.x.value
             v[i][1] = __v.y.value
             v[i][2] = __v.z.value
-        np.append(_bodies, np.array([
+        _bodies = np.append(_bodies, np.array([
             (body.mass.value, r, v)
         ], dtype=body_dtype))
     _bodies = _load_jit(delta.value, limit.value, _bodies, action=action, modifier=modifier, t=t.value)
     __bodies = ()
     for body in _bodies: 
-        _body = ax.Body(body["m"] * u.kg, CartesianRepresentation(body["r"][0], u.m), CartesianRepresentation(body["v"][0], u.m/u.s))
+        #print(body["r"][0])
+        _body = ax.Body(body["m"] * u.kg, CartesianRepresentation(*body["r"][0], u.m), CartesianRepresentation(*body["v"][0], u.m/u.s))
         for i, r in enumerate(body["r"]):
-            _body.r[i] = CartesianRepresentation(r, u.m)
+            _body.r[i * delta] = CartesianRepresentation(*r, u.m)
         for i, v in enumerate(body["v"]):
-            _body.v[i] = CartesianRepresentation(v, u.m/u.s)
+            _body.v[i * delta] = CartesianRepresentation(*v, u.m/u.s)
         __bodies += (_body,)
     return __bodies
