@@ -1,6 +1,8 @@
 import axinite as ax
 from axinite.tools import AxiniteArgs
 import json
+from numba import jit
+_jit = jit
 
 def load(args: AxiniteArgs, path: str = "", dont_change_args: bool = False, jit: bool = True):
     args.action = lambda t, **kwargs: print(f"Timestep {t} ({((t / args.limit) * 100).value:.2f}% complete)", end="\r")
