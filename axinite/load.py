@@ -34,8 +34,8 @@ def load(delta, limit, *bodies, t=0 * u.s, modifier=None, action=None):
         #print(body["r"][0])
         _body = ax.Body(body["m"] * u.kg, CartesianRepresentation(*body["r"][0], u.m), CartesianRepresentation(*body["v"][0], u.m/u.s))
         for i, r in enumerate(body["r"]):
-            _body.r[i * delta] = CartesianRepresentation(*r, u.m)
+            _body.r[i * delta.value] = CartesianRepresentation(*r, u.m)
         for i, v in enumerate(body["v"]):
-            _body.v[i * delta] = CartesianRepresentation(*v, u.m/u.s)
+            _body.v[i * delta.value] = CartesianRepresentation(*v, u.m/u.s)
         __bodies += (_body,)
     return __bodies

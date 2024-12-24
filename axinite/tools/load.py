@@ -1,4 +1,5 @@
 import axinite as ax
+import axinite.tools as axtools
 from axinite.tools import AxiniteArgs
 import json
 from numba import jit
@@ -10,11 +11,17 @@ def load(args: AxiniteArgs, path: str = "", dont_change_args: bool = False, jit:
     bodies = ax.load(*args.unpack(), t=args.t, modifier=args.modifier, action=args.action)
     print(f"\nFinished with {len(bodies[0].r)} timesteps")
 
+    _bodies = []
+    for i, body in enumerate(bodies):
+        _bodies.append(args.bodies[i])
+        for j, r in body.r.items():
+            _bodies[i].r[j] = r
+            _bodies[i].v[j] = body.v[j]
     if path == "": 
         if not dont_change_args:
             args.t = args.limit
-            args.bodies = bodies
-        return bodies
+            args.bodies = _bodies
+        return _bodies
     else: 
         with open(path, 'w+') as f:
             data = {
@@ -26,7 +33,7 @@ def load(args: AxiniteArgs, path: str = "", dont_change_args: bool = False, jit:
                 "bodies": []
             }
 
-            for body in bodies: 
+            for body in _bodies: 
                 body_data = {
                     "name": body.name,
                     "mass": body.mass.value,
@@ -58,5 +65,5 @@ def load(args: AxiniteArgs, path: str = "", dont_change_args: bool = False, jit:
             json.dump(data, f, indent=4)
             if not dont_change_args:
                 args.t = args.limit
-                args.bodies = bodies
-            return bodies
+                args.bodies = _bodies
+            return _bodies
