@@ -5,7 +5,9 @@ import astropy.units as u
 from astropy.coordinates import CartesianRepresentation
 from numba import jit
 
-def load(delta, limit, *bodies, t=0 * u.s, modifier=None, action=None):
+def load(delta, limit, *bodies, t=0 * u.s, modifier=None, action=None, legacy=False):
+    if legacy: return ax.load_legacy(delta, limit, bodies, t=t, modifier=modifier, action=action)
+
     body_dtype = np.dtype([
         ("m", np.float64),
         ("r", np.float64, (int(limit.value/delta.value), 3)),

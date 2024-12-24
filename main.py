@@ -3,7 +3,7 @@ import sys
 
 if sys.argv[1] == "load":
     args = axtools.read(sys.argv[2])
-    axtools.load(args, sys.argv[3], jit=False)
+    axtools.load(args, sys.argv[3])
 elif sys.argv[1] == "show":
     args = axtools.read(sys.argv[2])
     axtools.show(args, axtools.plotly_frontend(

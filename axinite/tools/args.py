@@ -11,7 +11,7 @@ class AxiniteArgs:
         self.radius_multiplier = None
         self.rate = None
         self.retain = None
-        self.modifiers = []
+        self.modifier = None
         self.frontend_args = {}
 
     def unpack(self):

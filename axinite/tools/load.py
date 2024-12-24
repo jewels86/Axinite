@@ -1,11 +1,17 @@
 import axinite as ax
 from axinite.tools import AxiniteArgs
 import json
+from numba import jit
+_jit = jit
 
 def load(args: AxiniteArgs, path: str = "", dont_change_args: bool = False, jit: bool = True):
-    args.action = lambda t, **kwargs: print(f"Timestep {t} ({((t / args.limit) * 100).value:.2f}% complete)", end="\r")
+    if not jit: args.action = lambda t, **kwargs: print(f"Timestep {t} ({((t / args.limit) * 100).value:.2f}% complete)", end="\r")
+    else: 
+        args.action = _jit(lambda t, limit, delta, modifier, bodies: print(t, t / limit), nopython=False)
+        if args.modifier: args.modifier = _jit(args.modifier, nopython=False)
+        else: args.modifier = _jit(lambda body, t, bodies, f: 0, nopython=False)
 
-    bodies = ax.load(*args.unpack(), t=args.t, modifiers=args.modifiers, action=args.action, jit=jit)
+    bodies = ax.load(*args.unpack(), t=args.t, modifier=args.modifier, action=args.action, legacy=not jit)
     print(f"\nFinished with {len(bodies[0].r)} timesteps")
 
     if path == "": 
