@@ -39,7 +39,7 @@ class AxiniteArgs:
         self.frontend_args: dict[str, dict[str, str|float|int|bool|list|dict]] = {}
         "A dictionary of frontend-specific arguments."
 
-    def unpack(self) -> tuple[u.Quantity, u.Quantity, *tuple[axtools.Body, ...]]:
+    def unpack(self) -> tuple[u.Quantity, u.Quantity, '*tuple[axtools.Body, ...]']:
         """Unpacks the AxiniteArgs object into a tuple that can be passed in `axinite`'s load function.
 
         Returns:

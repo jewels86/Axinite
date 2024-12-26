@@ -2,7 +2,7 @@ import axinite as ax
 import axinite.tools as axtools
 from vpython import *
 
-def run(_args: axtools.AxiniteArgs, frontend: function) -> tuple[axtools.Body, ...]:
+def run(_args: axtools.AxiniteArgs, frontend: 'function') -> tuple[axtools.Body, ...]:
     """Load and display a simulation simultaneously.
 
     Args:
