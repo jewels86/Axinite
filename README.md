@@ -1,5 +1,5 @@
 # Axinite
-A powerful open-source engine for advanced celestial mechanics.
+A powerful open-source engine for advanced celestial mechanics, orbital dynamics, and planetary motion.
 
 ![axinite-1](https://github.com/user-attachments/assets/bcd7bc7e-627e-44e5-bfc6-d2ddd787a208)
 ![axinite-9](https://github.com/user-attachments/assets/8e07f586-3eda-439f-ab1c-8875da6b9e5a)
