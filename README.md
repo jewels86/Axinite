@@ -1,5 +1,5 @@
 # Axinite
-A powerful open-source engine for advanced celestial mechanics.
+A powerful open-source engine for advanced celestial mechanics, orbital dynamics, and planetary motion.
 
 ![axinite-1](https://github.com/user-attachments/assets/bcd7bc7e-627e-44e5-bfc6-d2ddd787a208)
 ![axinite-9](https://github.com/user-attachments/assets/8e07f586-3eda-439f-ab1c-8875da6b9e5a)
@@ -26,7 +26,7 @@ Any help will be appricated!
 ### Other ways to support
 - Giving this repository a star! This really helps me to get Axinite out to other developers.
 - Reaching out! I'd love to hear about your thoughts, ideas, and issues.
-- Share the project! Tell you physics/tech-inclined friends about the Axinite engine and see what they think.
+- Share the project! Help me spread the word to other students and developers.
 
 ## Gallery
 ![axinite-2](https://github.com/user-attachments/assets/2e952d41-5585-484d-bc3b-05c92aeefe2d)
@@ -39,10 +39,9 @@ Any help will be appricated!
 
 ## Todos
 - Create `ax-cli` executable
-- ~~Add live mode~~
-- ~~Move actools into axinite.tools and add axinite[tools]~~
 - Graceful load funciton exiting
 - Add a `save` function
 - Move `gravitational_force` out of `Body`
 - Phase out `astropy`
 - Add console updates every 100-1000 timesteps in `axtools.load(jit=True)`
+- Fix weird JIT loading error where first positions are always the origin
