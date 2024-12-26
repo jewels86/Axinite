@@ -39,10 +39,9 @@ Any help will be appricated!
 
 ## Todos
 - Create `ax-cli` executable
-- ~~Add live mode~~
-- ~~Move actools into axinite.tools and add axinite[tools]~~
 - Graceful load funciton exiting
 - Add a `save` function
 - Move `gravitational_force` out of `Body`
 - Phase out `astropy`
 - Add console updates every 100-1000 timesteps in `axtools.load(jit=True)`
+- Fix weird JIT loading error where first positions are always the origin
