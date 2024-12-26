@@ -1,6 +1,7 @@
 from axinite.tools.args import AxiniteArgs
 from axinite.tools.body import Body
-from axinite.tools.functions import *
+from axinite.tools.functions import interpret_time, array_to_vectors, data_to_body, vector_from_list, to_float, \
+    create_sphere, max_axis_length, min_axis_length
 from axinite.tools.load import load
 from axinite.tools.read import read
 from axinite.tools.show import show
