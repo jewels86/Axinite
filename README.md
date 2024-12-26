@@ -44,3 +44,7 @@ Any help will be appricated!
 - Phase out `astropy`
 - Add console updates every 100-1000 timesteps in `axtools.load(jit=True)`
 - Fix weird JIT loading error where first positions are always the origin
+- Add backends
+    - Euler's method
+    - Leapfrog
+    - DOPRI5
