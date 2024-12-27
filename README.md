@@ -47,4 +47,5 @@ Any help will be appricated!
 - Add backends
     - Euler's method
     - Leapfrog
-    - DOPRI5
+    - RK4
+    - Verlet
