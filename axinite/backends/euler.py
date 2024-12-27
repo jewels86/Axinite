@@ -3,7 +3,7 @@ from numba import njit, typed, types, jit
 import axinite as ax
 
 @jit(nopython=False)
-def euler(delta, limit, bodies, action=None, modifier=None, t=-1.0):
+def euler_backend(delta, limit, bodies, action=None, modifier=None, t=-1.0):
     if t == -1.0: t = 0.0 + delta
     timestep = 1
     while t < limit:

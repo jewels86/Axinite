@@ -39,10 +39,13 @@ class AxiniteArgs:
         self.frontend_args: dict[str, dict[str, str|float|int|bool|list|dict]] = {}
         "A dictionary of frontend-specific arguments."
 
-    def unpack(self) -> tuple[u.Quantity, u.Quantity, '*tuple[axtools.Body, ...]']:
+        self.backend: function = None
+        "The backend (integration method) to use."
+
+    def unpack(self) -> tuple[u.Quantity, u.Quantity, 'function', '*tuple[axtools.Body, ...]']:
         """Unpacks the AxiniteArgs object into a tuple that can be passed in `axinite`'s load function.
 
         Returns:
             *tuple[u.Quantity, u.Quantity, *tuple[axtools.Body, ...]]: An unpackable tuple of the core simulation parameters.
         """
-        return self.delta, self.limit, *self.bodies
+        return self.delta, self.limit, self.backend, *self.bodies

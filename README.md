@@ -50,3 +50,5 @@ Any help will be appricated!
     - RK4
     - ~~Verlet~~
 - Add infinite limits
+- Add action frequency to JIT functions
+- ~~Replace load_legacy~~

@@ -3,7 +3,7 @@ from numba import njit, typed, types, jit
 import axinite as ax
 
 @jit(nopython=False)
-def verlet(delta, limit, bodies, action=None, modifier=None, t=0.0):
+def verlet_backend(delta, limit, bodies, action=None, modifier=None, t=0.0):
     if t != 0.0: raise Exception("Verlet method does not support non-zero initial time.")
     t = 0.0 + delta 
     n = 1
