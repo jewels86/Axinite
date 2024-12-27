@@ -43,7 +43,7 @@ Any help will be appricated!
 - Move `gravitational_force` out of `Body`
 - Phase out `astropy`
 - Add console updates every 100-1000 timesteps in `axtools.load(jit=True)`
-- Fix weird JIT loading error where first positions are always the origin
+- ~~Fix weird JIT loading error where first positions are always the origin~~ - This should hopefully be fixed with backends
 - Add backends
     - Euler's method
     - Leapfrog
