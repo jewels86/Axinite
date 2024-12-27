@@ -49,3 +49,4 @@ Any help will be appricated!
     - Leapfrog
     - RK4
     - Verlet
+- Add infinite limits
