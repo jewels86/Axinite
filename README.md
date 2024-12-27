@@ -45,8 +45,8 @@ Any help will be appricated!
 - Add console updates every 100-1000 timesteps in `axtools.load(jit=True)`
 - ~~Fix weird JIT loading error where first positions are always the origin~~ - This should hopefully be fixed with backends
 - Add backends
-    - Euler's method
+    - ~~Euler's method~~
     - Leapfrog
     - RK4
-    - Verlet
+    - ~~Verlet~~
 - Add infinite limits
