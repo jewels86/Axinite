@@ -5,4 +5,5 @@ from axinite.functions import apply_to_vector, vector_to, vector_magnitude, unit
     vector_magnitude_jit, unit_vector_jit, gravitational_force_jit
 import axinite.functions as functions
 from axinite.load import load
-from axinite.load_legacy import load_legacy
+from axinite.backends.euler import euler_backend
+from axinite.backends.verlet import verlet_backend

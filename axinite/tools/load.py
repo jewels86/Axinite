@@ -19,10 +19,10 @@ def load(args: AxiniteArgs, path: str = "", dont_change_args: bool = False, jit:
         list[axtools.Body]: A list of Body objects containing the preloaded simulation data.
     """
     
-    if not jit and verbose: args.action = lambda t, **kwargs: print(f"Timestep {t} ({((t / args.limit) * 100).value:.2f}% complete)", end="\r")
+    #if args.action == None: args.action = lambda t, **kwargs: print(f"Timestep {t} ({((t / args.limit) * 100).value:.2f}% complete)", end="\r")
+    if args.backend == None: args.backend = ax.euler_backend
 
-    if jit: bodies = ax.load(*args.unpack(), t=args.t, modifier=args.modifier, action=args.action)
-    else: bodies = ax.load_legacy(*args.unpack(), t=args.t, modifier=args.modifier, action=args.action)
+    bodies = ax.load(*args.unpack(), t=args.t, modifier=args.modifier, action=args.action)
     if verbose: print(f"Finished with {len(bodies[0].r)} timesteps")
 
     _bodies = []

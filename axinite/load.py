@@ -1,11 +1,10 @@
 import axinite as ax
-from axinite._load_jit import _load_jit
 import numpy as np
 import astropy.units as u
 from astropy.coordinates import CartesianRepresentation
 from numba import jit
 
-def load(delta, limit, *bodies, t=0 * u.s, modifier=None, action=None):
+def load(delta, limit, backend, *bodies, t=0 * u.s, modifier=None, action=None):
     body_dtype = np.dtype([
         ("m", np.float64),
         ("r", np.float64, (int(limit.value/delta.value), 3)),
@@ -28,7 +27,7 @@ def load(delta, limit, *bodies, t=0 * u.s, modifier=None, action=None):
         _bodies = np.append(_bodies, np.array([
             (body.mass.value, r, v)
         ], dtype=body_dtype))
-    _bodies = _load_jit(delta.value, limit.value, _bodies, action=action, modifier=modifier, t=t.value)
+    _bodies = backend(delta.value, limit.value, _bodies, action=action, modifier=modifier, t=t.value)
     __bodies = ()
     for body in _bodies: 
         _body = ax.Body(body["m"] * u.kg, CartesianRepresentation(*body["r"][0], u.m), CartesianRepresentation(*body["v"][0], u.m/u.s))
