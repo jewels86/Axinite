@@ -42,6 +42,9 @@ class AxiniteArgs:
         self.backend: function = None
         "The backend (integration method) to use."
 
+        self.action_frequency: int = None
+        "The frequency at which the action function should be called."
+
     def unpack(self) -> tuple[u.Quantity, u.Quantity, 'function', '*tuple[axtools.Body, ...]']:
         """Unpacks the AxiniteArgs object into a tuple that can be passed in `axinite`'s load function.
 

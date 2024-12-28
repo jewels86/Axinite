@@ -32,6 +32,6 @@ def verlet_nojit_backend(delta, limit, bodies, action=None, modifier=None, t=0.0
     
     return bodies
 
-@jit(nopython=False)
 def verlet_backend(delta, limit, bodies, action=None, modifier=None, t=0.0, action_frequency=200):
-    return jit(verlet_nojit_backend, nopython=True)(delta, limit, bodies, action=action, modifier=modifier, t=t, action_frequency=action_frequency)
+    compiled = jit(verlet_nojit_backend, nopython=False)
+    return compiled(delta, limit, bodies, action=action, modifier=modifier, t=t, action_frequency=action_frequency)

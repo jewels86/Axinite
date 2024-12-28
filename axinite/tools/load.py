@@ -3,9 +3,8 @@ import axinite.tools as axtools
 from axinite.tools import AxiniteArgs
 import json
 from numba import jit
-_jit = jit
 
-def load(args: AxiniteArgs, path: str = "", dont_change_args: bool = False, jit: bool = True, verbose: bool = True):
+def load(args: AxiniteArgs, path: str = "", dont_change_args: bool = False, verbose: bool = True):
     """Preloads a simulation.
 
     Args:
@@ -19,8 +18,16 @@ def load(args: AxiniteArgs, path: str = "", dont_change_args: bool = False, jit:
         list[axtools.Body]: A list of Body objects containing the preloaded simulation data.
     """
     
-    #if args.action == None: args.action = lambda t, **kwargs: print(f"Timestep {t} ({((t / args.limit) * 100).value:.2f}% complete)", end="\r")
-    if args.backend == None: args.backend = ax.euler_backend
+    if args.action == None: 
+        delta = args.delta.value
+        limit = args.limit.value
+
+        @jit(nopython=False)
+        def default_action(bodies, t): print("Timestep", round(t / delta), "(", t / limit * 100, "\b% )")
+
+        args.action = default_action if verbose else None
+        args.action_frequency = 200
+    if args.backend == None: args.backend = ax.verlet_backend
 
     bodies = ax.load(*args.unpack(), t=args.t, modifier=args.modifier, action=args.action)
     if verbose: print(f"Finished with {len(bodies[0].r)} timesteps")
