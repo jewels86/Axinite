@@ -8,7 +8,7 @@ If you choose to make a pull request, please keep the following in mind:
 - Comments in the code may be removed upon review
 # Issues
 ## Bugs
-If there's a bug you'd like fixed, please cover tgese points in your issue:
+If there's a bug you'd like fixed, please cover these points in your issue:
 - What were you trying to do?
 - What happened?
 - Any error messages (if applicable)
