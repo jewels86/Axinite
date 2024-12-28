@@ -3,9 +3,14 @@ from numba import njit, typed, types, jit
 import axinite as ax
 
 def euler_nojit_backend(delta, limit, bodies, action=None, modifier=None, t=-1.0, action_frequency=200):
-    if t == -1.0: t = 0.0 + delta
+    _infinite = False
+    if t == 0.0: t = 0.0 + delta
+    if t == -1.0: 
+        _infinite = True
+        t = 0.0 + delta
+        
     n = 1
-    while t < limit:
+    while t < limit or _infinite:
         for i, body in enumerate(bodies):
             f = np.zeros(3)
             for j, other in enumerate(bodies):

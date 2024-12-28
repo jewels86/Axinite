@@ -45,5 +45,4 @@ Any help will be appricated!
 - Fix weird euler loading error where first positions are always the origin
 - Add Leapfrog backend
 - Add RK4 backend
-- Add infinite limits
 - Add annotations to `axinite` module
