@@ -42,11 +42,7 @@ Any help will be appricated!
 - Add a `save` function
 - Move `gravitational_force` out of `Body`
 - Phase out `astropy`
-- Add console updates every 100-1000 timesteps in `axtools.load(jit=True)`
 - Fix weird euler loading error where first positions are always the origin
-- Add backends
-    - Leapfrog
-    - RK4
+- Add Leapfrog backend
+- Add RK4 backend
 - Add infinite limits
-- Add action frequency to JIT functions
-
