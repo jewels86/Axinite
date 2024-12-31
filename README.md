@@ -13,11 +13,6 @@ Check out the docs [here](https://jewels86.gitbook.io/axinite/axinite/getting-st
 `axtools` is a library to help abstract and simplify Axinite. With `axtools`, Developers can deploy Axinite powered applications with ease. 
 You can find the docs [here](https://jewels86.gitbook.io/axinite/axtools/quickstart).
 
-### Executable
-Axinite will soon be coming to executable format! 
-
-Development is still in progress.
-
 ## Supporting Axinite
 ### Contributing
 Feel free to open up a [pull request](https://github.com/jewels86/Axinite/pulls) or an [issue](https://github.com/jewels86/Axinite/issues) if there are any changes you'd like introduced to Axinite.
@@ -43,7 +38,7 @@ Any help will be appricated!
 - Move `gravitational_force` out of `Body`
 - Phase out `astropy`
 - Fix weird euler loading error where first positions are always the origin
-- Add Leapfrog backend
+- Add Velocity Verlet backend
 - Add RK4 backend
 - Add annotations to `axinite` module
 - Add comments to code
