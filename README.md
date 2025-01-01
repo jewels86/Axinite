@@ -34,7 +34,6 @@ Any help will be appricated!
 ## Todos
 - Create `ax-cli` executable
 - Graceful load funciton exiting
-- Add a `save` function
 - Move `gravitational_force` out of `Body`
 - Phase out `astropy`
 - Fix weird euler loading error where first positions are always the origin
