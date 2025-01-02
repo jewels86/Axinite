@@ -47,16 +47,3 @@ class Body:
 
         self.radius_multiplier: int = radius_multiplier
         "A multiplier which was applied to the radius."
-
-    def gravitational_force(self, r: CartesianRepresentation, m: u.Quantity) -> u.Quantity:
-        """Calculates the gravitational force between this body and another.
-        !!! This function is a legacy function !!!
-
-        Args:
-            r (CartesianRepresentation): Displacement vector between the two bodies.
-            m (u.Quantity): Mass of the other body.
-
-        Returns:
-            u.Quantity: The force between the two in Newtons.
-        """
-        return -G * ((self.mass * m) / ax.vector_magnitude(r)**2) * ax.unit_vector(r)
