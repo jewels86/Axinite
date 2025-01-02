@@ -15,8 +15,10 @@ class Body:
             velocity (CartesianRepresentation): The initial velocity of the object.
         """
         self.mass = mass
-        self.r = { float64(0): position}
-        self.v = { float64(0): velocity}
+        "The mass of the object in kilograms."
 
-    def gravitational_force(self, r: CartesianRepresentation, m: u.Quantity):
-        return -G * ((self.mass * m) / vector_magnitude(r)**2) * unit_vector(r)
+        self.r = { float64(0): position}
+        "The position of the object at each timestep."
+
+        self.v = { float64(0): velocity}
+        "The velocity of the object at each timestep."

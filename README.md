@@ -38,5 +38,4 @@ Any help will be appricated!
 - Fix weird euler loading error where first positions are always the origin
 - Add Velocity Verlet backend
 - Add RK4 backend
-- Add annotations to `axinite` module
 - Add comments to code
