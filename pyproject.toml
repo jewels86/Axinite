@@ -10,8 +10,8 @@ authors = [{ name = "Jewels", email = "jewels286@proton.me" }]
 maintainers = [{ name = "Jewels", email = "jewels286@proton.me" }]
 description = "A powerful open-source engine for advanced celestial mechanics."
 readme = "README.md"
-license = { file = "LICENSE" }
-keywords = ["celestial-mechanics", "orbital-dynamics", "engine"]
+license = { file = "LICENSE.md" }
+keywords = ["celestial-mechanics", "orbital-dynamics", "engine", "astrodynamics"]
 classifiers = [
 	"Development Status :: 4 - Beta"
 ]
