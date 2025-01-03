@@ -22,10 +22,9 @@ Documentation = "https://jewels86.gitbook.io/axinite"
 Repository = "https://github.com/jewels86/axinite"
 
 [project.optional-dependencies]
-tools-no-frontends = ["json", "itertools"]
-tools = ["vpython", "plotly", "json", "itertools"]
-tools-vpython = ["json", "itertools"]
-tools-plotly = ["json", "itertools", "plotly"]
+tools = ["vpython", "plotly"]
+tools-vpython = ["vpython"]
+tools-plotly = ["plotly"]
 
 [tool.setuptools.packages.find]
 where = ["axinite"]
