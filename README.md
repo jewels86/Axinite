@@ -13,6 +13,11 @@ Check out the docs [here](https://jewels86.gitbook.io/axinite/axinite/getting-st
 `axtools` is a library to help abstract and simplify Axinite. With `axtools`, Developers can deploy Axinite powered applications with ease. 
 You can find the docs [here](https://jewels86.gitbook.io/axinite/axtools/quickstart).
 
+## How can I use Axinite?
+You can check out [the docs](https://jewels86.gitbook.io/axinite/) to check out the `axinite` module.
+
+
+
 ## Supporting Axinite
 ### Contributing
 Feel free to open up a [pull request](https://github.com/jewels86/Axinite/pulls) or an [issue](https://github.com/jewels86/Axinite/issues) if there are any changes you'd like introduced to Axinite.
