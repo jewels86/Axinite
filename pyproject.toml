@@ -23,4 +23,3 @@ Repository = "https://github.com/jewels86/axinite"
 
 [tool.setuptools.packages.find]
 where = ["axinite"]
-exclude = ["test.py"]
