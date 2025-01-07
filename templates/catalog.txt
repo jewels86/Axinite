@@ -1,8 +1,3 @@
-alpha-centauri.tmpl.ax
-earth-satellite.tmpl.ax
-earth-system.tmpl.ax
-jupiter.tmpl.ax
-solar-system.tmpl.ax
 alpha-centauri.meta.ax
 earth-satellite.meta.ax
 earth-system.meta.ax
