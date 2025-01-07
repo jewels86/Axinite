@@ -1,5 +1,5 @@
-alpha-centauri
-earth-satellite
-earth-system
-jupiter
-solar-system
+alpha-centauri.tmpl.ax
+earth-satellite.tmpl.ax
+earth-system.tmpl.ax
+jupiter.tmpl.ax
+solar-system.tmpl.ax
