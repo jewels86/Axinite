@@ -17,7 +17,7 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://jewels86.me/axinite"
+Homepage = "https://jewels86.me/solutions?s=axinite"
 Documentation = "https://jewels86.gitbook.io/axinite"
 Repository = "https://github.com/jewels86/axinite"
 

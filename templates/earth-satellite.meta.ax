@@ -1,0 +1,7 @@
+{
+  "name": "earth-satellite",
+  "author": "jewels86",
+  "license": "MIT",
+  "description": "Template for Earth Satellite system.",
+  "path": "earth-satellite.tmpl.ax"
+}

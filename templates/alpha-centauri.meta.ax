@@ -1,0 +1,7 @@
+{
+  "name": "alpha-centauri",
+  "author": "jewels86",
+  "license": "MIT",
+  "description": "Template for Alpha Centauri system.",
+  "path": "alpha-centauri.tmpl.ax"
+}
