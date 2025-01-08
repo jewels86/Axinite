@@ -154,7 +154,6 @@ def string_to_color(color_name: str, frontend: Literal['vpython', 'mpl', 'plotly
         }
         return color_map.get(color_name, 'white')
     
-
 def create_sphere(pos: CartesianRepresentation, radius: u.Quantity, n=20) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Generates the vertices of a sphere.
 
