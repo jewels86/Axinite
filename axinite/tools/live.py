@@ -1,10 +1,5 @@
-import axinite as ax
 import axinite.tools as axtools
-from vpython import *
-from itertools import cycle
 import astropy.units as u
-
-colors = cycle([color.red, color.blue, color.green, color.orange, color.purple, color.yellow])
 
 def live(args: axtools.AxiniteArgs, frontend: 'function') -> None:
     """Watch a preloaded simulation live.

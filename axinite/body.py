@@ -22,3 +22,6 @@ class Body:
 
         self.v = { float64(0): velocity}
         "The velocity of the object at each timestep."
+
+        self.name = None
+        "The name of the object."

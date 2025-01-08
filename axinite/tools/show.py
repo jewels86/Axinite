@@ -29,5 +29,3 @@ def show(_args: axtools.AxiniteArgs, frontend: 'function') -> None:
         frontend[1]()
 
     signal.signal(signal.SIGINT, lambda *args, **kwargs: frontend[2])
-    while True:
-        time.sleep(1)

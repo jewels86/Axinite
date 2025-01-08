@@ -4,6 +4,7 @@ from astropy.constants import G
 import astropy.units as u
 import math
 import numpy as np
+import axinite as ax
 from numba import njit
 
 _G = G.value
@@ -65,6 +66,31 @@ def to_vector(data: dict, unit: u.Unit) -> CartesianRepresentation:
         CartesianRepresentation: The vector.
     """
     return CartesianRepresentation(data["x"] * unit, data["y"] * unit, data["z"] * unit)
+
+def to_body(body_dtype, delta):
+    """Converts a body_dtype to an ax.Body object.
+
+    Args:
+        body_dtype (np.dtype): The body_dtype to convert.
+        delta (u.Quantity): The change in time between each step.
+        limit (u.Quantity): The limit of the simulation.
+
+    Returns:
+        ax.Body: The converted Body object.
+    """
+    mass = body_dtype["m"] * u.kg
+    position = CartesianRepresentation(*body_dtype["r"][0], u.m)
+    velocity = CartesianRepresentation(*body_dtype["v"][0], u.m/u.s)
+    
+    body = ax.Body(mass, position, velocity)
+    body.name = body_dtype["n"]
+    
+    for i, r in enumerate(body_dtype["r"]):
+        body.r[i * delta.value] = CartesianRepresentation(*r, u.m)
+    for i, v in enumerate(body_dtype["v"]):
+        body.v[i * delta.value] = CartesianRepresentation(*v, u.m/u.s)
+    
+    return body
 
 @njit 
 def vector_magnitude_jit(vec: np.ndarray) -> float:

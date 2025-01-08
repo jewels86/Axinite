@@ -44,7 +44,7 @@ def array_to_vectors(array: list[dict[str, np.float64]], unit: u.Unit) -> list[C
     for a in array:
         arr.append(ax.to_vector(a, unit))
     return arr
-
+    
 def data_to_body(data: dict[str, any]) -> axtools.Body:
     """Converts a dict to a Body object.
 
@@ -214,3 +214,22 @@ def min_axis_length(*bodies: axtools.Body, radius_multiplier: int = 1) -> np.flo
         min_length = min(min_length, x_length, y_length, z_length)
     
     return min_length
+
+def from_body(body: ax.Body) -> axtools.Body:
+    """Converts an ax.Body object to an axtools.Body object.
+
+    Args:
+        body (ax.Body): The Body object to convert.
+
+    Returns:
+        axtools.Body: The converted Body object.
+    """
+
+    body = axtools.Body(body.name, body.mass, body.r[0], body.v[0])
+
+    for t, r in body.r.items():
+        body.r[t] = r
+    for t, v in body.v.items():
+        body.v[t] = v
+
+    return body

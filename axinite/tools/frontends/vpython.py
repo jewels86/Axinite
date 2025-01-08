@@ -1,4 +1,5 @@
 import axinite.tools as axtools
+import axinite as ax
 from vpython import *
 from itertools import cycle
 from astropy.coordinates import CartesianRepresentation
@@ -53,12 +54,13 @@ def vpython_rt(args: axtools.AxiniteArgs):
             lights[body.name] = local_light(pos=to_vec(body.r[0]), color=body_color)
             attach_light(spheres[body.name], lights[body.name])
 
-    def fn(t, **kwargs):
+    def fn(bodies, t, **kwargs):
         try:
+            _bodies = [ax.to_body(b, args.delta) for b in bodies]
             global _rate, pause
             rate(_rate)
-            for body in kwargs["bodies"]:
-                spheres[body.name].pos = to_vec(body.r[t.value])
+            for body in _bodies:
+                spheres[body.name].pos = to_vec(body.r[t])
                 labels[body.name].pos = spheres[body.name].pos
                 try: lights[body.name].pos = spheres[body.name].pos
                 except: pass

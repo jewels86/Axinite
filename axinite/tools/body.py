@@ -6,7 +6,7 @@ from numpy import float64
 
 class Body:
     "A class that represents a body in the simulation."
-    def __init__(self, name: str, mass: u.Quantity, position: CartesianRepresentation, velocity: CartesianRepresentation, radius: u.Quantity, color: str = "", light: bool = False, retain = None, radius_multiplier = 1):
+    def __init__(self, name: str, mass: u.Quantity, position: CartesianRepresentation, velocity: CartesianRepresentation, radius: u.Quantity = 0 * u.m, color: str = "", light: bool = False, retain = None, radius_multiplier = 1):
         """Initializes a new Body object.
 
         Args:

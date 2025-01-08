@@ -20,31 +20,31 @@ def load(delta, limit, backend, *bodies, t=0 * u.s, modifier=None, action=None, 
         np.ndarray: An array of bodies.
     """
     body_dtype = np.dtype([
+        ("n", "U20"),
         ("m", np.float64),
         ("r", np.float64, (int(limit.value/delta.value), 3)),
         ("v", np.float64, (int(limit.value/delta.value), 3))
     ])
-    _bodies = np.array([], dtype=body_dtype)
-    for body in bodies:
+    _bodies = np.zeros(len(bodies), dtype=body_dtype)
+    for i, body in enumerate(bodies):
         _r = body.r.values()
         _v = body.v.values()
         r = np.zeros((int(limit.value/delta.value), 3))
         v = np.zeros((int(limit.value/delta.value), 3))
-        for i, __r in enumerate(_r): 
-            r[i][0] = __r.x.value
-            r[i][1] = __r.y.value
-            r[i][2] = __r.z.value
-        for i, __v in enumerate(_v):
-            v[i][0] = __v.x.value
-            v[i][1] = __v.y.value
-            v[i][2] = __v.z.value
-        _bodies = np.append(_bodies, np.array([
-            (body.mass.value, r, v)
-        ], dtype=body_dtype))
+        for j, __r in enumerate(_r): 
+            r[j][0] = __r.x.value
+            r[j][1] = __r.y.value
+            r[j][2] = __r.z.value
+        for j, __v in enumerate(_v):
+            v[j][0] = __v.x.value
+            v[j][1] = __v.y.value
+            v[j][2] = __v.z.value
+        _bodies[i] = (body.name, body.mass.value, r, v)
     _bodies = backend(delta.value, limit.value, _bodies, action=action, modifier=modifier, t=t.value, action_frequency=action_frequency)
     __bodies = ()
     for body in _bodies: 
         _body = ax.Body(body["m"] * u.kg, CartesianRepresentation(*body["r"][0], u.m), CartesianRepresentation(*body["v"][0], u.m/u.s))
+        _body.name = body["n"]
         for i, r in enumerate(body["r"]):
             _body.r[i * delta.value] = CartesianRepresentation(*r, u.m)
         for i, v in enumerate(body["v"]):
