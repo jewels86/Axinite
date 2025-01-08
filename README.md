@@ -14,9 +14,7 @@ Check out the docs [here](https://jewels86.gitbook.io/axinite/axinite/getting-st
 You can find the docs [here](https://jewels86.gitbook.io/axinite/axtools/quickstart).
 
 ## How can I use Axinite?
-You can check out [the docs](https://jewels86.gitbook.io/axinite/) to check out the `axinite` module.
-
-
+You can check out [the docs](https://jewels86.gitbook.io/axinite/) to learn about using the `axinite` module. Axinite also has a [command line interface](https://github.com/jewels86/axcli).
 
 ## Supporting Axinite
 ### Contributing
