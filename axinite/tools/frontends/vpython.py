@@ -56,11 +56,11 @@ def vpython_rt(args: axtools.AxiniteArgs):
 
     def fn(bodies, t, **kwargs):
         try:
-            _bodies = [ax.to_body(b, args.delta) for b in bodies]
+            _bodies = [b for b in bodies]
             global _rate, pause
             rate(_rate)
             for body in _bodies:
-                spheres[body.name].pos = to_vec(body.r[t])
+                spheres[body.name].pos = to_vec(body.r[t.value])
                 labels[body.name].pos = spheres[body.name].pos
                 try: lights[body.name].pos = spheres[body.name].pos
                 except: pass
