@@ -1,8 +1,8 @@
-import axinite as ax
 from vpython import *
 import axinite.tools as axtools
 from itertools import cycle
 import vpython as vp
+import signal, time
 
 colors = cycle([color.red, color.blue, color.green, color.orange, color.purple, color.yellow])
 
@@ -28,8 +28,6 @@ def show(_args: axtools.AxiniteArgs, frontend: 'function') -> None:
     if frontend[1] != None: 
         frontend[1]()
 
-    try:
-        while True:
-            pass
-    except KeyboardInterrupt:
-        frontend[2]()
+    signal.signal(signal.SIGINT, lambda *args, **kwargs: frontend[2])
+    while True:
+        time.sleep(1)
