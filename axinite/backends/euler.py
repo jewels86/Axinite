@@ -17,15 +17,15 @@ def euler_nojit_backend(delta, limit, bodies, action=None, modifier=None, t=-1.0
                 if i != j:
                     r = body["r"][n - 1] - other["r"][n - 1]
                     f += ax.gravitational_force_jit(body["m"], other["m"], r)
-            if modifier is not None: f = modifier(body, f)
+            if modifier is not None: f = modifier(body, f, bodies=bodies, t=t, delta=delta, limit=limit)
             a = f / body["m"]
             v = body["v"][n - 1] + a * delta
             r = body["r"][n - 1] + v * delta
             body["v"][n] = v
             body["r"][n] = r
+        if action is not None and n % action_frequency == 0: action(bodies, t, limit=limit, delta=delta)
         t += delta
         n += 1
-        if action is not None and n % action_frequency == 0: action(bodies, t)
     return bodies
 
 @jit(nopython=False)
