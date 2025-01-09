@@ -35,7 +35,6 @@ Any help will be appricated!
 ![axinite-8](https://github.com/user-attachments/assets/e39cafc8-7670-4a9d-a0c8-c95682641a95)
 
 ## Todos
-- Create `ax-cli` executable
 - Graceful load funciton exiting
 - Phase out `astropy`
 - Fix weird euler loading error where first positions are always the origin
