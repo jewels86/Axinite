@@ -42,4 +42,3 @@ Any help will be appricated!
 - Add Velocity Verlet backend
 - Add RK4 backend
 - Add comments to code
-- Fix combine method idesnts
