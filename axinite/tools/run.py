@@ -3,7 +3,7 @@ import axinite.tools as axtools
 from vpython import *
 import signal
 
-def run(_args: axtools.AxiniteArgs, frontend: 'function') -> tuple[axtools.Body, ...]:
+def run(_args: axtools.AxiniteArgs, frontend: 'function', backend = ax.verlet_nojit_backend) -> tuple[axtools.Body, ...]:
     """Load and display a simulation simultaneously. !! USE WITH CAUTION - this function has been known to have unexpected behavior !!
 
     Args:
@@ -23,7 +23,7 @@ def run(_args: axtools.AxiniteArgs, frontend: 'function') -> tuple[axtools.Body,
        args.retain = 200
 
     args.action = frontend[0]
-    signal.signal(signal.SIGINT, lambda *args, **kwargs: frontend[1])
-    try: bodies = ax.load(*args.unpack(), t=args.t, action=args.action, action_frequency=10)
-    finally: frontend[1]()
+    args.backend = backend
+    bodies = axtools.load(args)
+    frontend[1]()
     return bodies

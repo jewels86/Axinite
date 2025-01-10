@@ -5,16 +5,17 @@ from itertools import cycle
 from astropy.coordinates import CartesianRepresentation
 import os, signal
   
-def to_vec(cartesian_representation: CartesianRepresentation):
-    return vector(cartesian_representation.x.value, cartesian_representation.y.value, cartesian_representation.z.value)
-    
+def to_vec(v): 
+    print(v)
+    return vec(v[0], v[1], v[2])
+
 def vpython_frontend(args: axtools.AxiniteArgs, mode: str, **kwargs):
     if mode == "live" or mode == "run":
-        return vpython_rt(args, **kwargs)
+        return vpython_live(args, **kwargs)
     elif mode == "show":
         return vpython_static(args, **kwargs)
     
-def vpython_rt(args: axtools.AxiniteArgs):
+def vpython_live(args: axtools.AxiniteArgs):
     if args.rate is None:
         args.rate = 100
     if args.radius_multiplier is None:
@@ -56,13 +57,14 @@ def vpython_rt(args: axtools.AxiniteArgs):
 
     def fn(bodies, t, **kwargs):
         try:
-            _bodies = [b for b in bodies]
             global _rate, pause
             rate(_rate)
-            for body in _bodies:
-                spheres[body.name].pos = to_vec(body.r[t.value])
-                labels[body.name].pos = spheres[body.name].pos
-                try: lights[body.name].pos = spheres[body.name].pos
+            for body in bodies:
+                print(body["r"][int(t / kwargs["delta"])] )
+                print(int(t / kwargs["delta"]))
+                spheres[body["n"]].pos = to_vec(body["r"][int(t / kwargs["delta"])])
+                labels[body["n"]].pos = spheres[body["n"]].pos
+                try: lights[body["n"]].pos = spheres[body["n"]].pos
                 except: pass
             print(f"t = {t}", end='\r')
             if pause: 
