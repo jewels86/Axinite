@@ -23,13 +23,13 @@ def load(args: AxiniteArgs, path: str = "", dont_change_args: bool = False, verb
         limit = args.limit.value
 
         @jit(nopython=False)
-        def default_action(bodies, t, limit, delta): print("Timestep", round(t / delta), "(", round(t / limit * 100, 2), "\b% )")
+        def default_action(bodies, t, limit, delta): print("Timestep", round(t / delta), "(", round(t / limit * 100, 2), "\b% )", end="\r")
 
         args.action = default_action if verbose else None
         args.action_frequency = 200
     if args.backend == None: args.backend = ax.verlet_backend
 
-    bodies = ax.load(*args.unpack(), t=args.t, modifier=args.modifier, action=args.action)
+    bodies = ax.load(*args.unpack(), t=args.t, modifier=args.modifier, action=args.action, action_frequency=args.action_frequency)
     if verbose: print(f"Finished with {len(bodies[0].r)} timesteps")
 
     _bodies = []

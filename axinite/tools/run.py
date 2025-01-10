@@ -4,7 +4,7 @@ from vpython import *
 import signal
 
 def run(_args: axtools.AxiniteArgs, frontend: 'function', backend = ax.verlet_nojit_backend) -> tuple[axtools.Body, ...]:
-    """Load and display a simulation simultaneously. !! USE WITH CAUTION - this function has been known to have unexpected behavior !!
+    """Load and display a simulation simultaneously.
 
     Args:
         _args (axtools.AxiniteArgs): The simulation parameters.
@@ -24,6 +24,7 @@ def run(_args: axtools.AxiniteArgs, frontend: 'function', backend = ax.verlet_no
 
     args.action = frontend[0]
     args.backend = backend
+    args.action_frequency = 1
     bodies = axtools.load(args)
     frontend[1]()
     return bodies

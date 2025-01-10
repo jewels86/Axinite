@@ -23,11 +23,11 @@ def euler_nojit_backend(delta, limit, bodies, action=None, modifier=None, t=-1.0
             r = body["r"][n - 1] + v * delta
             body["v"][n] = v
             body["r"][n] = r
-        if action is not None and n % action_frequency == 0: action(bodies, t, limit=limit, delta=delta)
+        if action is not None and n % action_frequency == 0: action(bodies, t, limit=limit, delta=delta, n=n)
         t += delta
         n += 1
     return bodies
 
 @jit(nopython=False)
 def euler_backend(delta, limit, bodies, action=None, modifier=None, t=-1.0, action_frequency=200):
-    return jit(euler_nojit_backend, nopython=True)(delta, limit, bodies, action=action, modifier=modifier, t=t, action_frequency=action_frequency)
+    return jit(euler_nojit_backend, nopython=False)(delta, limit, bodies, action=action, modifier=modifier, t=t, action_frequency=action_frequency)

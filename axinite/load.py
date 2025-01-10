@@ -19,28 +19,7 @@ def load(delta, limit, backend, *bodies, t=0 * u.s, modifier=None, action=None, 
     Returns:
         np.ndarray: An array of bodies.
     """
-    body_dtype = np.dtype([
-        ("n", "U20"),
-        ("m", np.float64),
-        ("r", np.float64, (int(limit.value/delta.value), 3)),
-        ("v", np.float64, (int(limit.value/delta.value), 3))
-    ])
-    _bodies = np.zeros(len(bodies), dtype=body_dtype)
-    for i, body in enumerate(bodies):
-        _r = body.r.values()
-        _v = body.v.values()
-        r = np.zeros((int(limit.value/delta.value), 3))
-        v = np.zeros((int(limit.value/delta.value), 3))
-        for j, __r in enumerate(_r): 
-            r[j][0] = __r.x.value
-            r[j][1] = __r.y.value
-            r[j][2] = __r.z.value
-        for j, __v in enumerate(_v):
-            v[j][0] = __v.x.value
-            v[j][1] = __v.y.value
-            v[j][2] = __v.z.value
-        _bodies[i] = (body.name, body.mass.value, r, v)
-    _bodies = backend(delta.value, limit.value, _bodies, action=action, modifier=modifier, t=t.value, action_frequency=action_frequency)
+    _bodies = backend(delta.value, limit.value, ax.create_jit_bodies(bodies, limit, delta), action=action, modifier=modifier, t=t.value, action_frequency=action_frequency)
     __bodies = ()
     for body in _bodies: 
         _body = ax.Body(body["m"] * u.kg, CartesianRepresentation(*body["r"][0], u.m), CartesianRepresentation(*body["v"][0], u.m/u.s))

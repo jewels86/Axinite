@@ -92,6 +92,30 @@ def to_body(body_dtype, delta):
     
     return body
 
+def create_jit_bodies(bodies, limit, delta):
+    body_dtype = np.dtype([
+        ("n", "U20"),
+        ("m", np.float64),
+        ("r", np.float64, (int(limit.value/delta.value), 3)),
+        ("v", np.float64, (int(limit.value/delta.value), 3))
+    ])
+    _bodies = np.zeros(len(bodies), dtype=body_dtype)
+    for i, body in enumerate(bodies):
+        _r = body.r.values()
+        _v = body.v.values()
+        r = np.zeros((int(limit.value/delta.value), 3))
+        v = np.zeros((int(limit.value/delta.value), 3))
+        for j, __r in enumerate(_r): 
+            r[j][0] = __r.x.value
+            r[j][1] = __r.y.value
+            r[j][2] = __r.z.value
+        for j, __v in enumerate(_v):
+            v[j][0] = __v.x.value
+            v[j][1] = __v.y.value
+            v[j][2] = __v.z.value
+        _bodies[i] = (body.name, body.mass.value, r, v)
+    return _bodies
+
 @njit 
 def vector_magnitude_jit(vec: np.ndarray) -> float:
     """Calculates the magnitude of a vector.

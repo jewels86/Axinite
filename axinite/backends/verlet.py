@@ -31,7 +31,7 @@ def verlet_nojit_backend(delta, limit, bodies, action=None, modifier=None, t=0.0
 
             body["r"][n] = body["r"][n-1] * 2 - body["r"][n-2] + (f / body["m"]) * delta**2
             body["v"][n] = (body["r"][n] - body["r"][n-1]) / (2 * delta)
-        if action is not None and n % action_frequency == 0: action(bodies, t, limit=limit, delta=delta)
+        if action is not None and n % action_frequency == 0: action(bodies, t, limit=limit, delta=delta, n=n)
         n += 1
         t += delta
     

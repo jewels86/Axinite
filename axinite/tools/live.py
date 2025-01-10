@@ -1,4 +1,5 @@
 import axinite.tools as axtools
+import axinite as ax
 import astropy.units as u
 
 def live(args: axtools.AxiniteArgs, frontend: 'function') -> None:
@@ -16,7 +17,8 @@ def live(args: axtools.AxiniteArgs, frontend: 'function') -> None:
        args.retain = 200
 
     t = 0 * u.s
+    bodies = ax.create_jit_bodies(args.bodies, args.limit, args.delta)
     while t < args.limit:
-        frontend[0](args.bodies, t)
+        frontend[0](bodies, t, limit=args.limit, delta=args.delta, n=int(t.value / args.delta.value))
         t += args.delta
     frontend[1]()

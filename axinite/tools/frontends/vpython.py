@@ -3,10 +3,12 @@ import axinite as ax
 from vpython import *
 from itertools import cycle
 from astropy.coordinates import CartesianRepresentation
-import os, signal
+import os, signal, time
   
 def to_vec(v): 
     return vec(v[0], v[1], v[2])
+def to_vec_cartesian(v):
+    return vec(v.x.value, v.y.value, v.z.value)
 
 def vpython_frontend(args: axtools.AxiniteArgs, mode: str, **kwargs):
     if mode == "live" or mode == "run":
@@ -21,7 +23,7 @@ def vpython_live(args: axtools.AxiniteArgs):
         args.radius_multiplier = 1
     if args.retain is None:
        args.retain = 200
-    
+
     scene = canvas(title=args.name)
     scene.select()
 
@@ -48,7 +50,7 @@ def vpython_live(args: axtools.AxiniteArgs):
     for body in args.bodies:
         body_color = axtools.string_to_color(body.color, "vpython") if body.color != "" else next(colors)
         body_retain = body.retain if body.retain != None else args.retain
-        spheres[body.name] = sphere(pos=to_vec(body.r[0]), radius=body.radius.value * args.radius_multiplier, color=body_color, make_trail=True, retain=body_retain, interval=10)
+        spheres[body.name] = sphere(pos=to_vec_cartesian(body.r[0]), radius=body.radius.value * args.radius_multiplier, color=body_color, make_trail=True, retain=body_retain, interval=10)
         labels[body.name] = label(pos=spheres[body.name].pos, text=body.name, xoffset=15, yoffset=15, space=30, height=10, border=4, font='sans')
         if body.light == True: 
             lights[body.name] = local_light(pos=to_vec(body.r[0]), color=body_color)
@@ -59,13 +61,11 @@ def vpython_live(args: axtools.AxiniteArgs):
             global _rate, pause
             rate(_rate)
             for body in bodies:
-                print(f"r {body["r"][int(t / kwargs["delta"])]}")
-                print(int(t / kwargs["delta"]))
-                spheres[body["n"]].pos = to_vec(body["r"][int(t / kwargs["delta"])])
+                spheres[body["n"]].pos = to_vec(body["r"][kwargs["n"]])
                 labels[body["n"]].pos = spheres[body["n"]].pos
                 try: lights[body["n"]].pos = spheres[body["n"]].pos
                 except: pass
-            print(f"t = {t}", end='\r')
+            print(f"t = {t}, n = {kwargs['n']}", end='\r')
             if pause: 
                 while pause: rate(10)
         except KeyboardInterrupt:
