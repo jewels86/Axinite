@@ -6,7 +6,6 @@ from astropy.coordinates import CartesianRepresentation
 import os, signal
   
 def to_vec(v): 
-    print(v)
     return vec(v[0], v[1], v[2])
 
 def vpython_frontend(args: axtools.AxiniteArgs, mode: str, **kwargs):
@@ -60,7 +59,7 @@ def vpython_live(args: axtools.AxiniteArgs):
             global _rate, pause
             rate(_rate)
             for body in bodies:
-                print(body["r"][int(t / kwargs["delta"])] )
+                print(f"r {body["r"][int(t / kwargs["delta"])]}")
                 print(int(t / kwargs["delta"]))
                 spheres[body["n"]].pos = to_vec(body["r"][int(t / kwargs["delta"])])
                 labels[body["n"]].pos = spheres[body["n"]].pos
