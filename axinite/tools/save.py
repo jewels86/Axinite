@@ -17,8 +17,8 @@ def save(args: axtools.AxiniteArgs, path: str):
                 "name": body.name,
                 "mass": body.mass.value,
                 "radius": body.radius.value,
-                "r": {k: [v.x.value, v.y.value, v.z.value] for k, v in body.r.items()},
-                "v": {k: [v.x.value, v.y.value, v.z.value] for k, v in body.v.items()}
+                "r": {i: list(body.r(i)) for i in range(body._inner["r"].shape[0])},
+                "v": {i: list(body.v(i)) for i in range(body._inner["v"].shape[0])}
             }
             if body.color != None:
                 body_data["color"] = body.color

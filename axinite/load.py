@@ -19,7 +19,7 @@ def load(delta, limit, backend, *bodies, t=0 * u.s, modifier=None, action=None, 
     Returns:
         np.ndarray: An array of bodies.
     """
-    _bodies = backend(delta, limit, ax.get_inner_bodies(bodies), action=action, modifier=modifier, t=t.value, action_frequency=action_frequency)
+    _bodies = backend(delta, limit, ax.get_inner_bodies(bodies), action=action, modifier=modifier, t=t, action_frequency=action_frequency)
     __bodies = []
     for body in _bodies:
         _body = ax.Body(body["n"], body["m"], limit, delta)
