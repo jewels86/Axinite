@@ -1,0 +1,7 @@
+{
+  "name": "three-body-system",
+  "author": "jewels86",
+  "license": "MIT",
+  "description": "Template for a three-body system, including complex gravitational interactions.",
+  "path": "three-body-system.tmpl.ax"
+}

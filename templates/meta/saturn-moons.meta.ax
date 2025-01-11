@@ -1,0 +1,7 @@
+{
+  "name": "saturn-moons",
+  "author": "jewels86",
+  "license": "MIT",
+  "description": "Template for the moons of Saturn, including Titan, Enceladus, and others.",
+  "path": "saturn-moons.tmpl.ax"
+}

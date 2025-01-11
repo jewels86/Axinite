@@ -1,0 +1,7 @@
+{
+  "name": "mars-moons",
+  "author": "jewels86",
+  "license": "MIT",
+  "description": "Template for the moons of Mars, including Phobos and Deimos.",
+  "path": "mars-moons.tmpl.ax"
+}

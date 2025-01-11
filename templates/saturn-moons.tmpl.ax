@@ -1,0 +1,90 @@
+{
+    "name": "saturn-moons",
+    "author": "jewels88",
+    "limit": "10759d",
+    "delta": "5min",
+    "t": 0,
+    "radius_multiplier": 2,
+    "bodies": [
+        {
+            "name": "Saturn",
+            "mass": 5.683e26,
+            "radius": 5.8232e7,
+            "color": "yellow",
+            "r": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "v": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            }
+        },
+        {
+            "name": "Titan",
+            "mass": 1.3452e23,
+            "radius": 2.575e6,
+            "color": "orange",
+            "r": {
+                "x": 1.222e9,
+                "y": 0,
+                "z": 0
+            },
+            "v": {
+                "x": 0,
+                "y": 5.57e3,
+                "z": 0
+            }
+        },
+        {
+            "name": "Enceladus",
+            "mass": 1.08022e20,
+            "radius": 2.52e5,
+            "color": "white",
+            "r": {
+                "x": 2.38e8,
+                "y": 0,
+                "z": 0
+            },
+            "v": {
+                "x": 0,
+                "y": 12.64e3,
+                "z": 0
+            }
+        },
+        {
+            "name": "Asteroid 1",
+            "mass": 1e12,
+            "radius": 1e3,
+            "color": "grey",
+            "r": {
+                "x": 1.4e8,
+                "y": 0,
+                "z": 0
+            },
+            "v": {
+                "x": 0,
+                "y": 20e3,
+                "z": 0
+            }
+        },
+        {
+            "name": "Asteroid 2",
+            "mass": 1e12,
+            "radius": 1e3,
+            "color": "grey",
+            "r": {
+                "x": 1.5e8,
+                "y": 0,
+                "z": 0
+            },
+            "v": {
+                "x": 0,
+                "y": 19e3,
+                "z": 0
+            }
+        }
+    ]
+}

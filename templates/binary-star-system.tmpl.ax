@@ -1,0 +1,74 @@
+{
+    "name": "binary-star-system",
+    "author": "jewels88",
+    "limit": "365d",
+    "delta": "5min",
+    "t": 0,
+    "radius_multiplier": 2,
+    "bodies": [
+        {
+            "name": "Primary Star",
+            "mass": 1.989e30,
+            "radius": 6.957e8,
+            "color": "yellow",
+            "r": {
+                "x": -1.496e11,
+                "y": 0,
+                "z": 0
+            },
+            "v": {
+                "x": 0,
+                "y": -29.78e3,
+                "z": 0
+            }
+        },
+        {
+            "name": "Secondary Star",
+            "mass": 1.589e30,
+            "radius": 6.957e8,
+            "color": "orange",
+            "r": {
+                "x": 1.496e11,
+                "y": 0,
+                "z": 0
+            },
+            "v": {
+                "x": 0,
+                "y": 29.78e3,
+                "z": 0
+            }
+        },
+        {
+            "name": "Planet 1",
+            "mass": 5.972e24,
+            "radius": 6.371e6,
+            "color": "blue",
+            "r": {
+                "x": 1.496e11,
+                "y": 1.496e11,
+                "z": 0
+            },
+            "v": {
+                "x": -29.78e3,
+                "y": 29.78e3,
+                "z": 0
+            }
+        },
+        {
+            "name": "Planet 2",
+            "mass": 1.898e27,
+            "radius": 6.9911e7,
+            "color": "brown",
+            "r": {
+                "x": 7.785e11,
+                "y": 0,
+                "z": 0
+            },
+            "v": {
+                "x": 0,
+                "y": 13.07e3,
+                "z": 0
+            }
+        }
+    ]
+}
