@@ -5,32 +5,39 @@ def save(args: axtools.AxiniteArgs, path: str):
     with open(path, 'w+') as f:
         data = {
             "name": args.name,
-            "delta": args.delta.value,
-            "limit": args.limit.value,
-            "t": args.t.value,
-            "radius_multiplier": args.radius_multiplier,
+            "delta": float(args.delta),
+            "limit": float(args.limit),
+            "t": float(args.t),
             "bodies": []
         }
 
         for body in args.bodies: 
             body_data = {
-                "name": body.name,
-                "mass": body.mass.value,
-                "radius": body.radius.value,
-                "r": {i: list(body.r(i)) for i in range(body._inner["r"].shape[0])},
-                "v": {i: list(body.v(i)) for i in range(body._inner["v"].shape[0])}
+                "name": str(body.name),
+                "mass": float(body.mass),
+                "radius": float(body.radius),
+                "r": [],
+                "v": []
             }
+
+            for i, r in enumerate(body._inner["r"]):
+                _r = [float(v) for v in r]
+                body_data["r"].append(_r)
+            for i, v in enumerate(body._inner["v"]):
+                _v = [float(v) for v in v]
+                body_data["v"].append(_v)
+
             if body.color != None:
                 body_data["color"] = body.color
             if body.retain != None:
-                body_data["retain"] = body.retain
+                body_data["retain"] = int(body.retain)
             if body.light != None:
                 body_data["light"] = body.light
 
             data["bodies"].append(body_data)
 
         if args.radius_multiplier is not None:
-            data["radius_multiplier"] = args.radius_multiplier
+            data["radius_multiplier"] = int(args.radius_multiplier)
 
         if args.rate is not None:
             data["rate"] = args.rate
