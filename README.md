@@ -14,8 +14,9 @@ Check out the docs [here](https://jewels86.gitbook.io/axinite/axinite/getting-st
 You can find the docs [here](https://jewels86.gitbook.io/axinite/axtools/quickstart).
 
 ## How can I use Axinite?
-You can check out [the docs](https://jewels86.gitbook.io/axinite/) to learn about using the `axinite` module. Axinite also has a [command line interface](https://github.com/jewels86/axcli) for students (although anyone can use it).
+For developers looking to deploy Axinite-powered applications, check out [the Python package](https://pypi.org/project/axinite/).
 
+For students, engineers, physicists, and anyone else in the field of astrophysics who want to simulate gravitational interactions, you can check out the [command line interface](https://github.com/jewels86/axcli).
 ## Supporting Axinite
 ### Contributing
 Feel free to open up a [pull request](https://github.com/jewels86/Axinite/pulls) or an [issue](https://github.com/jewels86/Axinite/issues) if there are any changes you'd like introduced to Axinite.
