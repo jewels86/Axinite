@@ -1,7 +1,7 @@
 {
-  "name": "two-body-system",
+  "name": "two-body",
   "author": "jewels86",
   "license": "MIT",
   "description": "Template for a two-body system, including simple gravitational interactions.",
-  "path": "two-body-system.tmpl.ax"
+  "path": "two-body.tmpl.ax"
 }
