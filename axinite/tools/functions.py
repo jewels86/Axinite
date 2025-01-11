@@ -1,12 +1,10 @@
-import astropy.units as u
 import axinite as ax
-from astropy.coordinates import CartesianRepresentation
 from typing import Literal
 import vpython as vp
 import numpy as np
 import axinite.tools as axtools
 
-def interpret_time(string: str) -> u.Quantity:
+def interpret_time(string: str) -> np.float64:
     """Interprets a string as a time in seconds.
 
     Args:
@@ -15,37 +13,73 @@ def interpret_time(string: str) -> u.Quantity:
     Returns:
         u.Quantity: The time in seconds.
     """
-    if type(string) is float: return string * u.s
+    if type(string) is float or type(string) is int: return string
     if string.endswith("min"):
         string = string.removesuffix("min")
-        return float(string) * 60 * u.s 
+        return float(string) * 60 
     elif string.endswith("hr"): 
         string = string.removesuffix("hr")
-        return float(string) * 3600 * u.s
+        return float(string) * 3600
     elif string.endswith("d"):
         string  = string.removesuffix("d")
-        return float(string) * 86400 * u.s
+        return float(string) * 86400
     elif string.endswith("yr"):
         string = string.removesuffix("yr")
-        return float(string) * 31536000 * u.s
-    else: return float(string) * u.s
+        return float(string) * 31536000
+    else: return float(string)
 
-def array_to_vectors(array: list[dict[str, np.float64]], unit: u.Unit) -> list[CartesianRepresentation]:
-    """Converts a list of dicts to a list of vectors.
+def interpret_mass(string: str) -> np.float64:
+    """Interprets a string as a mass in kilograms.
 
     Args:
-        array (list[dict[str, np.float64]]): A list of dicts to convert.
-        unit (u.Unit): The unit to convert to.
+        string (str): The string to interpret.
 
     Returns:
-        list[CartesianRepresentation]: The list of vectors.
+        u.Quantity: The mass in kilograms.
     """
-    arr = []
-    for a in array:
-        arr.append(ax.to_vector(a, unit))
-    return arr
-    
-def data_to_body(data: dict[str, any]) -> axtools.Body:
+    if type(string) is float or type(string) is int: return string
+    if string.endswith("kg"):
+        string = string.removesuffix("kg")
+        return float(string)
+    elif string.endswith("g"):
+        string = string.removesuffix("g")
+        return float(string) / 1000
+    elif string.endswith("t"):
+        string = string.removesuffix("t")
+        return float(string) * 1000
+    else: return float(string)
+
+def interpret_distance(string: str) -> np.float64:
+    """Interprets a string as a distance in meters.
+
+    Args:
+        string (str): The string to interpret.
+
+    Returns:
+        u.Quantity: The distance in meters.
+    """
+    if type(string) is float or type(string) is int: return string
+    if string.endswith("m"):
+        string = string.removesuffix("m")
+        return float(string)
+    elif string.endswith("km"):
+        string = string.removesuffix("km")
+        return float(string) * 1000
+    elif string.endswith("cm"):
+        string = string.removesuffix("cm")
+        return float(string) / 100
+    elif string.endswith("mm"):
+        string = string.removesuffix("mm")
+        return float(string) / 1000
+    elif string.endswith("μm"):
+        string = string.removesuffix("μm")
+        return float(string) / 1000000
+    elif string.endswith("nm"):
+        string = string.removesuffix("nm")
+        return float(string) / 1000000000
+    else: return float(string)
+
+def data_to_body(data: dict[str, any], limit, delta) -> axtools.Body:
     """Converts a dict to a Body object.
 
     Args:
@@ -56,68 +90,42 @@ def data_to_body(data: dict[str, any]) -> axtools.Body:
     """
 
     name = data["name"]
-    mass = data["mass"] * u.kg
-    
-    if "x" in data["r"]:
-        position = ax.to_vector(data["r"], u.m)
-        velocity = ax.to_vector(data["v"], u.m/u.s)
+    mass = interpret_mass(data["mass"])
 
-        body = axtools.Body(name, mass, position, velocity, data["radius"] * u.m)
+    position = np.array([
+        interpret_distance(data["r"][0][0]),
+        interpret_distance(data["r"][0][1]),
+        interpret_distance(data["r"][0][2])  
+    ])
+    velocity = np.array([
+        interpret_distance(data["v"][0][0]),
+        interpret_distance(data["v"][0][1]),
+        interpret_distance(data["v"][0][2])
+    ])
+    body = axtools.Body(name, mass, limit, delta, position, velocity)
+    body.radius = interpret_distance(data["radius"])
 
-        if "color" in data:
-            body.color = data["color"]
-        if "light" in data:
-            body.light = data["light"]
-        if "retain" in data:
-            body.retain = data["retain"]
+    if "color" in data:
+        body.color = data["color"]
+    if "light" in data:
+        body.light = data["light"]
+    if "retain" in data:
+        body.retain = data["retain"]
 
-        return body
-    else:
-        position = [vector_from_list(r, u.m) for r in data["r"].values()]
-        velocity = [vector_from_list(v, u.m/u.s) for v in data["v"].values()]
+    for i in range(len(data["r"])):
+        body._inner["r"][i] = np.array([
+            interpret_distance(data["r"][i][0]),
+            interpret_distance(data["r"][i][1]),
+            interpret_distance(data["r"][i][2])
+        ])
+    for i in range(len(data["v"])):
+        body._inner["v"][i] = np.array([
+            interpret_distance(data["v"][i][0]),
+            interpret_distance(data["v"][i][1]),
+            interpret_distance(data["v"][i][2])
+        ])
 
-        body = axtools.Body(name, mass, position[0], velocity[0], data["radius"] * u.m)
-
-        for t, r in data["r"].items():
-            body.r[to_float(t)] = vector_from_list(r, u.m)
-        for t, v in data["v"].items():
-            body.v[to_float(t)] = vector_from_list(v, u.m)
-
-        if "color" in data:
-            body.color = data["color"]
-        if "light" in data:
-            body.light = data["light"]
-        if "retain" in data:
-            body.retain = data["retain"]
-        if "radius_multiplier" in data:
-            body.radius *= data["radius_multiplier"]
-        
-        return body
-
-def vector_from_list(vector: list[np.float64], unit: u.Unit) -> CartesianRepresentation:
-    """Converts a list to a vector.
-
-    Args:
-        vector (list[np.float64]): The list to convert
-        unit (u.Unit): The unit to convert to.
-
-    Returns:
-        CartesianRepresentation: The vector.
-    """
-
-    return CartesianRepresentation(u.Quantity(float(vector[0]), unit), u.Quantity(float(vector[1]), unit), u.Quantity(float(vector[2]), unit))
-
-def to_float(val: any) -> np.float64:
-    """Legacy shorthand for converting to np.float64.
-
-    Args:
-        val (any): The value to convert.
-
-    Returns:
-        np.float64: The result.
-    """
-
-    return np.float64(val)
+    return body
 
 def string_to_color(color_name: str, frontend: Literal['vpython', 'mpl', 'plotly']) -> vp.color | str:
     """Converts a string to a color object for a given frontend.
@@ -154,7 +162,7 @@ def string_to_color(color_name: str, frontend: Literal['vpython', 'mpl', 'plotly
         }
         return color_map.get(color_name, 'white')
     
-def create_sphere(pos: CartesianRepresentation, radius: u.Quantity, n=20) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+def create_sphere(pos: np.ndarray, radius: np.float64, n=20) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Generates the vertices of a sphere.
 
     Args:
@@ -169,9 +177,9 @@ def create_sphere(pos: CartesianRepresentation, radius: u.Quantity, n=20) -> tup
     v1 = u1.copy()
     uu, vv = np.meshgrid(u1, v1)
 
-    xx = pos.x.value + radius.value * np.cos(uu) * np.sin(vv)
-    yy = pos.y.value + radius.value * np.sin(uu) * np.sin(vv)
-    zz = pos.z.value + radius.value * np.cos(vv)
+    xx = pos[0] + radius * np.cos(uu) * np.sin(vv)
+    yy = pos[0] + radius * np.sin(uu) * np.sin(vv)
+    zz = pos[0] + radius * np.cos(vv)
 
     return xx, yy, zz
 
@@ -187,9 +195,9 @@ def max_axis_length(*bodies: axtools.Body, radius_multiplier: int = 1) -> np.flo
 
     max_length = 0
     for body in bodies:
-        x_length = max([v.x.value for k, v in body.r.items()]) + body.radius.value * radius_multiplier
-        y_length = max([v.y.value for k, v in body.r.items()]) + body.radius.value * radius_multiplier
-        z_length = max([v.z.value for k, v in body.r.items()]) + body.radius.value * radius_multiplier
+        x_length = max([v[0] for v in body._inner["r"]]) + body.radius * radius_multiplier
+        y_length = max([v[1] for v in body._inner["r"]]) + body.radius * radius_multiplier
+        z_length = max([v[2] for v in body._inner["r"]]) + body.radius * radius_multiplier
         
         max_length = max(max_length, x_length, y_length, z_length)
     
@@ -207,9 +215,9 @@ def min_axis_length(*bodies: axtools.Body, radius_multiplier: int = 1) -> np.flo
     
     min_length = 0
     for body in bodies:
-        x_length = min([v.x.value for k, v in body.r.items()]) - body.radius.value * radius_multiplier
-        y_length = min([v.y.value for k, v in body.r.items()]) - body.radius.value * radius_multiplier
-        z_length = min([v.z.value for k, v in body.r.items()]) - body.radius.value * radius_multiplier
+        x_length = min([v[0] for v in body._inner["r"]]) - body.radius * radius_multiplier
+        y_length = min([v[1] for v in body._inner["r"]]) - body.radius * radius_multiplier
+        z_length = min([v[2] for v in body._inner["r"]]) - body.radius * radius_multiplier
         
         min_length = min(min_length, x_length, y_length, z_length)
     
@@ -225,11 +233,11 @@ def from_body(body: ax.Body) -> axtools.Body:
         axtools.Body: The converted Body object.
     """
 
-    body = axtools.Body(body.name, body.mass, body.r[0], body.v[0])
+    _body = axtools.Body(body.name, body.mass, body.limit, body.delta, body._inner["r"][0], body._inner["v"][0])
 
-    for t, r in body.r.items():
-        body.r[t] = r
-    for t, v in body.v.items():
-        body.v[t] = v
+    for i, r in enumerate(body._inner["r"]):
+        _body._inner["r"][i] = r
+    for i, v in enumerate(body._inner["v"]):
+        _body._inner["v"][i] = v
 
-    return body
+    return _body

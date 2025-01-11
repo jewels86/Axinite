@@ -1,5 +1,5 @@
 import axinite.tools as axtools
-import astropy.units as u
+import numpy as np
 
 class AxiniteArgs:
     "A class to store simulation parameters."
@@ -9,16 +9,16 @@ class AxiniteArgs:
         self.name: str = None
         "The name of the simulation."
 
-        self.delta: u.Quantity = None
+        self.delta: np.float64 = None
         "The frequency at which the simulation should be computed in seconds."
 
-        self.limit: u.Quantity = None
+        self.limit: np.float64 = None
         "The length of the simulation in seconds."
 
         self.action: function = None
         "A function to be called at each timestep."
 
-        self.t: u.Quantity = None
+        self.t: np.float64 = None
         "The current timestep."
 
         self.bodies: list[axtools.Body] = []
@@ -45,7 +45,7 @@ class AxiniteArgs:
         self.action_frequency: int = None
         "The frequency at which the action function should be called."
 
-    def unpack(self) -> tuple[u.Quantity, u.Quantity, 'function', '*tuple[axtools.Body, ...]']:
+    def unpack(self) -> tuple[np.float64, np.float64, 'function', '*tuple[axtools.Body, ...]']:
         """Unpacks the AxiniteArgs object into a tuple that can be passed in `axinite`'s load function.
 
         Returns:

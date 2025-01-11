@@ -39,7 +39,7 @@ def plotly_frontend(args: axtools.AxiniteArgs, mode: str, theme="plotly_dark", u
 
     def fn(body: axtools.Body):
         body_color = body.color if body.color != "" else next(colors)
-        xx, yy, zz = axtools.create_sphere(body.r[0], body.radius * body.radius_multiplier)
+        xx, yy, zz = axtools.create_sphere(body.r(0), body.radius * body.radius_multiplier)
         fig.add_trace(go.Surface(
             x=xx,
             y=yy,
@@ -54,17 +54,21 @@ def plotly_frontend(args: axtools.AxiniteArgs, mode: str, theme="plotly_dark", u
             opacity=0.2
         ))
         fig.add_trace(go.Scatter3d(
-            x=[body.r[0].x.value],
-            y=[body.r[0].y.value],
-            z=[body.r[0].z.value],
+            x=[body.r(0)[0]],
+            y=[body.r(0)[1]],
+            z=[body.r(0)[2]],
             mode='text',
             text=[body.name],
             textposition='top center',
             showlegend=False
         ))
-        trajectory_x = [point.x.value for point in body.r.values()]
-        trajectory_y = [point.y.value for point in body.r.values()]
-        trajectory_z = [point.z.value for point in body.r.values()]
+        trajectory_x, trajectory_y, trajectory_z = ([], [], [])
+
+        for r in body._inner["r"]:
+            trajectory_x.append(r[0])
+            trajectory_y.append(r[1])
+            trajectory_z.append(r[2])
+
         fig.add_trace(go.Scatter3d(
             x=trajectory_x,
             y=trajectory_y,

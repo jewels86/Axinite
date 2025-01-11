@@ -4,7 +4,10 @@ import axinite as ax
 
 def verlet_nojit_backend(delta, limit, bodies, action=None, modifier=None, t=0.0, action_frequency=200):
     _infinite = False
-    if t > 0.0: raise Exception("Verlet method does not support non-zero initial time.")
+    if t is None:
+        t = 0.0
+    if t > 0.0:
+        raise Exception("Verlet method does not support non-zero initial time.")
     if t == -1.0: 
         _infinite = True
         t = 0.0

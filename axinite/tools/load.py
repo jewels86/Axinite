@@ -1,10 +1,9 @@
 import axinite as ax
 import axinite.tools as axtools
-from axinite.tools import AxiniteArgs
 import json
 from numba import jit
 
-def load(args: AxiniteArgs, path: str = "", dont_change_args: bool = False, verbose: bool = True):
+def load(args: axtools.AxiniteArgs, path: str = "", dont_change_args: bool = False, verbose: bool = True):
     """Preloads a simulation.
 
     Args:
@@ -19,8 +18,8 @@ def load(args: AxiniteArgs, path: str = "", dont_change_args: bool = False, verb
     """
     
     if args.action == None: 
-        delta = args.delta.value
-        limit = args.limit.value
+        delta = args.delta
+        limit = args.limit
 
         @jit(nopython=False)
         def default_action(bodies, t, limit, delta, n): print("Timestep", n, "(", round(t / limit * 100, 2), "\b% )\033[F")
@@ -30,14 +29,18 @@ def load(args: AxiniteArgs, path: str = "", dont_change_args: bool = False, verb
     if args.backend == None: args.backend = ax.verlet_backend
 
     bodies = ax.load(*args.unpack(), t=args.t, modifier=args.modifier, action=args.action, action_frequency=args.action_frequency)
-    if verbose: print(f"Finished with {len(bodies[0].r)} timesteps")
+    if verbose: print(f"Finished with {bodies[0]._inner["r"].shape[0]} timesteps")
 
     _bodies = []
     for i, body in enumerate(bodies):
-        _bodies.append(args.bodies[i])
-        for j, r in body.r.items():
-            _bodies[i].r[j] = r
-            _bodies[i].v[j] = body.v[j]
+        _bodies.append(axtools.Body(body.name, body.mass, args.limit, args.delta, position=body.r(0), velocity=body.v(0)))
+        _bodies[i].retain = args.bodies[i].retain
+        _bodies[i].color = args.bodies[i].color
+        _bodies[i].light = args.bodies[i].light
+        _bodies[i].radius = args.bodies[i].radius
+        _bodies[i].radius_multiplier = args.bodies[i].radius_multiplier
+
+        _bodies[i]._inner = body._inner
     
     if not dont_change_args:
         args.t = args.limit

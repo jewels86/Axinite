@@ -20,7 +20,7 @@ def read(path: str) -> AxiniteArgs:
         args.name = data["name"]
         args.delta = interpret_time(data["delta"])
         args.limit = interpret_time(data["limit"])
-        args.t = data["t"] * u.s
+        args.t = data["t"]
 
         if "radius_multiplier" in data:
             args.radius_multiplier = data["radius_multiplier"]
@@ -35,6 +35,6 @@ def read(path: str) -> AxiniteArgs:
             args.frontend_args = data["frontend_args"]
 
         for body in data["bodies"]: 
-            args.bodies.append(data_to_body(body))
+            args.bodies.append(data_to_body(body, args.limit, args.delta))
 
         return args

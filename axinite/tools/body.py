@@ -1,12 +1,9 @@
-from astropy.coordinates import CartesianRepresentation
-from astropy.constants import G
 import axinite as ax
 import astropy.units as u
-from numpy import float64
-
+import numpy as np
 class Body:
     "A class that represents a body in the simulation."
-    def __init__(self, name: str, mass: u.Quantity, position: CartesianRepresentation, velocity: CartesianRepresentation, radius: u.Quantity = 0 * u.m, color: str = "", light: bool = False, retain = None, radius_multiplier = 1):
+    def __init__(self, name: str, mass: np.float64, limit: np.float64, delta: np.float64, position: np.ndarray = None, velocity: np.ndarray = None):
         """Initializes a new Body object.
 
         Args:
@@ -21,29 +18,53 @@ class Body:
             radius_multiplier (int, optional): A multiplier to be applied to the radius. Defaults to 1.
         """
 
-        self.mass: u.Quantity = mass
+        self.mass: np.float64 = mass
         "The mass of the body in kilograms."
-
-        self.r: dict[float64, CartesianRepresentation] = { float64(0): position}
-        "The position of the body at each timestep."
-
-        self.v: dict[float64, CartesianRepresentation] = { float64(0): velocity}
-        "The velocity of the body at each timestep."
 
         self.name: str = name
         "The name of the body."
 
-        self.radius: u.Quantity = radius * radius_multiplier
+        self._inner = ax._body(limit, delta, name, mass)
+
+        if position is not None: self._inner["r"][0] = position
+        if velocity is not None: self._inner["v"][0] = velocity
+
+        self._inner["n"] = name
+        self._inner["m"] = mass
+
+        self.radius: np.float64 = -1
         "The radius of the body in meters."
 
-        self.color: str = color
+        self.color: str = ""
         "The color of the body."
 
-        self.light: bool = light
+        self.light: bool = False
         "Whether the body should give off light."
 
-        self.retain: int = retain
+        self.retain: int = -1
         "How many points the body should retain on it's trail."
 
-        self.radius_multiplier: int = radius_multiplier
+        self.radius_multiplier: int = 1
         "A multiplier which was applied to the radius."
+
+    def r(self, t: np.float64) -> np.ndarray:
+        """Returns the position of the body at a specific time.
+
+        Args:
+            t (np.float64): The time to get the position at.
+
+        Returns:
+            np.ndarray: The position of the body at the time.
+        """
+        return self._inner["r"][int(t)]
+    
+    def v(self, t: np.float64) -> np.ndarray:
+        """Returns the velocity of the body at a specific time.
+
+        Args:
+            t (np.float64): The time to get the velocity at.
+
+        Returns:
+            np.ndarray: The velocity of the body at the time.
+        """
+        return self._inner["v"][int(t)]
