@@ -2,7 +2,7 @@
 
 from axinite.body import Body
 from axinite.functions import vector_magnitude_jit, unit_vector_jit, gravitational_force_jit, body_dtype, \
-    get_inner_bodies
+    get_inner_bodies, _body
 import axinite.functions as functions
 from axinite.load import load
 from axinite.backends.euler import euler_backend, euler_nojit_backend

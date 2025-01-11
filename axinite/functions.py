@@ -4,12 +4,14 @@ import axinite as ax
 from numba import njit
 
 G = 6.67430e-11
-def body_dtype(limit, delta): np.dtype([
+def body_dtype(limit, delta): return np.dtype([
     ("n", "U20"),
     ("m", np.float64),
-    ("r", np.float64, (int(limit.value/delta.value), 3)),
-    ("v", np.float64, (int(limit.value/delta.value), 3))
+    ("r", np.float64, (int(limit/delta), 3)),
+    ("v", np.float64, (int(limit/delta), 3))
 ])
+def _body(limit, delta, name, mass): 
+    return np.array((name, mass, np.zeros((int(limit/delta), 3)), np.zeros((int(limit/delta), 3))), dtype=ax.body_dtype(limit, delta))
 
 def get_inner_bodies(bodies):
     _bodies = ()

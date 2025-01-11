@@ -1,8 +1,3 @@
-from astropy.coordinates import CartesianRepresentation
-from astropy.constants import G
-from axinite.functions import vector_to, apply_to_vector, vector_magnitude, unit_vector
-import astropy.units as u
-from math import pi
 import numpy as np
 import axinite as ax
 
@@ -21,7 +16,7 @@ class Body:
         self.name = name
         "The name of the object."
 
-        self._inner = np.zeros(1, dtype=ax.body_dtype(limit, delta))
+        self._inner = ax._body(limit, delta, name, mass)
 
         if position is not None: self._inner["r"][0] = position
         if velocity is not None: self._inner["v"][0] = velocity
