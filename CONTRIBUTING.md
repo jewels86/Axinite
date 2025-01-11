@@ -1,5 +1,5 @@
 # Contribution Guide
-Thank you for showing interest in the developement of Axinite!
+Thank you for showing interest in the development of Axinite!
 Please read through this page before contributing.
 # Pull Requests
 If you choose to make a pull request, please keep the following in mind:
@@ -14,4 +14,4 @@ If there's a bug you'd like fixed, please cover these points in your issue:
 - Are you interested in fixing this bug via pull request?
 ## Feature Request
 If you'd like to request a new feature, be sure to describe everything you can about your vision.
-Once/if it's approved, either you or I will create a pull request to implement the changes.
+Once/if it's approved, either you, I, or another contributor will create a pull request to implement the changes.
