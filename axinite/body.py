@@ -7,7 +7,7 @@ import numpy as np
 import axinite as ax
 
 class Body:
-    def __init__(self, name: str, mass: np.float64, limit, delta, position: np.ndarray = None, velocity: np.ndarray = None):
+    def __init__(self, name: str, mass: np.float64, limit: np.float64, delta: np.float64, position: np.ndarray = None, velocity: np.ndarray = None):
         """Initializes a new Body object.
 
         Args:
