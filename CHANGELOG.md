@@ -3,6 +3,8 @@ Axinite uses a derivative of the **semantic versioning system** to record change
 - Major increments represent a rework or a revamp of the module.
 - Minor increments represent new functionality or API changes.
 - Patch increments represent bug fixes or other changes that don't directly affect users.
+## 1.12.2 - 1/11/2025
+- Fixed live mode problems
 ## 1.12.1 - 1/11/2025
 - Fixed VPython errors with inner bodies
 ## 1.12.0 - 1/11/2025

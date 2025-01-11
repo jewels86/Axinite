@@ -1,6 +1,5 @@
 import axinite.tools as axtools
 import axinite as ax
-import astropy.units as u
 
 def live(args: axtools.AxiniteArgs, frontend: 'function') -> None:
     """Watch a preloaded simulation live.
@@ -16,9 +15,8 @@ def live(args: axtools.AxiniteArgs, frontend: 'function') -> None:
     if args.retain is None:
        args.retain = 200
 
-    t = 0 * u.s
-    bodies = ax.create_jit_bodies(args.bodies, args.limit, args.delta)
+    t = 0
     while t < args.limit:
-        frontend[0](bodies, t, limit=args.limit, delta=args.delta, n=int(t.value / args.delta.value))
+        frontend[0](args.bodies, t, limit=args.limit, delta=args.delta, n=int(t / args.delta))
         t += args.delta
     frontend[1]()

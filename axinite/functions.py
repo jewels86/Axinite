@@ -18,6 +18,14 @@ def get_inner_bodies(bodies):
     for body in bodies: _bodies += (body._inner,)
     return _bodies
 
+def create_outer_bodies(bodies, limit, delta):
+    _bodies = []
+    for body in bodies:
+        _body = ax.Body(str(body["n"]), body["m"], limit, delta)
+        _body._inner = body
+        _bodies.append(_body)
+    return _bodies
+
 @njit 
 def vector_magnitude_jit(vec: np.ndarray) -> float:
     """Calculates the magnitude of a vector.

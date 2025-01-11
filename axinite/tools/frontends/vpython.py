@@ -61,9 +61,9 @@ def vpython_live(args: axtools.AxiniteArgs):
             global _rate, pause
             rate(_rate)
             for body in bodies:
-                spheres[body["n"]].pos = to_vec(body["r"][kwargs["n"]])
-                labels[body["n"]].pos = spheres[body["n"]].pos
-                try: lights[body["n"]].pos = spheres[body["n"]].pos
+                spheres[body.name].pos = to_vec(body.r(kwargs["n"]))
+                labels[body.name].pos = spheres[body.name].pos
+                try: lights[body.name].pos = spheres[body.name].pos
                 except: pass
             print(f"t = {t}, n = {kwargs['n']}", end='\r')
             if pause: 
