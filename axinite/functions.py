@@ -8,6 +8,12 @@ import axinite as ax
 from numba import njit
 
 _G = G.value
+def body_dtype(limit, delta): np.dtype([
+    ("n", "U20"),
+    ("m", np.float64),
+    ("r", np.float64, (int(limit.value/delta.value), 3)),
+    ("v", np.float64, (int(limit.value/delta.value), 3))
+])
 
 def apply_to_vector(vector: CartesianRepresentation, function) -> CartesianRepresentation:
     """Applies a function to each component of a vector.
@@ -93,12 +99,6 @@ def to_body(body_dtype, delta):
     return body
 
 def create_jit_bodies(bodies, limit, delta):
-    body_dtype = np.dtype([
-        ("n", "U20"),
-        ("m", np.float64),
-        ("r", np.float64, (int(limit.value/delta.value), 3)),
-        ("v", np.float64, (int(limit.value/delta.value), 3))
-    ])
     _bodies = np.zeros(len(bodies), dtype=body_dtype)
     for i, body in enumerate(bodies):
         _r = body.r.values()
