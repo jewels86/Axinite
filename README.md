@@ -35,8 +35,6 @@ Any help will be appricated!
 
 ## Todos
 - Graceful load funciton exiting
-- Phase out `astropy`
 - Fix weird euler loading error where first positions are always the origin
 - Add Velocity Verlet backend
 - Add RK4 backend
-- Add comments to code
