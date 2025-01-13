@@ -21,10 +21,10 @@ def save(args: axtools.AxiniteArgs, path: str):
             }
 
             for i, r in enumerate(body._inner["r"]):
-                _r = [float(v) for v in r]
+                v = body._inner["v"][i]
+                _r = [float(_v) for _v in r]
                 body_data["r"].append(_r)
-            for i, v in enumerate(body._inner["v"]):
-                _v = [float(v) for v in v]
+                _v = [float(__v) for __v in v]
                 body_data["v"].append(_v)
 
             if body.color != None:

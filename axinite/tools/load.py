@@ -2,7 +2,6 @@ import axinite as ax
 import axinite.tools as axtools
 import json
 from numba import jit
-from colorama import Style, Fore
 
 def load(args: axtools.AxiniteArgs, path: str = "", dont_change_args: bool = False, verbose: bool = False):
     """Preloads a simulation.
@@ -28,11 +27,11 @@ def load(args: axtools.AxiniteArgs, path: str = "", dont_change_args: bool = Fal
         args.action = default_action if verbose else None
         args.action_frequency = 200
     if args.backend == None: args.backend = ax.verlet_backend
-    if verbose: print(f"Reached target {Style.BRIGHT}System loading{Style.RESET_ALL}...")
+    if verbose: print(f"Initializing system...")
     bodies = ax.load(*args.unpack(), t=args.t, modifier=args.modifier, action=args.action, action_frequency=args.action_frequency)
     if verbose: 
         print(f"Finished with {bodies[0]._inner["r"].shape[0]} timesteps")
-        print(f"Reached target {Style.BRIGHT}Body data transfer{Style.RESET_ALL}...")
+        print(f"Synchronizing inner and outer bodies...")
 
     _bodies = []
     for i, body in enumerate(bodies):
@@ -51,6 +50,6 @@ def load(args: axtools.AxiniteArgs, path: str = "", dont_change_args: bool = Fal
     if path == "":
         return _bodies
     else: 
-        if verbose: print(f"Reached target {Style.BRIGHT}Data saving{Style.RESET_ALL}...")
+        if verbose: print(f"Saving system data to file...")
         axtools.save(args, path)
         return _bodies
