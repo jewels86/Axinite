@@ -32,7 +32,7 @@ def verlet_nojit_backend(delta, limit, bodies, action=None, modifier=None, t=0.0
         f = np.zeros(3)
         for j, other in enumerate(bodies):
             if i != j: f += ax.gravitational_force_jit(body["m"], other["m"], body["r"][0] - other["r"][0])
-        if modifier is not None: f = modifier(body, f, bodies=bodies, t=t, delta=delta, limit=limit)
+        if modifier is not None: f = modifier(body, f, bodies=bodies, t=t, delta=delta, limit=limit, n=n)
         body["r"][1] = body["r"][0] + body["v"][0] * delta + 0.5 * (f / body["m"]) * delta**2
         body["v"][1] = (body["r"][1] - body["r"][0]) / (2 * delta)
     
@@ -44,7 +44,7 @@ def verlet_nojit_backend(delta, limit, bodies, action=None, modifier=None, t=0.0
             f = np.zeros(3)
             for j, other in enumerate(bodies):
                 if i != j: f += ax.gravitational_force_jit(body["m"], other["m"], body["r"][n-1] - other["r"][n-1])
-            if modifier is not None: f = modifier(body, f, bodies=bodies, t=t, delta=delta, limit=limit)
+            if modifier is not None: f = modifier(body, f, bodies=bodies, t=t, delta=delta, limit=limit, n=n)
 
             body["r"][n] = body["r"][n-1] * 2 - body["r"][n-2] + (f / body["m"]) * delta**2
             body["v"][n] = (body["r"][n] - body["r"][n-1]) / (2 * delta)
