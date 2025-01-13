@@ -29,9 +29,9 @@ class Body:
             position (np.ndarray, optional): The initial position of the body (in vector form). Defaults to None.
             velocity (np.ndarray, optional): The initial velocity of the body (in vector form). Defaults to None.
         """
-        if position is not None and not isinstance(position, np.ndarray):
+        if position is not None:
             position = np.array(position, dtype=np.float64)
-        if velocity is not None and not isinstance(velocity, np.ndarray):
+        if velocity is not None:
             velocity = np.array(velocity, dtype=np.float64)
         mass = np.float64(mass)
         limit = np.float64(limit)
