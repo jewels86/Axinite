@@ -1,10 +1,7 @@
 from vpython import *
 import axinite.tools as axtools
 from itertools import cycle
-import vpython as vp
-import signal, time
-
-colors = cycle([color.red, color.blue, color.green, color.orange, color.purple, color.yellow])
+import signal
 
 def show(_args: axtools.AxiniteArgs, frontend: 'function') -> None:
     """Statically display the bodies in the simulation.

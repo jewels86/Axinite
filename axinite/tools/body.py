@@ -1,6 +1,7 @@
 import axinite as ax
 import astropy.units as u
 import numpy as np
+
 class Body:
     "A class that represents a body in the simulation."
     def __init__(self, name: str, mass: np.float64, limit: np.float64, delta: np.float64, position: np.ndarray = None, velocity: np.ndarray = None):

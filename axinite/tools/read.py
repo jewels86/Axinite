@@ -1,6 +1,5 @@
 import axinite as ax
 from axinite.tools import AxiniteArgs, interpret_time, data_to_body
-import astropy.units as u
 import json
 
 def read(path: str) -> AxiniteArgs:

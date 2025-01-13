@@ -2,8 +2,7 @@ import axinite.tools as axtools
 import axinite as ax
 from vpython import *
 from itertools import cycle
-from astropy.coordinates import CartesianRepresentation
-import os, signal, time
+import os, signal
   
 def to_vec(v): 
     return vec(v[0], v[1], v[2])

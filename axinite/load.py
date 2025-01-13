@@ -1,7 +1,6 @@
 import axinite as ax
 import numpy as np
 import astropy.units as u
-from astropy.coordinates import CartesianRepresentation
 from numba import jit
 
 def load(delta, limit, backend, *bodies, t=0 * u.s, modifier=None, action=None, action_frequency=200):

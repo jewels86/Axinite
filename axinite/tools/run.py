@@ -1,7 +1,6 @@
 import axinite as ax
 import axinite.tools as axtools
 from vpython import *
-import signal
 
 def run(_args: axtools.AxiniteArgs, frontend: 'function', backend = ax.verlet_nojit_backend) -> tuple[axtools.Body, ...]:
     """Load and display a simulation simultaneously.
