@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "axinite"
 version = "1.12.3"
-dependencies = ["astropy", "numpy", "numba", "vpython", "plotly"]
+dependencies = ["astropy", "numpy", "numba", "vpython", "plotly", "colorama"]
 authors = [{ name = "Jewels", email = "jewels@jewels86.me" }]
 maintainers = [{ name = "Jewels", email = "jewels@jewels86.me" }]
 description = "A powerful open-source engine for advanced celestial mechanics."

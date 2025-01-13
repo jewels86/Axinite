@@ -2,8 +2,9 @@ import axinite as ax
 import axinite.tools as axtools
 import json
 from numba import jit
+from colorama import s
 
-def load(args: axtools.AxiniteArgs, path: str = "", dont_change_args: bool = False, verbose: bool = True):
+def load(args: axtools.AxiniteArgs, path: str = "", dont_change_args: bool = False, verbose: bool = False):
     """Preloads a simulation.
 
     Args:
@@ -27,7 +28,7 @@ def load(args: axtools.AxiniteArgs, path: str = "", dont_change_args: bool = Fal
         args.action = default_action if verbose else None
         args.action_frequency = 200
     if args.backend == None: args.backend = ax.verlet_backend
-
+    print()
     bodies = ax.load(*args.unpack(), t=args.t, modifier=args.modifier, action=args.action, action_frequency=args.action_frequency)
     if verbose: print(f"Finished with {bodies[0]._inner["r"].shape[0]} timesteps")
 
