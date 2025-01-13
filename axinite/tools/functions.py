@@ -11,7 +11,7 @@ def interpret_time(string: str) -> np.float64:
         string (str): The string to interpret.
 
     Returns:
-        u.Quantity: The time in seconds.
+        float: The time in seconds.
     """
     if type(string) is float or type(string) is int: return string
     if string.endswith("min"):
@@ -35,7 +35,7 @@ def interpret_mass(string: str) -> np.float64:
         string (str): The string to interpret.
 
     Returns:
-        u.Quantity: The mass in kilograms.
+        float: The mass in kilograms.
     """
     if type(string) is float or type(string) is int: return string
     if string.endswith("kg"):
@@ -56,7 +56,7 @@ def interpret_distance(string: str) -> np.float64:
         string (str): The string to interpret.
 
     Returns:
-        u.Quantity: The distance in meters.
+        float: The distance in meters.
     """
     if type(string) is float or type(string) is int: return string
     if string.endswith("m"):
@@ -166,8 +166,8 @@ def create_sphere(pos: np.ndarray, radius: np.float64, n=20) -> tuple[np.ndarray
     """Generates the vertices of a sphere.
 
     Args:
-        pos (CartesianRepresentation): The position of the sphere.
-        radius (u.Quantity): The radius of the sphere.
+        pos (np.ndarray): The position of the sphere.
+        radius (np.float64): The radius of the sphere.
         n (int, optional): Number of segments used to generate verticies. Defaults to 20.
 
     Returns:

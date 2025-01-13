@@ -2,6 +2,16 @@ import axinite.tools as axtools
 import json
 
 def save(args: axtools.AxiniteArgs, path: str):
+    """
+    Saves the simulation data to a file.
+
+    Args:
+        args (axtools.AxiniteArgs): The arguments for the simulation.
+        path (str): The file path where the simulation data will be saved.
+
+    The function serializes the simulation parameters and body data into a JSON format and writes it to the specified file.
+    The body data includes the name, mass, radius, position (r), velocity (v), color, retain, and light attributes.
+    """
     with open(path, 'w+') as f:
         data = {
             "name": args.name,

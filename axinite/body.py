@@ -2,14 +2,34 @@ import numpy as np
 import axinite as ax
 
 class Body:
+    """
+    A class that represents a body in the simulation.
+
+    Attributes:
+        name (str): The body's name.
+        mass (np.float64): The mass of the body in kilograms.
+        position (np.ndarray): The initial position of the body (in vector form).
+        velocity (np.ndarray): The initial velocity of the body (in vector form).
+        radius (np.float64): The radius of the body in meters.
+        color (str): The color of the body.
+        light (bool): Whether the body should give off light.
+        retain (int): How many points the body should retain on its trail.
+        radius_multiplier (int): A multiplier to be applied to the radius.
+    """
+
     def __init__(self, name: str, mass: np.float64, limit: np.float64, delta: np.float64, position: np.ndarray = None, velocity: np.ndarray = None):
-        """Initializes a new Body object.
+        """
+        Initializes a new Body object.
 
         Args:
-            mass (u.Quantity): Mass of the object in kilograms.
-            position (CartesianRepresentation): The initial position of the object.
-            velocity (CartesianRepresentation): The initial velocity of the object.
+            name (str): The body's name.
+            mass (np.float64): The mass of the body in kilograms.
+            limit (np.float64): The length of the simulation in seconds.
+            delta (np.float64): The frequency at which the simulation should be computed in seconds.
+            position (np.ndarray, optional): The initial position of the body (in vector form). Defaults to None.
+            velocity (np.ndarray, optional): The initial velocity of the body (in vector form). Defaults to None.
         """
+        
         self.mass = mass
         "The mass of the object in kilograms."
 

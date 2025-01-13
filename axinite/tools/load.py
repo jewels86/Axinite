@@ -10,19 +10,17 @@ def load(args: axtools.AxiniteArgs, path: str = "", dont_change_args: bool = Fal
         args (AxiniteArgs): An AxiniteArgs object containing simulation parameters.
         path (str, optional): The path to dump the computed simulation to. Defaults to "", which skips data dumping.
         dont_change_args (bool, optional): True if the load function should take care not to edit the args object. Defaults to False.
-        jit (bool, optional): Whether JIT should be used. Defaults to True.
-        verbose (bool, optional): Whether the load function should print to console. Defaults to True.
+        verbose (bool, optional): Whether the load function should print to console. Defaults to False.
 
     Returns:
         list[axtools.Body]: A list of Body objects containing the preloaded simulation data.
     """
     
     if args.action == None: 
-        delta = args.delta
-        limit = args.limit
+        ntotal = args.limit / args.delta
 
         @jit(nopython=False)
-        def default_action(bodies, t, limit, delta, n): print("Timestep", n, "(", round(t / limit * 100, 2), "\b% )\033[F")
+        def default_action(bodies, t, limit, delta, n): print("Timestep", n, "/", ntotal, "(", round(t / limit * 100, 2), "\b% )\033[F")
 
         args.action = default_action if verbose else None
         args.action_frequency = 200

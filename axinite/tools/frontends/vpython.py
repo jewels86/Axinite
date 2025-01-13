@@ -10,6 +10,21 @@ def to_vec_cartesian(v):
     return vec(v.x.value, v.y.value, v.z.value)
 
 def vpython_frontend(args: axtools.AxiniteArgs, mode: str, **kwargs):
+    """
+    Initializes the VPython frontend for visualizing the simulation.
+
+    Args:
+        args (axtools.AxiniteArgs): The arguments for the simulation.
+        mode (str): The mode of the frontend. Can be 'live', 'run', or 'show'.
+        **kwargs: Additional keyword arguments for the frontend.
+
+    Raises:
+        Exception: If the mode is not 'live', 'run', or 'show'.
+
+    Returns:
+        function: A function to update the visualization in 'live' or 'run' mode.
+        function: A function to stop the visualization in 'live' or 'run' mode.
+    """
     if mode == "live" or mode == "run":
         return vpython_live(args, **kwargs)
     elif mode == "show":

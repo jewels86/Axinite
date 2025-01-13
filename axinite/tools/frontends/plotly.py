@@ -4,6 +4,23 @@ from itertools import cycle
 import os, signal
 
 def plotly_frontend(args: axtools.AxiniteArgs, mode: str, theme="plotly_dark", use_min=True):
+    """
+    Initializes the Plotly frontend for visualizing the simulation.
+
+    Args:
+        args (axtools.AxiniteArgs): The arguments for the simulation.
+        mode (str): The mode of the frontend. Must be 'show'.
+        theme (str, optional): The theme for the Plotly visualization. Defaults to 'plotly_dark'.
+        use_min (bool, optional): Whether to use the minimum axis length for the plot range. Defaults to True.
+
+    Raises:
+        Exception: If the mode is not 'show'.
+
+    Returns:
+        function: A function to update the visualization.
+        function: A function to show the visualization.
+        function: A function to stop the visualization.
+    """
     if mode != "show": raise Exception("plotly_frontend is only supported in show mode.")
     if args.rate is None:
         args.rate = 100
