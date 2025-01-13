@@ -57,6 +57,7 @@ def vpython_live(args: axtools.AxiniteArgs):
             attach_light(spheres[body.name], lights[body.name])
 
     def fn(bodies, t, **kwargs):
+        bodies = ax.create_outer_bodies(bodies, kwargs["limit"], kwargs["delta"])
         try:
             global _rate, pause
             rate(_rate)
