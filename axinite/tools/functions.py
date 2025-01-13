@@ -4,81 +4,6 @@ import vpython as vp
 import numpy as np
 import axinite.tools as axtools
 
-def interpret_time(string: str) -> np.float64:
-    """Interprets a string as a time in seconds.
-
-    Args:
-        string (str): The string to interpret.
-
-    Returns:
-        float: The time in seconds.
-    """
-    if type(string) is float or type(string) is int: return string
-    if string.endswith("min"):
-        string = string.removesuffix("min")
-        return float(string) * 60 
-    elif string.endswith("hr"): 
-        string = string.removesuffix("hr")
-        return float(string) * 3600
-    elif string.endswith("d"):
-        string  = string.removesuffix("d")
-        return float(string) * 86400
-    elif string.endswith("yr"):
-        string = string.removesuffix("yr")
-        return float(string) * 31536000
-    else: return float(string)
-
-def interpret_mass(string: str) -> np.float64:
-    """Interprets a string as a mass in kilograms.
-
-    Args:
-        string (str): The string to interpret.
-
-    Returns:
-        float: The mass in kilograms.
-    """
-    if type(string) is float or type(string) is int: return string
-    if string.endswith("kg"):
-        string = string.removesuffix("kg")
-        return float(string)
-    elif string.endswith("g"):
-        string = string.removesuffix("g")
-        return float(string) / 1000
-    elif string.endswith("t"):
-        string = string.removesuffix("t")
-        return float(string) * 1000
-    else: return float(string)
-
-def interpret_distance(string: str) -> np.float64:
-    """Interprets a string as a distance in meters.
-
-    Args:
-        string (str): The string to interpret.
-
-    Returns:
-        float: The distance in meters.
-    """
-    if type(string) is float or type(string) is int: return string
-    if string.endswith("m"):
-        string = string.removesuffix("m")
-        return float(string)
-    elif string.endswith("km"):
-        string = string.removesuffix("km")
-        return float(string) * 1000
-    elif string.endswith("cm"):
-        string = string.removesuffix("cm")
-        return float(string) / 100
-    elif string.endswith("mm"):
-        string = string.removesuffix("mm")
-        return float(string) / 1000
-    elif string.endswith("μm"):
-        string = string.removesuffix("μm")
-        return float(string) / 1000000
-    elif string.endswith("nm"):
-        string = string.removesuffix("nm")
-        return float(string) / 1000000000
-    else: return float(string)
-
 def data_to_body(data: dict[str, any], limit, delta) -> axtools.Body:
     """Converts a dict to a Body object.
 
@@ -90,20 +15,20 @@ def data_to_body(data: dict[str, any], limit, delta) -> axtools.Body:
     """
 
     name = data["name"]
-    mass = interpret_mass(data["mass"])
+    mass = ax.interpret_mass(data["mass"])
 
     position = np.array([
-        interpret_distance(data["r"][0][0]),
-        interpret_distance(data["r"][0][1]),
-        interpret_distance(data["r"][0][2])  
+        ax.interpret_distance(data["r"][0][0]),
+        ax.interpret_distance(data["r"][0][1]),
+        ax.interpret_distance(data["r"][0][2])  
     ])
     velocity = np.array([
-        interpret_distance(data["v"][0][0]),
-        interpret_distance(data["v"][0][1]),
-        interpret_distance(data["v"][0][2])
+        ax.interpret_distance(data["v"][0][0]),
+        ax.interpret_distance(data["v"][0][1]),
+        ax.interpret_distance(data["v"][0][2])
     ])
     body = axtools.Body(name, mass, limit, delta, position, velocity)
-    body.radius = interpret_distance(data["radius"])
+    body.radius = ax.interpret_distance(data["radius"])
 
     if "color" in data:
         body.color = data["color"]
@@ -114,15 +39,15 @@ def data_to_body(data: dict[str, any], limit, delta) -> axtools.Body:
 
     for i in range(len(data["r"])):
         body._inner["r"][i] = np.array([
-            interpret_distance(data["r"][i][0]),
-            interpret_distance(data["r"][i][1]),
-            interpret_distance(data["r"][i][2])
+            ax.interpret_distance(data["r"][i][0]),
+            ax.interpret_distance(data["r"][i][1]),
+            ax.interpret_distance(data["r"][i][2])
         ])
     for i in range(len(data["v"])):
         body._inner["v"][i] = np.array([
-            interpret_distance(data["v"][i][0]),
-            interpret_distance(data["v"][i][1]),
-            interpret_distance(data["v"][i][2])
+            ax.interpret_distance(data["v"][i][0]),
+            ax.interpret_distance(data["v"][i][1]),
+            ax.interpret_distance(data["v"][i][2])
         ])
 
     return body

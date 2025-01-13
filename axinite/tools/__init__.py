@@ -31,8 +31,8 @@ Functions:
 
 from axinite.tools.args import AxiniteArgs
 from axinite.tools.body import Body
-from axinite.tools.functions import interpret_time, data_to_body, interpret_distance, interpret_mass, \
-    string_to_color, create_sphere, max_axis_length, min_axis_length, from_body
+from axinite.tools.functions import data_to_body, string_to_color, create_sphere, max_axis_length, min_axis_length, \
+    from_body
 from axinite.tools.load import load
 from axinite.tools.read import read
 from axinite.tools.show import show
