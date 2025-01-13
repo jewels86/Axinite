@@ -3,7 +3,8 @@ Axinite uses a derivative of the **semantic versioning system** to record change
 - Major increments represent a rework or a revamp of the module.
 - Minor increments represent new functionality or API changes.
 - Patch increments represent bug fixes or other changes that don't directly affect users.
-## 1.12.3-1.17.0 (1/13/25)
+## 1.12.3-1.17.2 (1/13/25)
+- Fixed load function problem with carriage return
 - Automatic type checking in bodies
 - `timestep` method
 - Updated all docstrings

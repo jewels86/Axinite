@@ -28,7 +28,7 @@ def load(args: axtools.AxiniteArgs, path: str = "", dont_change_args: bool = Fal
     if verbose: print(f"Initializing system...")
     bodies = ax.load(*args.unpack(), t=args.t, modifier=args.modifier, action=args.action, action_frequency=args.action_frequency)
     if verbose: 
-        print(f"Finished with {bodies[0]._inner["r"].shape[0]} timesteps")
+        print(f"Finished with {bodies[0]._inner['r'].shape[0]} timesteps \033[K")
         print(f"Synchronizing inner and outer bodies...")
 
     _bodies = []
