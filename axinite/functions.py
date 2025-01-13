@@ -110,3 +110,16 @@ def gravitational_force_jit(m1: np.float64, m2: np.float64, r: np.ndarray) -> np
     if mag == 0:
         return np.zeros(3)
     return -G *((m1 * m2) / mag**2) * unit_vector_jit(r)
+
+def timestep(t: np.float64, delta: np.float64) -> int:
+    """
+    Computes the time step.
+
+    Args:
+        t (np.float64): The current time.
+        delta (np.float64): The frequency at which the simulation should be computed in seconds.
+
+    Returns:
+        int: The new time.
+    """
+    return int(t / delta)
