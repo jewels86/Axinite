@@ -32,9 +32,9 @@ Any help will be appricated!
 ![axinite-1](https://github.com/user-attachments/assets/bcd7bc7e-627e-44e5-bfc6-d2ddd787a208)
 ![axinite-6](https://github.com/user-attachments/assets/9f2b21b8-e90d-4c5b-9cde-027dfb0ee704)
 
-## Todos
-- Graceful load funciton exiting
-- Fix weird euler loading error where first positions are always the origin
-- Add Velocity Verlet backend
-- Add RK4 backend
-- Reduce data saving time by not converting every part of the array?
+## Development Progress
+- [ ] Graceful load funciton exiting
+- [ ] Fix weird euler loading error where first positions are always the origin
+- [ ] Add Velocity Verlet backend
+- [ ] Add RK4 backend
+- [ ] Reduce data saving time by not converting every part of the array?
