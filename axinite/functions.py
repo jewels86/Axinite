@@ -16,11 +16,11 @@ def body_dtype(limit, delta):
         np.dtype: The data type for a body.
     """
     return np.dtype([
-    ("n", "U20"),
-    ("m", np.float64),
-    ("r", np.float64, (int(limit/delta), 3)),
-    ("v", np.float64, (int(limit/delta), 3))
-])
+        ("n", "U20"),
+        ("m", np.float64),
+        ("r", np.float64, (int(limit/delta), 3)),
+        ("v", np.float64, (int(limit/delta), 3))
+    ])
 def _body(limit, delta, name, mass): 
     """
     Creates a new body.

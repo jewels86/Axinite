@@ -3,6 +3,7 @@ from typing import Literal
 import vpython as vp
 import numpy as np
 import axinite.tools as axtools
+from numba import jit
 
 def data_to_body(data: dict[str, any], limit, delta) -> axtools.Body:
     """Converts a dict to a Body object.
@@ -86,7 +87,8 @@ def string_to_color(color_name: str, frontend: Literal['vpython', 'mpl', 'plotly
             'gray': 'gray'
         }
         return color_map.get(color_name, 'white')
-    
+
+@jit
 def create_sphere(pos: np.ndarray, radius: np.float64, n=20) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Generates the vertices of a sphere.
 
