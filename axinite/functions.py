@@ -124,6 +124,19 @@ def timestep(t: np.float64, delta: np.float64) -> int:
     """
     return int(t / delta)
 
+def timesteps(limit: np.float64, delta: np.float64) -> int:
+    """
+    Computes the number of time steps.
+
+    Args:
+        limit (np.float64): The length of the simulation in seconds.
+        delta (np.float64): The frequency at which the simulation should be computed in seconds.
+
+    Returns:
+        int: The number of time steps.
+    """
+    return int(limit / delta)
+
 def interpret_time(string: str) -> np.float64:
     """Interprets a string as a time in seconds.
 

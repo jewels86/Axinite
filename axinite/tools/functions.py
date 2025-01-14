@@ -3,7 +3,7 @@ from typing import Literal
 import vpython as vp
 import numpy as np
 import axinite.tools as axtools
-from numba import jit
+from numba import njit
 
 def data_to_body(data: dict[str, any], limit, delta) -> axtools.Body:
     """Converts a dict to a Body object.
@@ -88,7 +88,7 @@ def string_to_color(color_name: str, frontend: Literal['vpython', 'mpl', 'plotly
         }
         return color_map.get(color_name, 'white')
 
-@jit
+@njit
 def create_sphere(pos: np.ndarray, radius: np.float64, n=20) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Generates the vertices of a sphere.
 
@@ -109,6 +109,21 @@ def create_sphere(pos: np.ndarray, radius: np.float64, n=20) -> tuple[np.ndarray
     zz = pos[0] + radius * np.cos(vv)
 
     return xx, yy, zz
+
+@njit
+def sphere_has(point: np.ndarray, sphere_pos: np.ndarray, radius: np.float64) -> bool:
+    """Checks if a point is inside a sphere.
+
+    Args:
+        point (np.ndarray): The point to check.
+        sphere_pos (np.ndarray): The position of the sphere.
+        radius (np.float64): The radius of the sphere.
+
+    Returns:
+        bool: True if the point is inside the sphere, False otherwise.
+    """
+    distance = np.linalg.norm(point - sphere_pos)
+    return distance <= radius
 
 def max_axis_length(*bodies: axtools.Body, radius_multiplier: int = 1) -> np.float64:
     """Finds the maximum axis length of a set of bodies.

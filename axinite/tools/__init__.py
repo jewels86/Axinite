@@ -32,7 +32,7 @@ Functions:
 from axinite.tools.args import AxiniteArgs
 from axinite.tools.body import Body
 from axinite.tools.functions import data_to_body, string_to_color, create_sphere, max_axis_length, min_axis_length, \
-    from_body
+    from_body, sphere_has
 from axinite.tools.load import load
 from axinite.tools.read import read
 from axinite.tools.show import show

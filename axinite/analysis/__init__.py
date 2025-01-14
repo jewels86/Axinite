@@ -1,1 +1,1 @@
-d
+from axinite.analysis.intercept import intercept
