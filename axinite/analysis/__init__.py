@@ -1,1 +1,1 @@
-from axinite.analysis.intercept import intercept
+from axinite.analysis.intercept import intercept, intercept_at

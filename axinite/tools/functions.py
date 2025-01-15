@@ -88,7 +88,6 @@ def string_to_color(color_name: str, frontend: Literal['vpython', 'mpl', 'plotly
         }
         return color_map.get(color_name, 'white')
 
-@njit
 def create_sphere(pos: np.ndarray, radius: np.float64, n=20) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Generates the vertices of a sphere.
 
@@ -110,7 +109,6 @@ def create_sphere(pos: np.ndarray, radius: np.float64, n=20) -> tuple[np.ndarray
 
     return xx, yy, zz
 
-@njit
 def sphere_has(point: np.ndarray, sphere_pos: np.ndarray, radius: np.float64) -> bool:
     """Checks if a point is inside a sphere.
 

@@ -1,7 +1,7 @@
 {
     "name": "rocket-launch",
     "author": "jewels86",
-    "limit": "300d",
+    "limit": "900d",
     "delta": "10min",
     "t": 0,
     "bodies": [
@@ -24,7 +24,7 @@
             "mass": 5e4,
             "radius": 5,
             "r": [[1.496e11, 0, 0]],
-            "v": [[0, 0, 2.98e4]]
+            "v": [[0, 0, 0]]
         },
         {
             "name": "Mars",
