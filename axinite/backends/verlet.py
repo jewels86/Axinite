@@ -69,5 +69,6 @@ def verlet_backend(delta, limit, bodies, action=None, modifier=None, t=0.0, acti
     Returns:
         np.ndarray: The bodies after the simulation.
     """
+
     compiled = jit(verlet_nojit_backend, nopython=False)
     return compiled(delta, limit, bodies, action=action, modifier=modifier, t=t, action_frequency=action_frequency)

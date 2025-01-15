@@ -23,8 +23,8 @@ def _intercept(a, b, speed_range, delta, n, verbose):
     _n = float(n)
     for i, r in enumerate(a["r"]):
         if verbose: print(f"Checking timestep {i} ({int(i/_n*100)}%)")
-        unit_vector = ax.unit_vector_jit(b["r"][0] - r)
-        magnitude = ax.vector_magnitude_jit(b["r"][0] - r)
+        unit_vector = ax.unit_vector_jit(r - b["r"][0])
+        magnitude = ax.vector_magnitude_jit(r - b["r"][0])
         speed = magnitude / ((i + 1) * delta)
         if verbose: print(f"Speed: {int(speed)}\033[F\033[F")
         if speed_range[0] <= speed <= speed_range[1]: 

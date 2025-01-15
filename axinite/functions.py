@@ -44,11 +44,11 @@ def get_inner_bodies(bodies):
         bodies (list[ax.Body]): A list of Body objects.
 
     Returns:
-        tuple: The inner representation of the bodies.
+        np.ndarray: The inner representation of the bodies.
     """
     _bodies = ()
     for body in bodies: _bodies += (body._inner,)
-    return _bodies
+    return np.array(_bodies)
 
 def create_outer_bodies(bodies, limit, delta):
     """
