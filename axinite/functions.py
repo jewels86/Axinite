@@ -211,3 +211,20 @@ def interpret_distance(string: str) -> np.float64:
         string = string.removesuffix("nm")
         return float(string) / 1000000000
     else: return float(string)
+
+@njit
+def clip_scalar(scalar, min, max):
+    """
+    Clips a scalar value between a minimum and maximum value.
+
+    Args:
+        scalar (float): The scalar value to clip.
+        min (float): The minimum value.
+        max (float): The maximum value.
+
+    Returns:
+        float: The clipped scalar value.
+    """
+    if scalar < min: return min
+    if scalar > max: return max
+    return scalar
