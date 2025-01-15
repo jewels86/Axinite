@@ -211,18 +211,3 @@ def interpret_distance(string: str) -> np.float64:
         string = string.removesuffix("nm")
         return float(string) / 1000000000
     else: return float(string)
-
-def compare_arr(arr1, arr2):
-    """
-    Compares two arrays.
-
-    Args:
-        arr1 (np.ndarray): The first array.
-        arr2 (np.ndarray): The second array.
-
-    Returns:
-        bool: Whether the arrays are equal.
-    """
-    for i in range(len(arr1)):
-        if arr1[i] != arr2[i]: return False
-    return True

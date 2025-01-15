@@ -26,8 +26,10 @@ def modifier(body, f, bodies, t, delta, limit, n):
             if n == time - 1:
                 v = speed * -unit_vector
                 a = v / delta
+                print("Applied end force at", n, "n")
                 return body["m"] * a
             else: return np.array([0.0, 0.0, 0.0])
+        print("Applied start force at", n, "n")
         v = speed * unit_vector
         a = v / delta
         return body["m"] * a
@@ -36,4 +38,3 @@ def modifier(body, f, bodies, t, delta, limit, n):
 args2 = axtools.read("examples/rocket-launch.tmpl.ax")
 args2.modifier = modifier
 axtools.load(args2, "rocket-launch.ax", verbose=True)
-axtools.show(args2, axtools.plotly_frontend(args2, "show"))
