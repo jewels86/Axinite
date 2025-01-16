@@ -228,3 +228,6 @@ def clip_scalar(scalar, min, max):
     if scalar < min: return min
     if scalar > max: return max
     return scalar
+
+def state(body, n):
+    return body._inner["r"][n], body._inner["v"][n]

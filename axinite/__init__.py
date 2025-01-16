@@ -26,7 +26,7 @@ Functions:
 from axinite.body import Body
 from axinite.functions import vector_magnitude_jit, unit_vector_jit, gravitational_force_jit, body_dtype, \
     get_inner_bodies, _body, create_outer_bodies, timestep, interpret_distance, interpret_mass, interpret_time, \
-    timesteps, clip_scalar, G
+    timesteps, clip_scalar, G, state
 import axinite.functions as functions
 from axinite.load import load
 from axinite.backends.euler import euler_backend, euler_nojit_backend
