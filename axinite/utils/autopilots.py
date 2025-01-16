@@ -3,7 +3,7 @@ import axinite.analysis as axana
 import numpy as np
 from numba import jit
 
-def rocket_autopilot(self, destination: np.ndarray, body: ax.Body,
+def rocket_autopilot(destination: np.ndarray, body: ax.Body,
                      bodies: np.ndarray, speed_max: np.float64, 
                      force_max: np.float64, turn_rate: np.float64, 
                      acceleration_rate: np.float64, delta: np.float64, 

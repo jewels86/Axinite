@@ -1,6 +1,7 @@
 import axinite as ax
 import axinite.tools as axtools
 import axinite.analysis as axana
+import axinite.utils as axutils
 from numba import njit
 import numpy as np
 
@@ -23,45 +24,8 @@ position = result[1]
 time = result[2]
 unit_vector = result[3]
 
-@njit
-def modifier(body, f, bodies, t, delta, limit, n):
-    if bodies[2]["n"] == body["n"] and time - n > 0:
-        r_prev = body["r"][n - 1]
-        v_prev = body["v"][n - 1]
-        print(ax.vector_magnitude_jit(v_prev))
-
-        difference = position - r_prev
-        distance = ax.vector_magnitude_jit(difference)
-        timesteps_left = time - n
-        avg_speed = distance / (timesteps_left * delta)
-        target = avg_speed - ax.vector_magnitude_jit(v_prev)
-        acceleration = target / delta
-        acceleration = ax.clip_scalar(acceleration, -ACCELERATION_RATE * delta, ACCELERATION_RATE * delta)
-
-        quaternion = axana.quaternion_between(v_prev, unit_vector)
-        quaternion = axana.clip_quaternion_degrees(quaternion, TURN_RATE)
-        
-        if ax.vector_magnitude_jit(v_prev) == 0: v_prev = unit_vector
-        v = axana.apply_quaternion(v_prev, quaternion)
-        _acceleration = ax.unit_vector_jit(v) * acceleration
-
-        f = axana.apply_quaternion(_acceleration, quaternion) * body["m"]
-        f = np.clip(f, -THRUST_MAX, THRUST_MAX)
-        return f
-
-    if bodies[2]["n"] == body["n"] and time - n == 0:
-        v_prev = body["v"][n - 1]
-        print(ax.vector_magnitude_jit(v_prev))
-        a = -v_prev / delta
-        f = a * body["m"]
-        return f
-
-    if bodies[2]["n"] == body["n"] and time - n < 0:
-        f = np.zeros(3)
-        return f
-        
-    return f
-
 args2 = axtools.read("examples/rocket-launch.tmpl.ax")
-args2.modifier = modifier
+args2.modifier = axutils.rocket_autopilot(
+    position, bodies[2], bodies, 1.1e4, THRUST_MAX, TURN_RATE, ACCELERATION_RATE, args2.delta, time
+)
 axtools.load(args2, "rocket-launch.ax", verbose=True)
