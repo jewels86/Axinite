@@ -22,23 +22,12 @@ def rocket_autopilot(destination: np.ndarray, body: ax.Body,
 
             difference = destination - r_prev
             distance = ax.vector_magnitude_jit(difference)
+            deceleration_dist = (speed_max ** 2) / (2 * force_max)
             unit_vector = ax.unit_vector_jit(difference)
-            speed = ax.vector_magnitude_jit(v_prev)
-            time_left = time - n
-
-            target = distance / time_left
-            target = target - speed
-            target = ax.clip_scalar(target, -speed_max, speed_max)
-
+            
             quaternion = axana.quaternion_between(unit_vector, v_prev)
-            quaternion = axana.clip_quaternion_degrees(quaternion, turn_rate * delta)
-            target = axana.apply_quaternion(ax.unit_vector_jit(v_prev), quaternion)
-            acceleration = target - v_prev / delta
-            acceleration = np.clip(acceleration, -acceleration_rate * delta, acceleration_rate * delta)
-            force = acceleration * _body["m"]
-            force = np.clip(force, -force_max, force_max)
-
-            f = force + f
+            quaternion = axana.clip_quaternion_degrees(quaternion, turn_rate)
+            target_unit_vector = axana.apply_quaternion(v_prev, quaternion)
 
         return f
     return fn
