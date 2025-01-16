@@ -34,3 +34,4 @@ from axinite.backends.verlet import verlet_backend, verlet_nojit_backend
 import axinite.backends as backends
 import axinite.analysis as analysis
 import axinite.tools as tools
+import axinite.utils as utils
