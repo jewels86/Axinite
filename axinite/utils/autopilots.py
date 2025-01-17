@@ -28,7 +28,15 @@ def rocket_autopilot(destination: np.ndarray, body: ax.Body, _bodies: np.ndarray
             quaternion = axana.clip_quaternion_degrees(quaternion, turn_rate)
             target_unit_vector = axana.apply_quaternion(v_prev, quaternion)
 
+            speed = ax.vector_magnitude_jit(v_prev)
+
+            if distance_from_deceleration <= 0:
+                f = target_unit_vector * -force_max
+                f = np.clip(f, -force_max, force_max)
+            else:
+                f = target_unit_vector * force_max
             
+            f = np.clip(f, -force_max, force_max)
 
         return f
     return fn
