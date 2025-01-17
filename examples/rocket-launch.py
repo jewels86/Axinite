@@ -28,6 +28,6 @@ unit_vector = result[3]
 
 args2 = axtools.read("examples/rocket-launch.tmpl.ax")
 args2.modifier = axutils.rocket_autopilot(
-    position, bodies[2], bodies, 1.1e4, THRUST_MAX, TURN_RATE, ACCELERATION_RATE, args2.delta, time
+    position, bodies[2], bodies, 1.1e4, THRUST_MAX, TURN_RATE, time
 )
 axtools.load(args2, "rocket-launch.ax", verbose=True)

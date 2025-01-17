@@ -4,8 +4,7 @@ import numpy as np
 from numba import jit
 
 def rocket_autopilot(destination: np.ndarray, body: ax.Body, _bodies: np.ndarray, speed_max: np.float64, 
-                     force_max: np.float64, turn_rate: np.float64, acceleration_rate: np.float64, delta: np.float64, 
-                     time: int, stop_param: np.float64) -> np.ndarray:
+                     force_max: np.float64, turn_rate: np.float64, time: int) -> np.ndarray:
     n_body = -1
     for i, _body in enumerate(_bodies):
         if _body.name == body.name: n_body = i
@@ -28,15 +27,15 @@ def rocket_autopilot(destination: np.ndarray, body: ax.Body, _bodies: np.ndarray
             quaternion = axana.clip_quaternion_degrees(quaternion, turn_rate)
             target_unit_vector = axana.apply_quaternion(v_prev, quaternion)
 
-            speed = ax.vector_magnitude_jit(v_prev)
-
             if distance_from_deceleration <= 0:
-                f = target_unit_vector * -force_max
-                f = np.clip(f, -force_max, force_max)
+                force = target_unit_vector * -force_max
+                force = np.clip(f, -force_max, force_max)
             else:
-                f = target_unit_vector * force_max
+                force = target_unit_vector * force_max
             
-            f = np.clip(f, -force_max, force_max)
+            force = np.clip(f, -force_max, force_max)
+
+            f = force + f
 
         return f
     return fn

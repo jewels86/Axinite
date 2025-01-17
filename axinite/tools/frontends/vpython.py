@@ -72,19 +72,16 @@ def vpython_live(args: axtools.AxiniteArgs):
 
     def fn(bodies, t, **kwargs):
         bodies = ax.create_outer_bodies(bodies, kwargs["limit"], kwargs["delta"])
-        try:
-            global _rate, pause
-            rate(_rate)
-            for body in bodies:
-                spheres[body.name].pos = to_vec(body.r(kwargs["n"]))
-                labels[body.name].pos = spheres[body.name].pos
-                try: lights[body.name].pos = spheres[body.name].pos
-                except: pass
-            print(f"t = {t}, n = {kwargs['n']}", end='\r')
-            if pause: 
-                while pause: rate(10)
-        except KeyboardInterrupt:
-            os.kill(os.getpid(), signal.SIGINT)
+        global _rate, pause
+        rate(_rate)
+        for body in bodies:
+            spheres[body.name].pos = to_vec(body.r(kwargs["n"]))
+            labels[body.name].pos = spheres[body.name].pos
+            try: lights[body.name].pos = spheres[body.name].pos
+            except: pass
+        print(f"t = {t}, n = {kwargs['n']}", end='\r')
+        if pause: 
+            while pause: rate(10)
 
     return fn, lambda: os.kill(os.getpid(), signal.SIGINT)
 
