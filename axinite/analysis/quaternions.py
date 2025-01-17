@@ -46,9 +46,9 @@ def apply_quaternion(v, q):
     return rotated[1:]
 
 @jit
-def clip_quaternion_degrees(q, degrees):
+def clip_quaternion(q, radians):
     angle = 2 * np.arccos(q[0])
-    max_angle = np.radians(degrees)
+    max_angle = radians
 
     if angle > max_angle:
         angle = max_angle
@@ -60,3 +60,7 @@ def clip_quaternion_degrees(q, degrees):
     v = np.sin(angle / 2) * axis
 
     return np.array([w, *v])
+
+@jit
+def clip_quaternion_degrees(q, degrees):
+    return clip_quaternion(q, np.radians(degrees))
