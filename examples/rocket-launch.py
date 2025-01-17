@@ -5,6 +5,8 @@ import axinite.utils as axutils
 from numba import njit
 import numpy as np
 
+# This is VERY unfinished. It will not work.
+
 ACCELERATION_RATE = 25
 THRUST_MAX = 7.36e5
 TURN_RATE = 3
