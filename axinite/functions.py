@@ -212,6 +212,85 @@ def interpret_distance(string: str) -> np.float64:
         return float(string) / 1000000000
     else: return float(string)
 
+def time_to(time: np.float64, unit: str, round_digits: int=-1) -> str:
+    """Converts a time to a specific unit.
+
+    Args:
+        time (np.float64): The time to convert.
+        unit (str): The unit to convert to.
+        round_digits (int, optional): The number of digits to round to. Defaults to -1.
+
+    Returns:
+        str: The converted time.
+    """
+    if unit == "min":
+        converted_time = time / 60
+    elif unit == "hr":
+        converted_time = time / 3600
+    elif unit == "d":
+        converted_time = time / 86400
+    elif unit == "yr":
+        converted_time = time / 31536000
+    else:
+        converted_time = time
+
+    if round_digits >= 0:
+        converted_time = round(converted_time, round_digits)
+
+    return f"{converted_time}{unit}"
+
+def mass_to(mass: np.float64, unit: str, round_digits: int=-1) -> str:
+    """Converts a mass to a specific unit.
+
+    Args:
+        mass (np.float64): The mass to convert.
+        unit (str): The unit to convert to.
+        round_digits (int, optional): The number of digits to round to. Defaults to -1.
+
+    Returns:
+        str: The converted mass.
+    """
+    if unit == "g":
+        converted_mass = mass * 1000
+    elif unit == "t":
+        converted_mass = mass / 1000
+    else:
+        converted_mass = mass
+
+    if round_digits >= 0:
+        converted_mass = round(converted_mass, round_digits)
+
+    return f"{converted_mass}{unit}"
+
+def distance_to(distance: np.float64, unit: str, round_digits: int=-1) -> str:
+    """Converts a distance to a specific unit.
+
+    Args:
+        distance (np.float64): The distance to convert.
+        unit (str): The unit to convert to.
+        round_digits (int, optional): The number of digits to round to. Defaults to -1.
+
+    Returns:
+        str: The converted distance.
+    """
+    if unit == "km":
+        converted_distance = distance / 1000
+    elif unit == "cm":
+        converted_distance = distance * 100
+    elif unit == "mm":
+        converted_distance = distance * 1000
+    elif unit == "μm":
+        converted_distance = distance * 1000000
+    elif unit == "nm":
+        converted_distance = distance * 1000000000
+    else:
+        converted_distance = distance
+
+    if round_digits >= 0:
+        converted_distance = round(converted_distance, round_digits)
+
+    return f"{converted_distance}{unit}"
+
 @njit
 def clip_scalar(scalar, min, max):
     """

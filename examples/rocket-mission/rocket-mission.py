@@ -11,7 +11,7 @@ ACCELERATION_RATE = 25
 THRUST_MAX = 7.36e5
 TURN_RATE = 3
 
-args = axtools.read("examples/rocket-launch.tmpl.ax")
+args = axtools.read("examples/rocket-mission/rocket-mission.tmpl.ax")
 bodies = axtools.load(args, verbose=True)
 
 result = axana.intercept(

@@ -3,6 +3,8 @@ Axinite uses a derivative of the **semantic versioning system** to record change
 - Major increments represent a rework or a revamp of the module.
 - Minor increments represent new functionality or API changes.
 - Patch increments represent bug fixes or other changes that don't directly affect users.
+# 1.20 (1/18/25)
+- Added `time_to`, `mass_to`, and `distance_to` methods
 # 1.19.1 (1/16/25)
 - Added `state` method
 ## 1.18-1.19 (1/15/25)
@@ -24,4 +26,3 @@ Axinite uses a derivative of the **semantic versioning system** to record change
 ## 1.11.16-1.11.19 (1/9/25)
 - Fixed error in `axtools.load`'s default action method 
 - Fixed some `combine` method indent problems
-- 1.11 is officially the buggiest version in existence 
