@@ -18,7 +18,7 @@ def read(path: str) -> axtools.AxiniteArgs:
         args = axtools.AxiniteArgs()
         args.name = data["name"]
         args.delta = ax.interpret_time(data["delta"])
-        args.limit = ax.interpret_time(data["limit"])
+        args.limit = ax.round_limit(ax.interpret_time(data["limit"]), args.delta)
         args.t = data["t"]
 
         if "radius_multiplier" in data:

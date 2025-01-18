@@ -33,13 +33,17 @@ class Orbit:
 
     def _apogee_perigee(self):
         relative = self.satellite._inner["r"] - self.central._inner["r"]
-        absolute = np.abs(relative)
-        apogee = np.max(absolute)
-        perigee = np.min(absolute)
+        absolute = np.linalg.norm(relative, axis=1)
+        max_index = np.argmax(absolute)
+        min_index = np.argmin(absolute)
+        apogee = absolute[max_index]
+        perigee = absolute[min_index]
         return (apogee, perigee)
     
     def _eccentricity(self):
-        return (self.apogee - self.perigee) / (self.apogee + self.perigee)
+        apogee_magnitude = np.linalg.norm(self.apogee)
+        perigee_magnitude = np.linalg.norm(self.perigee)
+        return (apogee_magnitude - perigee_magnitude) / (apogee_magnitude + perigee_magnitude)
     
     def _inclination(self):
         relative = self.satellite._inner["r"] - self.central._inner["r"]
@@ -48,7 +52,9 @@ class Orbit:
         return np.arccos(z / r)
 
     def _semi_major_axis(self):
-        return (self.apogee + self.perigee) / 2
+        apogee_magnitude = np.linalg.norm(self.apogee)
+        perigee_magnitude = np.linalg.norm(self.perigee)
+        return (apogee_magnitude + perigee_magnitude) / 2
     
     def _orbital_period(self):
         total_mass = self.central.mass + self.satellite.mass

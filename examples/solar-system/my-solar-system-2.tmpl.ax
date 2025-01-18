@@ -1,6 +1,6 @@
 {
-    "name": "my-solar-system",
-    "limit": "3yr",
+    "name": "my-solar-system-2",
+    "limit": "1yr",
     "delta": "1hr",
     "t": 0,
     "bodies": [

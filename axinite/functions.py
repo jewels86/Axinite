@@ -310,3 +310,6 @@ def clip_scalar(scalar, min, max):
 
 def state(body, n):
     return body._inner["r"][n], body._inner["v"][n]
+
+def round_limit(limit, delta):
+    return round(limit / delta) * delta
