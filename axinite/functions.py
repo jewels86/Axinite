@@ -4,7 +4,7 @@ import axinite as ax
 from numba import njit
 
 G = 6.67430e-11
-def body_dtype(limit, delta):
+def body_dtype(limit: np.float64, delta: np.float64) -> np.dtype:
     """
     Returns the data type for a body.
 
@@ -21,7 +21,8 @@ def body_dtype(limit, delta):
         ("r", np.float64, (int(limit/delta), 3)),
         ("v", np.float64, (int(limit/delta), 3))
     ])
-def _body(limit, delta, name, mass): 
+
+def _body(limit: np.float64, delta: np.float64, name: str, mass: np.float64) -> np.ndarray: 
     """
     Creates a new body.
 
@@ -36,9 +37,9 @@ def _body(limit, delta, name, mass):
     """
     return np.array((name, mass, np.zeros((int(limit/delta), 3)), np.zeros((int(limit/delta), 3))), dtype=ax.body_dtype(limit, delta))
 
-def get_inner_bodies(bodies):
+def get_inner_bodies(bodies: list[ax.Body]) -> np.ndarray:
     """
-    Returns the inner representation of a list of bodies.
+    Returns the inner representations of a list of bodies.
 
     Args:
         bodies (list[ax.Body]): A list of Body objects.
@@ -50,7 +51,7 @@ def get_inner_bodies(bodies):
     for body in bodies: _bodies += (body._inner,)
     return np.array(_bodies)
 
-def create_outer_bodies(bodies, limit, delta):
+def create_outer_bodies(bodies: np.ndarray, limit: np.float64, delta: np.float64) -> list[ax.Body]:
     """
     Creates outer body representations from inner bodies.
 
@@ -70,14 +71,15 @@ def create_outer_bodies(bodies, limit, delta):
     return _bodies
 
 @njit 
-def vector_magnitude_jit(vec: np.ndarray) -> float:
-    """Calculates the magnitude of a vector.
+def vector_magnitude_jit(vec: np.ndarray) -> np.float64:
+    """
+    Calculates the magnitude of a vector.
 
     Args:
         vec (np.ndarray): The vector to calculate the magnitude of.
 
     Returns:
-        float: The magnitude of the vector.
+        np.float64: The magnitude of the vector.
     """
     return np.sqrt(np.sum(vec**2))
 
