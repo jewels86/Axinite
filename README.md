@@ -37,4 +37,3 @@ Any help will be appricated!
 - [ ] Fix weird euler loading error where first positions are always the origin
 - [ ] Add Velocity Verlet backend
 - [ ] Add RK4 backend
-- [ ] Reduce data saving time by not converting every part of the array?
