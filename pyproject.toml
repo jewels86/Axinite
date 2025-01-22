@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "axinite"
-version = "1.20.4"
+version = "1.20.5"
 dependencies = ["numpy", "numba", "vpython", "plotly"]
 authors = [{ name = "Jewels", email = "jewels@jewels86.me" }]
 maintainers = [{ name = "Jewels", email = "jewels@jewels86.me" }]

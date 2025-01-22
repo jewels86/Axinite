@@ -72,3 +72,8 @@ class Body:
             np.ndarray: The velocity of the object at the time.
         """
         return self._inner["v"][int(t)]
+
+    @property
+    def rs(self) -> np.ndarray: return self._inner["r"]
+    @property
+    def vs(self) -> np.ndarray: return self._inner["v"]

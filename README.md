@@ -20,7 +20,7 @@ For students, engineers, physicists, and anyone else in the field of astrophysic
 ## Supporting Axinite
 ### Contributing
 Feel free to open up a [pull request](https://github.com/jewels86/Axinite/pulls) or an [issue](https://github.com/jewels86/Axinite/issues) if there are any changes you'd like introduced to Axinite.
-Any help will be appricated!
+Any help will be appreciated!
 ### Other ways to support
 - Giving this repository a star! This really helps me to get Axinite out to other developers.
 - Reaching out! I'd love to hear about your thoughts, ideas, and issues.
@@ -37,3 +37,4 @@ Any help will be appricated!
 - [ ] Fix weird euler loading error where first positions are always the origin
 - [ ] Add Velocity Verlet backend
 - [ ] Add RK4 backend
+- [ ] Fix VPython static frontend
