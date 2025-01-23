@@ -35,6 +35,4 @@ Any help will be appreciated!
 ## Development Todo List
 - [ ] Graceful load funciton exiting
 - [ ] Fix weird euler loading error where first positions are always the origin
-- [ ] Add Velocity Verlet backend
-- [ ] Add RK4 backend
 - [ ] Fix VPython static frontend

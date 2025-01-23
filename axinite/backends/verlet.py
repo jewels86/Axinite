@@ -1,5 +1,5 @@
 import numpy as np
-from numba import njit, typed, types, jit
+from numba import jit
 import axinite as ax
 
 def verlet_nojit_backend(delta, limit, bodies, action=None, modifier=None, t=0.0, action_frequency=200):
@@ -17,14 +17,11 @@ def verlet_nojit_backend(delta, limit, bodies, action=None, modifier=None, t=0.0
     Returns:
         np.ndarray: The bodies after the simulation.
     """
-    _infinite = False
+
     if t is None:
         t = 0.0
     if t > 0.0:
         raise Exception("Verlet method does not support non-zero initial time.")
-    if t == -1.0: 
-        _infinite = True
-        t = 0.0
     t = 0.0 + delta 
     n = 1
 
@@ -39,7 +36,7 @@ def verlet_nojit_backend(delta, limit, bodies, action=None, modifier=None, t=0.0
     n += 1
     t += delta
 
-    while t < limit or _infinite:
+    while t < limit:
         for i, body in enumerate(bodies):
             f = np.zeros(3)
             for j, other in enumerate(bodies):
