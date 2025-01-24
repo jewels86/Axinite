@@ -1,5 +1,6 @@
 import axinite as ax
 import axinite.analysis as axana
+from numba import jit
 import numpy as np
 
 class Orbit:
@@ -62,3 +63,4 @@ class Orbit:
 
     def _orbital_velocity(self):
         return 2 * np.pi * self.semi_major_axis / self._orbital_period()
+    

@@ -10,11 +10,6 @@ class Body:
         mass (np.float64): The mass of the body in kilograms.
         position (np.ndarray): The initial position of the body (in vector form).
         velocity (np.ndarray): The initial velocity of the body (in vector form).
-        radius (np.float64): The radius of the body in meters.
-        color (str): The color of the body.
-        light (bool): Whether the body should give off light.
-        retain (int): How many points the body should retain on its trail.
-        radius_multiplier (int): A multiplier to be applied to the radius.
     """
 
     def __init__(self, name: str, mass: np.float64, limit: np.float64, delta: np.float64, position: np.ndarray = None, velocity: np.ndarray = None):

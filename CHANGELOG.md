@@ -1,8 +1,10 @@
 # Axinite Changelog
 Axinite uses a derivative of the **semantic versioning system** to record changes to the library. 
 - Major increments represent a rework or a revamp of the module.
-- Minor increments represent new functionality or API changes.
-- Patch increments represent bug fixes or other changes that don't directly affect users.
+- Minor increments represent new functionality or a milestone/accumulation of patch increments.
+- Patch increments represent bug fixes, modifications that don't directly affect users, or progress towards a milestone/goal.
+
+Although releases are only created for every **minor or major increment**, patch increments are still uploaded to PyPI.
 # 1.20.5 (1/22/25)
 - Fixed VPython live so it isn't as slow
 # 1.20 (1/18/25)

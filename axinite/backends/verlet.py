@@ -60,7 +60,7 @@ def verlet_backend(delta, limit, bodies, action=None, modifier=None, t=0.0, acti
         bodies (np.ndarray): An array of bodies.
         action (function, optional): A function to be called with frequency action_frequency. Defaults to None.
         modifier (function, optional): A function to be called at every timestep to modify the forces on the bodies. Defaults to None.
-        t (float, optional): The initial starting time of the simulation. Defaults to -1.0.
+        t (float, optional): The initial starting time of the simulation. Defaults to 0.0.
         action_frequency (int, optional): The frequency at which to call the action. Defaults to 200.
 
     Returns:

@@ -13,7 +13,6 @@ import axinite.functions as functions
 from axinite.load import load
 from axinite.backends.euler import euler_backend, euler_nojit_backend
 from axinite.backends.verlet import verlet_backend, verlet_nojit_backend
-from axinite.backends.rk4 import rk4_backend, rk4_nojit_backend
 import axinite.backends as backends
 import axinite.analysis as analysis
 import axinite.tools as tools
