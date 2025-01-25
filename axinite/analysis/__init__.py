@@ -5,3 +5,4 @@ from axinite.analysis.quaternions import quaternion_multiply, quaternion_conjuga
 from axinite.analysis.orbit import Orbit
 from axinite.analysis.approximate import approximate, _approximate, linear_interpolation, cubic_spline_interpolation, \
     hermite_interpolation
+from axinite.analysis.intersections import intersections, _intersections

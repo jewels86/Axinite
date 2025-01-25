@@ -14,5 +14,5 @@ def _collision_detection(bodies: np.ndarray, radii: np.ndarray, delta: np.float6
         ("bodies", np.ndarray[body_dtype])
     ])
 
-    n = 0
+    
     
