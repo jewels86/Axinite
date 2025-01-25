@@ -4,6 +4,7 @@ import axinite as ax
 from numba import njit
 
 G = 6.67430e-11
+@njit
 def body_dtype(limit: np.float64, delta: np.float64) -> np.dtype:
     """
     Returns the data type for a body.
@@ -22,6 +23,7 @@ def body_dtype(limit: np.float64, delta: np.float64) -> np.dtype:
         ("v", np.float64, (int(limit/delta), 3))
     ])
 
+@njit
 def _body(limit: np.float64, delta: np.float64, name: str, mass: np.float64) -> np.ndarray: 
     """
     Creates a new body.

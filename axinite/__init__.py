@@ -17,3 +17,7 @@ import axinite.backends as backends
 import axinite.analysis as analysis
 import axinite.tools as tools
 import axinite.utils as utils
+import axinite.analysis as axana
+import axinite.tools as axtools
+import axinite.utils as axutils
+import axinite as ax
