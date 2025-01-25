@@ -6,3 +6,4 @@ from axinite.analysis.orbit import Orbit
 from axinite.analysis.approximate import approximate, _approximate, linear_interpolation, cubic_spline_interpolation, \
     hermite_interpolation
 from axinite.analysis.intersections import intersections, _intersections
+from axinite.analysis.collisions import collision_detection, _collision_detection

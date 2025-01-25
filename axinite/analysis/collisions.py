@@ -1,18 +1,17 @@
 import axinite as ax
 import axinite.analysis as axana
 import numpy as np
+from numba import jit
 
-def _collision_detection(bodies: np.ndarray, radii: np.ndarray, delta: np.float64):
-    n_total = bodies[0]["r"].shape[0]
-    limit = n_total * delta
+@jit
+def _collision_detection(bodies: np.ndarray, radii: np.ndarray):
     collisions = []
-    body_dtype = ax.body_dtype(limit, delta)
-    collision = np.dtype([
-        ("t", np.float64),
-        ("n_range", np.int64, np.int64),
-        ("accuracy", np.float64),
-        ("bodies", np.ndarray[body_dtype])
-    ])
+    for i in range(len(bodies)):
+        for j in range(i + 1, len(bodies)):
+            distance = np.linalg.norm(bodies[i]["r"] - bodies[j]["r"])
+            if distance < (radii[i] + radii[j]):
+                collisions.append((i, j))
+    return collisions
 
-    
-    
+def collision_detection(bodies: list[ax.Body], radii: np.ndarray, delta: np.float64):
+    return _collision_detection(ax.get_inner_bodies(bodies), radii, delta)
