@@ -76,3 +76,31 @@ def _total_potential_energy(bodies: np.ndarray):
 
 def total_potential_energy(bodies: list[ax.Body]):
     return _total_potential_energy(ax.get_inner_bodies(bodies))
+
+@jit
+def _energy_at(n: np.float64, bodies: np.ndarray):
+    return _kinetic_energy_at(n, bodies) + _potential_energy_at(n, bodies)
+
+def energy_at(n: np.float64, bodies: list[ax.Body]):
+    return _energy_at(n, ax.get_inner_bodies(bodies))
+
+@jit
+def _total_energy_at(n: np.float64, bodies: np.ndarray):
+    return _total_kinetic_energy_at(n, bodies) + _total_potential_energy_at(n, bodies)
+
+def total_energy_at(n: np.float64, bodies: list[ax.Body]):
+    return _total_energy_at(n, ax.get_inner_bodies(bodies))
+
+@jit
+def _energy(bodies: np.ndarray):
+    return _kinetic_energy(bodies) + _potential_energy(bodies)
+
+def energy(bodies: list[ax.Body]):
+    return _energy(ax.get_inner_bodies(bodies))
+
+@jit
+def _total_energy(bodies: np.ndarray):
+    return _total_kinetic_energy(bodies) + _total_potential_energy(bodies)
+
+def total_energy(bodies: list[ax.Body]):
+    return _total_energy(ax.get_inner_bodies(bodies))
