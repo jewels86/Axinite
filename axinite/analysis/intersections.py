@@ -3,7 +3,19 @@ import numpy as np
 from numba import jit
 
 @jit
-def _intersections(a: np.ndarray, b: np.ndarray, tol=1e-9):
+def _intersections(a: np.ndarray, b: np.ndarray, tol=1e-9) -> np.ndarray:
+    """
+    Find intersections between two sets of points within a given tolerance.
+
+    Args:
+        a (np.ndarray): First set of points.
+        b (np.ndarray): Second set of points.
+        tol (float): Tolerance for intersection detection. Intersections are considered valid if the denominator
+                     of the intersection formula is greater than this tolerance.
+
+    Returns:
+        np.ndarray: Array of intersection points.
+    """
     intersections = []
     for i in range(len(a) - 1):
         for j in range(len(b) - 1):
@@ -16,7 +28,19 @@ def _intersections(a: np.ndarray, b: np.ndarray, tol=1e-9):
                 x = a[i, 0] + ua * (a[i+1, 0] - a[i, 0])
                 y = a[i, 1] + ua * (a[i+1, 1] - a[i, 1])
                 intersections.append((x, y))
-    return intersections
+    return np.array(intersections)
 
-def intersections(a: ax.Body, b: ax.Body, tol=1e-9):
-	return _intersections(a._inner, b._inner, tol=tol)
+def intersections(a: ax.Body, b: ax.Body, tol=1e-9) -> np.ndarray:
+    """
+    Find intersections between two bodies within a given tolerance.
+
+    Args:
+        a (ax.Body): First body.
+        b (ax.Body): Second body.
+        tol (float): Tolerance for intersection detection. Intersections are considered valid if the denominator
+                     of the intersection formula is greater than this tolerance.
+
+    Returns:
+        np.ndarray: Array of intersection points.
+    """
+    return _intersections(a._inner, b._inner, tol=tol)
