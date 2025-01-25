@@ -131,7 +131,8 @@ def _potential_energy_at(n: np.float64, bodies: np.ndarray):
     for i in range(len(bodies)):
         for j in range(i + 1, len(bodies)):
             distance = np.linalg.norm(bodies[i]["r"][n] - bodies[j]["r"][n])
-            potential_energy -= ax.G * bodies[i]["m"] * bodies[j]["m"] / distance
+            if distance > 0: 
+                potential_energy -= ax.G * bodies[i]["m"] * bodies[j]["m"] / distance
     return potential_energy
 
 def potential_energy_at(n: np.float64, bodies: list[ax.Body]):

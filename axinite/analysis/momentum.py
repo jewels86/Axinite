@@ -73,8 +73,8 @@ def _momentum(bodies: np.ndarray) -> np.ndarray:
     """
     momentums = np.zeros((len(bodies), bodies[0]["r"].shape[0], 3))
     n = 0
-    while n < 0:
-        momentums[n] = _momentum_at(n, bodies)
+    while n < bodies[0]["r"].shape[0]:
+        momentums[:, n] = _momentum_at(n, bodies)
         n += 1
     return momentums
 
