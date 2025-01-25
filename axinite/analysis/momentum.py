@@ -35,3 +35,6 @@ def momentum(bodies: list[ax.Body]):
 @jit
 def _total_momentum(bodies: np.ndarray):
     return np.sum(_momentum(bodies), axis=0)
+
+def total_momentum(bodies: list[ax.Body]):
+    return _total_momentum(ax.get_inner_bodies(bodies))
