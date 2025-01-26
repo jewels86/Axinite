@@ -98,19 +98,20 @@ def unit_vector_jit(vec: np.ndarray) -> np.ndarray:
     return vec / mag if mag > 0 else vec
 
 @njit
-def gravitational_force_jit(m1: np.float64, m2: np.float64, r: np.ndarray) -> np.ndarray:
+def gravitational_force_jit(m1: np.float64, m2: np.float64, r: np.ndarray, epsilon: np.float64 = 1e-10) -> np.ndarray:
     """Calculates the gravitational force between two bodies.
 
     Args:
         m1 (u.Quantity): The mass of the first body.
         m2 (u.Quantity): The mass of the second body.
         r (np.ndarray): The vector between the two bodies.
+        epsilon (np.float64, optional): The softening parameter. Defaults to 1e-10.
 
     Returns:
         np.ndarray: The gravitational force between the two bodies.
     """
     mag = vector_magnitude_jit(r)
-    if mag == 0:
+    if mag < epsilon:
         return np.zeros(3)
     return -G *((m1 * m2) / mag**2) * unit_vector_jit(r)
 
@@ -318,8 +319,8 @@ def round_limit(limit, delta):
     return round(limit / delta) * delta
 
 @njit
-def gravitational_forces(bodies, body, i):
+def gravitational_forces(bodies, body, i, n):
     f = np.zeros(3)
     for j, other in enumerate(bodies):
-        if i != j: f += ax.gravitational_force_jit(body["m"], other["m"], body["r"][0] - other["r"][0])
+        if i != j: f += ax.gravitational_force_jit(body["m"], other["m"], body["r"][n] - other["r"][n])
     return f

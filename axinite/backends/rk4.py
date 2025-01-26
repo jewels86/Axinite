@@ -17,7 +17,7 @@ def rk4_nojit_backend(delta, limit, bodies, action=None, modifier=None, t=0.0, a
     while t < limit:
         _bodies = np.zeros(len(bodies), dtype=rk_dtype)
         for i, body in enumerate(bodies):
-            f = ax.gravitational_forces(bodies, body, i)
+            f = ax.gravitational_forces(bodies, body, i, n-1)
             if modifier is not None: f = modifier(body, f, bodies=bodies, t=t, delta=delta, limit=limit, n=n)
 
             a = f / body["m"]
