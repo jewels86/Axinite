@@ -316,3 +316,10 @@ def state(body, n):
 
 def round_limit(limit, delta):
     return round(limit / delta) * delta
+
+@njit
+def gravitational_forces(bodies, body, i):
+    f = np.zeros(3)
+    for j, other in enumerate(bodies):
+        if i != j: f += ax.gravitational_force_jit(body["m"], other["m"], body["r"][0] - other["r"][0])
+    return f

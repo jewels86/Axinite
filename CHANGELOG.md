@@ -5,6 +5,8 @@ Axinite uses a derivative of the **semantic versioning system** to record change
 - Patch increments represent bug fixes, modifications that don't directly affect users, or progress towards a milestone/goal.
 
 Although releases are only created for every **minor or major increment**, patch increments are still uploaded to PyPI.
+# 1.22 (1/26/35)
+- Created RK2-4 backends
 # 1.21 (1/25/25)
 - Added approximation, collisions, energy, intersections, and momentum to `axana`
 - Added aliases to the `__init__.py` file of `axinite` to allow for faster imports
