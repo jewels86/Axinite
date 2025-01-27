@@ -50,4 +50,5 @@ def load(args: axtools.AxiniteArgs, path: str = "", dont_change_args: bool = Fal
     else: 
         if verbose: print(f"Saving system data to file...")
         axtools.save(args, path)
+        if verbose: print(f"Finished saving system data to file")
         return _bodies
