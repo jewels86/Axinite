@@ -318,6 +318,9 @@ def state(body, n):
 def round_limit(limit, delta):
     return round(limit / delta) * delta
 
+def round_time(t, delta):
+    return round(t / delta) * delta
+
 @njit
 def gravitational_forces(bodies, body, i, n):
     f = np.zeros(3)
