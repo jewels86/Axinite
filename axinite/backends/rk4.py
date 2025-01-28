@@ -14,9 +14,8 @@ rk_dtype = np.dtype([
     ("a_mid3", np.float64, (3,))
 ])
 
-def rk4_nojit_backend(delta, limit, bodies, action=None, modifier=None, t=0.0, action_frequency=200):
-    if t is None:
-        t = 0.0
+def rk4_nojit_backend(delta, limit, bodies, action=None, modifier=None, t=-1.0, action_frequency=200):
+    if t is None or t == -1.0 or t == 0.0: t = 0.0 + delta
     n = 1
 
     while t < limit:
