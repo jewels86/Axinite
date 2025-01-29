@@ -327,3 +327,10 @@ def gravitational_forces(bodies, body, i, n):
     for j, other in enumerate(bodies):
         if i != j: f += ax.gravitational_force_jit(body["m"], other["m"], body["r"][n] - other["r"][n])
     return f
+
+@njit 
+def locate_body(body, bodies):
+    for i, b in enumerate(bodies):
+        if b["n"] == body["n"]:
+            return i
+    return -1
