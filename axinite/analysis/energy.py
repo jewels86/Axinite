@@ -333,3 +333,57 @@ def total_energy(bodies: list[ax.Body]):
         float: The total energy over all time steps.
     """
     return _total_energy(ax.get_inner_bodies(bodies))
+
+def kinetic_energy_of(body: ax.Body):
+    """
+    Calculate the kinetic energy over all time steps for a single body.
+
+    Args:
+        body (ax.Body): A Body object.
+
+    Returns:
+        np.ndarray: Array of kinetic energies for each time step.
+    """
+    inner_body = ax.get_inner_body(body)
+    kinetic_energies = np.zeros(inner_body["r"].shape[0])
+    for n in range(inner_body["r"].shape[0]):
+        kinetic_energies[n] = 0.5 * inner_body["m"] * np.linalg.norm(inner_body["v"][n]) ** 2
+    return kinetic_energies
+
+def potential_energy_of(body: ax.Body, other_bodies: list[ax.Body]):
+    """
+    Calculate the potential energy over all time steps for a single body with respect to other bodies.
+
+    Args:
+        body (ax.Body): A Body object.
+        other_bodies (list[ax.Body]): List of other Body objects.
+
+    Returns:
+        np.ndarray: Array of potential energies for each time step.
+    """
+    inner_body = ax.get_inner_body(body)
+    inner_other_bodies = ax.get_inner_bodies(other_bodies)
+    potential_energies = np.zeros(inner_body["r"].shape[0])
+    for n in range(inner_body["r"].shape[0]):
+        potential_energy = 0
+        for other_body in inner_other_bodies:
+            distance = np.linalg.norm(inner_body["r"][n] - other_body["r"][n])
+            if distance > 0:
+                potential_energy -= ax.G * inner_body["m"] * other_body["m"] / distance
+        potential_energies[n] = potential_energy
+    return potential_energies
+
+def total_energy_of(body: ax.Body, other_bodies: list[ax.Body]):
+    """
+    Calculate the total energy (kinetic + potential) over all time steps for a single body with respect to other bodies.
+
+    Args:
+        body (ax.Body): A Body object.
+        other_bodies (list[ax.Body]): List of other Body objects.
+
+    Returns:
+        np.ndarray: Array of total energies for each time step.
+    """
+    kinetic_energies = kinetic_energy_of(body)
+    potential_energies = potential_energy_of(body, other_bodies)
+    return kinetic_energies + potential_energies

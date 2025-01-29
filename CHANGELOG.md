@@ -5,7 +5,8 @@ Axinite uses a derivative of the **semantic versioning system** to record change
 - Patch increments represent bug fixes, modifications that don't directly affect users, progress towards a milestone/goal, or other small changes.
 
 Although releases are only created for every minor or major increment, patch increments are still uploaded to PyPI.
-# 1.22.1 (1/29/25)
+# 1.22.1-1.22.2 (1/29/25)
+- Added `energy_of` methods for energy of specific bodies
 - Added `can_see` methods for line of sight checks
 # 1.22 (1/26/35)
 - Created RK2-4 backends
