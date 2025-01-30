@@ -179,19 +179,18 @@ def interpret_time(string: str) -> np.float64:
     try:
         return safe_eval(string)
     except:
-        if string.endswith("min"):
-            string = string.removesuffix("min")
-            return float(string) * 60 
-        elif string.endswith("hr"): 
-            string = string.removesuffix("hr")
-            return float(string) * 3600
-        elif string.endswith("d"):
-            string  = string.removesuffix("d")
-            return float(string) * 86400
-        elif string.endswith("yr"):
-            string = string.removesuffix("yr")
-            return float(string) * 31536000
-        else: return float(string)
+        units = {"s": 1, "min": 60, "hr": 3600, "d": 86400, "yr": 31536000}
+        total_time = 0
+        for part in string.split('+'):
+            part = part.strip()
+            for unit, factor in units.items():
+                if part.endswith(unit):
+                    part = part.removesuffix(unit)
+                    total_time += float(part) * factor
+                    break
+            else:
+                total_time += float(part)
+        return total_time
 
 def interpret_mass(string: str) -> np.float64:
     """Interprets a string as a mass in kilograms.
@@ -206,16 +205,18 @@ def interpret_mass(string: str) -> np.float64:
     try:
         return safe_eval(string)
     except:
-        if string.endswith("kg"):
-            string = string.removesuffix("kg")
-            return float(string)
-        elif string.endswith("g"):
-            string = string.removesuffix("g")
-            return float(string) / 1000
-        elif string.endswith("t"):
-            string = string.removesuffix("t")
-            return float(string) * 1000
-        else: return float(string)
+        units = {"kg": 1, "g": 1/1000, "t": 1000}
+        total_mass = 0
+        for part in string.split('+'):
+            part = part.strip()
+            for unit, factor in units.items():
+                if part.endswith(unit):
+                    part = part.removesuffix(unit)
+                    total_mass += float(part) * factor
+                    break
+            else:
+                total_mass += float(part)
+        return total_mass
 
 def interpret_distance(string: str) -> np.float64:
     """Interprets a string as a distance in meters.
@@ -230,25 +231,18 @@ def interpret_distance(string: str) -> np.float64:
     try:
         return safe_eval(string)
     except:
-        if string.endswith("m"):
-            string = string.removesuffix("m")
-            return float(string)
-        elif string.endswith("km"):
-            string = string.removesuffix("km")
-            return float(string) * 1000
-        elif string.endswith("cm"):
-            string = string.removesuffix("cm")
-            return float(string) / 100
-        elif string.endswith("mm"):
-            string = string.removesuffix("mm")
-            return float(string) / 1000
-        elif string.endswith("μm"):
-            string = string.removesuffix("μm")
-            return float(string) / 1000000
-        elif string.endswith("nm"):
-            string = string.removesuffix("nm")
-            return float(string) / 1000000000
-        else: return float(string)
+        units = {"m": 1, "km": 1000, "cm": 1/100, "mm": 1/1000, "μm": 1/1000000, "nm": 1/1000000000}
+        total_distance = 0
+        for part in string.split('+'):
+            part = part.strip()
+            for unit, factor in units.items():
+                if part.endswith(unit):
+                    part = part.removesuffix(unit)
+                    total_distance += float(part) * factor
+                    break
+            else:
+                total_distance += float(part)
+        return total_distance
 
 def time_to(time: np.float64, unit: str, round_digits: int=-1) -> str:
     """Converts a time to a specific unit.
