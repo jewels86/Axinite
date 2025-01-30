@@ -1,7 +1,7 @@
-import math
 import numpy as np
 import axinite as ax
 from numba import njit
+import ast, operator
 
 G = 6.67430e-11
 
@@ -141,6 +141,31 @@ def timesteps(limit: np.float64, delta: np.float64) -> int:
     """
     return int(limit / delta)
 
+def safe_eval(expr):
+    """Safely evaluate a basic math expression."""
+    allowed_operators = {
+        ast.Add: operator.add,
+        ast.Sub: operator.sub,
+        ast.Mult: operator.mul,
+        ast.Div: operator.truediv,
+        ast.Pow: operator.pow,
+        ast.BitXor: operator.xor,
+        ast.USub: operator.neg,
+    }
+
+    def eval_node(node):
+        if isinstance(node, ast.Num):  # <number>
+            return node.n
+        elif isinstance(node, ast.BinOp):  # <left> <operator> <right>
+            return allowed_operators[type(node.op)](eval_node(node.left), eval_node(node.right))
+        elif isinstance(node, ast.UnaryOp):  # <operator> <operand> e.g., -1
+            return allowed_operators[type(node.op)](eval_node(node.operand))
+        else:
+            raise TypeError(node)
+
+    node = ast.parse(expr, mode='eval').body
+    return eval_node(node)
+
 def interpret_time(string: str) -> np.float64:
     """Interprets a string as a time in seconds.
 
@@ -151,19 +176,22 @@ def interpret_time(string: str) -> np.float64:
         float: The time in seconds.
     """
     if type(string) is float or type(string) is int: return string
-    if string.endswith("min"):
-        string = string.removesuffix("min")
-        return float(string) * 60 
-    elif string.endswith("hr"): 
-        string = string.removesuffix("hr")
-        return float(string) * 3600
-    elif string.endswith("d"):
-        string  = string.removesuffix("d")
-        return float(string) * 86400
-    elif string.endswith("yr"):
-        string = string.removesuffix("yr")
-        return float(string) * 31536000
-    else: return float(string)
+    try:
+        return safe_eval(string)
+    except:
+        if string.endswith("min"):
+            string = string.removesuffix("min")
+            return float(string) * 60 
+        elif string.endswith("hr"): 
+            string = string.removesuffix("hr")
+            return float(string) * 3600
+        elif string.endswith("d"):
+            string  = string.removesuffix("d")
+            return float(string) * 86400
+        elif string.endswith("yr"):
+            string = string.removesuffix("yr")
+            return float(string) * 31536000
+        else: return float(string)
 
 def interpret_mass(string: str) -> np.float64:
     """Interprets a string as a mass in kilograms.
@@ -175,16 +203,19 @@ def interpret_mass(string: str) -> np.float64:
         float: The mass in kilograms.
     """
     if type(string) is float or type(string) is int: return string
-    if string.endswith("kg"):
-        string = string.removesuffix("kg")
-        return float(string)
-    elif string.endswith("g"):
-        string = string.removesuffix("g")
-        return float(string) / 1000
-    elif string.endswith("t"):
-        string = string.removesuffix("t")
-        return float(string) * 1000
-    else: return float(string)
+    try:
+        return safe_eval(string)
+    except:
+        if string.endswith("kg"):
+            string = string.removesuffix("kg")
+            return float(string)
+        elif string.endswith("g"):
+            string = string.removesuffix("g")
+            return float(string) / 1000
+        elif string.endswith("t"):
+            string = string.removesuffix("t")
+            return float(string) * 1000
+        else: return float(string)
 
 def interpret_distance(string: str) -> np.float64:
     """Interprets a string as a distance in meters.
@@ -196,25 +227,28 @@ def interpret_distance(string: str) -> np.float64:
         float: The distance in meters.
     """
     if type(string) is float or type(string) is int: return string
-    if string.endswith("m"):
-        string = string.removesuffix("m")
-        return float(string)
-    elif string.endswith("km"):
-        string = string.removesuffix("km")
-        return float(string) * 1000
-    elif string.endswith("cm"):
-        string = string.removesuffix("cm")
-        return float(string) / 100
-    elif string.endswith("mm"):
-        string = string.removesuffix("mm")
-        return float(string) / 1000
-    elif string.endswith("μm"):
-        string = string.removesuffix("μm")
-        return float(string) / 1000000
-    elif string.endswith("nm"):
-        string = string.removesuffix("nm")
-        return float(string) / 1000000000
-    else: return float(string)
+    try:
+        return safe_eval(string)
+    except:
+        if string.endswith("m"):
+            string = string.removesuffix("m")
+            return float(string)
+        elif string.endswith("km"):
+            string = string.removesuffix("km")
+            return float(string) * 1000
+        elif string.endswith("cm"):
+            string = string.removesuffix("cm")
+            return float(string) / 100
+        elif string.endswith("mm"):
+            string = string.removesuffix("mm")
+            return float(string) / 1000
+        elif string.endswith("μm"):
+            string = string.removesuffix("μm")
+            return float(string) / 1000000
+        elif string.endswith("nm"):
+            string = string.removesuffix("nm")
+            return float(string) / 1000000000
+        else: return float(string)
 
 def time_to(time: np.float64, unit: str, round_digits: int=-1) -> str:
     """Converts a time to a specific unit.
