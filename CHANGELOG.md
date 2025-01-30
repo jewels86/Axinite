@@ -2,9 +2,14 @@
 Axinite uses a derivative of the **semantic versioning system** to record changes to the library. 
 - Major increments represent a rework or a revamp of the module.
 - Minor increments represent new functionality or a milestone/accumulation of patch increments.
-- Patch increments represent bug fixes, modifications that don't directly affect users, or progress towards a milestone/goal.
+- Patch increments represent bug fixes, modifications that don't directly affect users, progress towards a milestone/goal, or other small changes.
 
-Although releases are only created for every **minor or major increment**, patch increments are still uploaded to PyPI.
+Although releases are only created for every minor or major increment, patch increments are still uploaded to PyPI.
+# 1.22.1-1.22.5 (1/29/25)
+- Fixed VPython static frontend
+- Created modifier utilities (normal force, magnetic force, modifier_from)
+- Added `energy_of` methods for energy of specific bodies
+- Added `can_see` methods for line of sight checks
 # 1.22 (1/26/35)
 - Created RK2-4 backends
 # 1.21 (1/25/25)

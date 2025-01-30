@@ -35,4 +35,4 @@ Any help will be appreciated!
 ## Development Todo List
 - [ ] Graceful load funciton exiting
 - [ ] Fix weird euler loading error where first positions are always the origin
-- [ ] Fix VPython static frontend
+- [x] Fix VPython static frontend

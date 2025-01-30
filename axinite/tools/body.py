@@ -1,7 +1,7 @@
 import axinite as ax
 import numpy as np
 
-class Body:
+class Body(ax.Body):
     """
     A class that represents a body in the simulation.
 

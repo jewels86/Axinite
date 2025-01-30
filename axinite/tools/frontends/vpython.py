@@ -101,8 +101,8 @@ def vpython_static(args: axtools.AxiniteArgs):
     def fn(body: axtools.Body):
         body_color = axtools.string_to_color(body.color, "vpython") if body.color != "" else next(colors)
         
-        label(pos=to_vec(body.r[0]), text=body.name, xoffset=15, yoffset=15, space=30, height=10, border=4, font='sans', color=body_color)
-        curve(pos=[to_vec(r) for r in body.r.values()], color=body_color)
-        sphere(pos=to_vec(body.r[0]), radius=body.radius.value * args.radius_multiplier, color=body_color, opacity=0.2, make_trail=False)
+        label(pos=to_vec(body.r(0)), text=body.name, xoffset=15, yoffset=15, space=30, height=10, border=4, font='sans', color=body_color)
+        curve(pos=[to_vec(r) for r in body.rs], color=body_color)
+        sphere(pos=to_vec(body.r(0)), radius=body.radius * args.radius_multiplier * body.radius_multiplier, color=body_color, opacity=0.2, make_trail=False)
 
     return fn, None, lambda: os.kill(os.getpid(), signal.SIGINT)

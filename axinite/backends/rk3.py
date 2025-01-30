@@ -2,16 +2,18 @@ import numpy as np
 from numba import jit
 import axinite as ax
 
-def rk3_nojit_backend(delta, limit, bodies, action=None, modifier=None, t=0.0, action_frequency=200):
-    if t is None:
-        t = 0.0
+rk_dtype = np.dtype([
+    ("v_mid1", np.float64, (3,)),
+    ("r_mid1", np.float64, (3,)),
+    ("a_mid1", np.float64, (3,)),
+    ("v_mid2", np.float64, (3,)),
+    ("r_mid2", np.float64, (3,)),
+    ("a_mid2", np.float64, (3,))
+])
+
+def rk3_nojit_backend(delta, limit, bodies, action=None, modifier=None, t=-1.0, action_frequency=200):
+    if t is None or t == -1.0 or t == 0.0: t = 0.0 + delta
     n = 1
-    rk_dtype = np.dtype([
-        ("v_mid1", np.float64, (3,)),
-        ("r_mid1", np.float64, (3,)),
-        ("v_mid2", np.float64, (3,)),
-        ("r_mid2", np.float64, (3,))
-    ])
 
     while t < limit:
         _bodies = np.zeros(len(bodies), dtype=rk_dtype)
@@ -26,6 +28,7 @@ def rk3_nojit_backend(delta, limit, bodies, action=None, modifier=None, t=0.0, a
             
             _bodies[i]["v_mid1"] = v_mid1
             _bodies[i]["r_mid1"] = r_mid1
+            _bodies[i]["a_mid1"] = a
 
         for i, body in enumerate(bodies):
             f = np.zeros(3)
@@ -40,6 +43,7 @@ def rk3_nojit_backend(delta, limit, bodies, action=None, modifier=None, t=0.0, a
             
             _bodies[i]["v_mid2"] = v_mid2
             _bodies[i]["r_mid2"] = r_mid2
+            _bodies[i]["a_mid2"] = a
 
         for i, body in enumerate(bodies):
             f = np.zeros(3)
@@ -49,9 +53,13 @@ def rk3_nojit_backend(delta, limit, bodies, action=None, modifier=None, t=0.0, a
 
             a = f / body["m"]
 
-            body["v"][n] = body["v"][n-1] + delta * a
-            body["r"][n] = body["r"][n-1] + delta * body["v"][n]
-        
+            body["r"][n] = body["r"][n-1] + (delta / 6) * (
+                body["v"][n-1] + 4 * _bodies[i]["v_mid1"] + _bodies[i]["v_mid2"]
+            )
+            body["v"][n] = body["v"][n-1] + (delta / 6) * (
+                a + 4 * _bodies[i]["a_mid1"] + _bodies[i]["a_mid2"]
+            )
+
         if action is not None and n % action_frequency == 0: action(bodies, t, limit=limit, delta=delta, n=n)
         n += 1
         t += delta
