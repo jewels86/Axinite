@@ -5,7 +5,7 @@ Axinite uses a derivative of the **semantic versioning system** to record change
 - Patch increments represent bug fixes, modifications that don't directly affect users, progress towards a milestone/goal, or other small changes.
 
 Although releases are only created for every minor or major increment, patch increments are still uploaded to PyPI.
-## 1.22.9 (1/30/25)
+## 1.22.8-1.22.10 (1/30/25)
 - Again, fixed VPython static frontend
 ## 1.22.6-1.22.7 (1/30/25)
 - Added basic math to interpret functions

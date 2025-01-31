@@ -2,7 +2,8 @@ import axinite.tools as axtools
 import axinite as ax
 from vpython import *
 from itertools import cycle
-import os, signal
+import os, signal, time, threading
+from vpython.no_notebook import stop_server
   
 def to_vec(v): 
     return vec(v[0], v[1], v[2])
@@ -105,7 +106,14 @@ def vpython_static(args: axtools.AxiniteArgs):
         curve(pos=[to_vec(r) for r in body.rs], color=body_color)
         sphere(pos=to_vec(body.r(0)), radius=body.radius * args.radius_multiplier * body.radius_multiplier, color=body_color, opacity=0.2, make_trail=False)
 
-    def fn2():
-        while True: rate(10)
+    def exit_func():
+        os.kill(os.getpid(), signal.SIGINT)
 
-    return fn1, fn2, lambda: os.kill(os.getpid(), signal.SIGINT)
+    def fn2():
+        threading.Thread(target=lambda: time.sleep(1), daemon=True).start()
+        signal.signal(signal.SIGINT, lambda *args, **kwargs: exit_func())
+        while True: 
+            rate(10)
+            time.sleep(0.1)
+
+    return fn1, fn2, lambda: exit_func()
