@@ -33,6 +33,5 @@ Any help will be appreciated!
 ![axinite-6](https://github.com/user-attachments/assets/9f2b21b8-e90d-4c5b-9cde-027dfb0ee704)
 
 ## Development Todo List
-- [ ] Graceful load funciton exiting
+- [ ] Graceful load function exiting
 - [ ] Fix weird euler loading error where first positions are always the origin
-- [x] Fix VPython static frontend
