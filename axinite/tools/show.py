@@ -22,7 +22,7 @@ def show(_args: axtools.AxiniteArgs, frontend: 'function') -> None:
     for body in args.bodies:
         frontend[0](body)
 
+    signal.signal(signal.SIGINT, lambda *args, **kwargs: frontend[2])
+    
     if frontend[1] != None: 
         frontend[1]()
-
-    signal.signal(signal.SIGINT, lambda *args, **kwargs: frontend[2])

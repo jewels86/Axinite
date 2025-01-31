@@ -5,23 +5,25 @@ Axinite uses a derivative of the **semantic versioning system** to record change
 - Patch increments represent bug fixes, modifications that don't directly affect users, progress towards a milestone/goal, or other small changes.
 
 Although releases are only created for every minor or major increment, patch increments are still uploaded to PyPI.
-# 1.22.6-1.22.7 (1/30/25)
-- Added basic math to interpret functionss
-# 1.22.1-1.22.5 (1/29/25)
+## 1.22.8 (1/30/25)
+- Again, fixed VPython static frontend
+## 1.22.6-1.22.7 (1/30/25)
+- Added basic math to interpret functions
+## 1.22.1-1.22.5 (1/29/25)
 - Fixed VPython static frontend
 - Created modifier utilities (normal force, magnetic force, modifier_from)
 - Added `energy_of` methods for energy of specific bodies
 - Added `can_see` methods for line of sight checks
-# 1.22 (1/26/35)
+## 1.22 (1/26/35)
 - Created RK2-4 backends
-# 1.21 (1/25/25)
+## 1.21 (1/25/25)
 - Added approximation, collisions, energy, intersections, and momentum to `axana`
 - Added aliases to the `__init__.py` file of `axinite` to allow for faster imports
-# 1.20.5 (1/22/25)
+## 1.20.5 (1/22/25)
 - Fixed VPython live so it isn't as slow
-# 1.20 (1/18/25)
+## 1.20 (1/18/25)
 - Added `time_to`, `mass_to`, and `distance_to` methods
-# 1.19.1 (1/16/25)
+## 1.19.1 (1/16/25)
 - Added `state` method
 ## 1.18-1.19 (1/15/25)
 - `axana` includes quaternions now
