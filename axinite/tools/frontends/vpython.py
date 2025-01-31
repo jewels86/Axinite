@@ -108,4 +108,4 @@ def vpython_static(args: axtools.AxiniteArgs):
     def fn2():
         while True: rate(10)
 
-    return fn1, None, lambda: os.kill(os.getpid(), signal.SIGINT)
+    return fn1, fn2, lambda: os.kill(os.getpid(), signal.SIGINT)
