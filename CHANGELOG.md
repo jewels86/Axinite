@@ -5,7 +5,8 @@ Axinite uses a derivative of the **semantic versioning system** to record change
 - Patch increments represent bug fixes, modifications that don't directly affect users, progress towards a milestone/goal, or other small changes.
 
 Although releases are only created for every minor or major increment, patch increments are still uploaded to PyPI.
-## 1.22.112 (2/1/25)
+## 1.22.11 - 1.22.14 (2/1/25)
+- Made sure to include `scipy` in the dependencies
 - Stopped VPython from opening on import
 - Created `axtools.reads` method 
 ## 1.22.8-1.22.10 (1/30/25)
