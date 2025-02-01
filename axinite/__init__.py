@@ -5,6 +5,8 @@ This module includes classes and functions for representing celestial bodies, pe
 using various methods, and loading simulation data.
 """
 
+__version__ = "1.22.11"
+
 from axinite.body import Body
 from axinite.functions import vector_magnitude_jit, unit_vector_jit, gravitational_force_jit, body_dtype, \
     get_inner_bodies, _body, create_outer_bodies, timestep, interpret_distance, interpret_mass, interpret_time, \

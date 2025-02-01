@@ -3,7 +3,8 @@ import axinite.tools as axtools
 import json
 
 def read(path: str) -> axtools.AxiniteArgs:
-    """Read a simulation from a file.
+    """
+    Read a simulation from a file.
 
     Args:
         path (str): The path to read from.
@@ -12,28 +13,41 @@ def read(path: str) -> axtools.AxiniteArgs:
         AxiniteArgs: The simulation result.
     """
     
-    with open(path, 'r') as f:
-        data = json.load(f)
-        
-        args = axtools.AxiniteArgs()
-        args.name = data["name"]
-        args.delta = ax.interpret_time(data["delta"])
-        args.limit = ax.round_limit(ax.interpret_time(data["limit"]), args.delta)
-        args.t = data["t"]
+    with open(path, "r") as file:
+        return reads(file.read())
 
-        if "radius_multiplier" in data:
-            args.radius_multiplier = data["radius_multiplier"]
+def reads(string: str) -> axtools.AxiniteArgs:
+    """
+    Read a simulation from a string.
 
-        if "rate" in data:
-            args.rate = data["rate"]
+    Args:
+        string (str): The string to read from.
 
-        if "retain" in data:
-            args.retain = data["retain"]
+    Returns:
+        AxiniteArgs: The simulation result.
+    """
+    
+    data = json.loads(string)
+    
+    args = axtools.AxiniteArgs()
+    args.name = data["name"]
+    args.delta = ax.interpret_time(data["delta"])
+    args.limit = ax.round_limit(ax.interpret_time(data["limit"]), args.delta)
+    args.t = data["t"]
 
-        if "frontend_args" in data:
-            args.frontend_args = data["frontend_args"]
+    if "radius_multiplier" in data:
+        args.radius_multiplier = data["radius_multiplier"]
 
-        for body in data["bodies"]: 
-            args.bodies.append(axtools.data_to_body(body, args.limit, args.delta))
+    if "rate" in data:
+        args.rate = data["rate"]
 
-        return args
+    if "retain" in data:
+        args.retain = data["retain"]
+
+    if "frontend_args" in data:
+        args.frontend_args = data["frontend_args"]
+
+    for body in data["bodies"]: 
+        args.bodies.append(axtools.data_to_body(body, args.limit, args.delta))
+
+    return args
