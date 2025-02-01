@@ -3,7 +3,6 @@ import axinite as ax
 from vpython import *
 from itertools import cycle
 import os, signal, time, threading
-from vpython.no_notebook import stop_server
   
 def to_vec(v): 
     return vec(v[0], v[1], v[2])
