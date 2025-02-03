@@ -5,6 +5,8 @@ Axinite uses a derivative of the **semantic versioning system** to record change
 - Patch increments represent bug fixes, modifications that don't directly affect users, progress towards a milestone/goal, or other small changes.
 
 Although releases are only created for every minor or major increment, patch increments are still uploaded to PyPI.
+## 1.22.16 (2/3/25)
+- Fixed combine method including the path attribute
 ## 1.22.11 - 1.22.15 (2/1/25)
 - Made sure to include `scipy` in the dependencies
 - Stopped VPython from opening on import

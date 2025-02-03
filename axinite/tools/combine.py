@@ -15,5 +15,6 @@ def combine(meta: dict, file: dict, indent=4) -> str:
     filedata = json.loads(file)
     if "name" in metadata and "name" in filedata: del filedata['name']
     if "author" in metadata and "author" in filedata: del filedata['author']
+    del metadata['path']
     combined = {**metadata, **filedata}
     return json.dumps(combined, indent=indent)
