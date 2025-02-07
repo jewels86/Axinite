@@ -18,7 +18,11 @@ def load(delta, limit, backend, *bodies, t=0, modifier=None, action=None, action
     Returns:
         list[ax.Body]: A list of Body objects after the simulation.
     """
-    _bodies = backend(delta, limit, ax.get_inner_bodies(bodies), action=action, modifier=modifier, t=t, action_frequency=action_frequency)
+    try:
+        _bodies = backend(delta, limit, ax.get_inner_bodies(bodies), action=action, modifier=modifier, t=t, action_frequency=action_frequency)
+    except TypeError as e:
+        print("Error: Invalid backend.")
+        raise e
     __bodies = []
     for body in _bodies:
         _body = ax.Body(str(body["n"]), body["m"], limit, delta)

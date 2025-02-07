@@ -16,12 +16,16 @@ def body_dtype(limit: np.float64, delta: np.float64) -> np.dtype:
     Returns:
         np.dtype: The data type for a body.
     """
-    return np.dtype([
-        ("n", "U20"),
-        ("m", np.float64),
-        ("r", np.float64, (int(limit/delta), 3)),
-        ("v", np.float64, (int(limit/delta), 3))
-    ])
+    try: 
+        return np.dtype([
+            ("n", "U20"),
+            ("m", np.float64),
+            ("r", np.float64, (int(limit/delta), 3)),
+            ("v", np.float64, (int(limit/delta), 3))
+        ])
+    except ValueError as e:
+        print("Error: limit/delta must be an integer.")
+        raise e
 
 def _body(limit: np.float64, delta: np.float64, name: str, mass: np.float64) -> np.ndarray: 
     """
@@ -36,7 +40,10 @@ def _body(limit: np.float64, delta: np.float64, name: str, mass: np.float64) -> 
     Returns:
         np.ndarray: The new body.
     """
-    return np.array((name, mass, np.zeros((int(limit/delta), 3)), np.zeros((int(limit/delta), 3))), dtype=ax.body_dtype(limit, delta))
+    try: return np.array((name, mass, np.zeros((int(limit/delta), 3)), np.zeros((int(limit/delta), 3))), dtype=ax.body_dtype(limit, delta))
+    except ValueError as e: 
+        print("Error: limit/delta must be an integer.")
+        raise e
 
 def get_inner_bodies(bodies: list[ax.Body]) -> np.ndarray:
     """
@@ -189,7 +196,11 @@ def interpret_time(string: str) -> np.float64:
                     total_time += float(part) * factor
                     break
             else:
-                total_time += float(part)
+                try:
+                    total_time += float(part)
+                except ValueError as e:
+                    print(f"Unrecognized time unit in '{part}'")
+                    raise e
         return total_time
 
 def interpret_mass(string: str) -> np.float64:
@@ -215,7 +226,11 @@ def interpret_mass(string: str) -> np.float64:
                     total_mass += float(part) * factor
                     break
             else:
-                total_mass += float(part)
+                try:
+                    total_mass += float(part)
+                except ValueError as e:
+                    print(f"Unrecognized mass unit in '{part}'")
+                    raise e
         return total_mass
 
 def interpret_distance(string: str) -> np.float64:
@@ -241,7 +256,11 @@ def interpret_distance(string: str) -> np.float64:
                     total_distance += float(part) * factor
                     break
             else:
-                total_distance += float(part)
+                try:
+                    total_distance += float(part)
+                except ValueError as e:
+                    print(f"Unrecognized distance unit in '{part}'")
+                    raise e
         return total_distance
 
 def time_to(time: np.float64, unit: str, round_digits: int=-1) -> str:

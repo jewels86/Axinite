@@ -5,6 +5,8 @@ Axinite uses a derivative of the **semantic versioning system** to record change
 - Patch increments represent bug fixes, modifications that don't directly affect users, progress towards a milestone/goal, or other small changes.
 
 Although releases are only created for every minor or major increment, patch increments are still uploaded to PyPI.
+## 1.23.0 (2/5/25)
+- Error handling in `axtools` and `axinite`
 ## 1.22.17 (2/5/25)
 - Removed accidental mention of `astropy.units` in `load`
 ## 1.22.16 (2/3/25)

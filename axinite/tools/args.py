@@ -1,4 +1,5 @@
 import axinite.tools as axtools
+import axinite as ax
 import numpy as np
 
 class AxiniteArgs:
@@ -57,7 +58,7 @@ class AxiniteArgs:
         self.frontend_args: dict[str, dict[str, str|float|int|bool|list|dict]] = {}
         "A dictionary of frontend-specific arguments."
 
-        self.backend: function = None
+        self.backend: function = ax.verlet_backend
         "The backend (integration method) to use."
 
         self.action_frequency: int = None
