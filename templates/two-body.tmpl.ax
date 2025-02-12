@@ -1,7 +1,7 @@
 {
     "name": "two-body",
     "author": "jewels88",
-    "limit": "600d",
+    "limit": "10000d",
     "delta": "5min",
     "t": 0,
     "radius_multiplier": 2,
