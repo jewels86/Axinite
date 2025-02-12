@@ -1,42 +1,59 @@
 {
     "name": "binary-star-system",
     "author": "jewels88",
-    "limit": "365d",
-    "delta": "5min",
+    "limit": "600d",
+    "delta": "15min",
     "t": 0,
     "radius_multiplier": 2,
     "bodies": [
         {
-            "name": "Primary Star",
+            "name": "Star A",
             "mass": 1.989e30,
-            "radius": 6.957e8,
-            "color": "yellow",
-            "r": [[-1.496e11, 0, 0]],
-            "v": [[0, -29.78e3, 0]]
+            "radius": 6.95e8,
+            "r": [[-1e11, 0, 0]],
+            "v": [[0, -1e4, 1e4]]
         },
         {
-            "name": "Secondary Star",
-            "mass": 1.589e30,
-            "radius": 6.957e8,
-            "color": "orange",
-            "r": [[1.496e11, 0, 0]],
-            "v": [[0, 29.78e3, 0]]
+            "name": "Star B",
+            "mass": 1.989e30,
+            "radius": 6.95e8,
+            "r": [[1e11, 0, 0]],
+            "v": [[0, 1e4, -1e4]]
         },
         {
             "name": "Planet 1",
-            "mass": 5.972e24,
-            "radius": 6.371e6,
-            "color": "blue",
-            "r": [[1.496e11, 1.496e11, 0]],
-            "v": [[-29.78e3, 29.78e3, 0]]
+            "mass": 3.301e23,
+            "radius": 2.4397e6,
+            "r": [[1.5e11, 0, 0]],
+            "v": [[0, 0, 4.79e4]]
         },
         {
             "name": "Planet 2",
+            "mass": 4.867e24,
+            "radius": 6.0518e6,
+            "r": [[2.5e11, 0, 0]],
+            "v": [[0, 0, 3.5e4]]
+        },
+        {
+            "name": "Planet 3",
+            "mass": 5.972e24,
+            "radius": 6.371e6,
+            "r": [[3.5e11, 0, 0]],
+            "v": [[0, 0, 2.98e4]]
+        },
+        {
+            "name": "Planet 4",
+            "mass": 6.417e23,
+            "radius": 3.3895e6,
+            "r": [[4.5e11, 0, 0]],
+            "v": [[0, 0, 2.41e4]]
+        },
+        {
+            "name": "Planet 5",
             "mass": 1.898e27,
             "radius": 6.9911e7,
-            "color": "brown",
-            "r": [[7.785e11, 0, 0]],
-            "v": [[0, 13.07e3, 0]]
+            "r": [[5.5e11, 0, 0]],
+            "v": [[0, 0, 1.31e4]]
         }
     ]
 }
