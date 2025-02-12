@@ -6,3 +6,4 @@ meta/mars-moons.meta.ax
 meta/saturn-moons.meta.ax
 meta/three-body.meta.ax
 meta/two-body.meta.ax
+meta/inner-solar-system.meta.ax
