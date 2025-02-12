@@ -36,3 +36,6 @@ Any help will be appreciated!
 - [ ] Graceful load function exiting
 - [ ] Fix weird euler loading error where first positions are always the origin
 - [ ] Add context objects for backends with modifiers and actions
+
+## Known Bugs
+- Loading randomly crashes when deltas don't work out with limits
