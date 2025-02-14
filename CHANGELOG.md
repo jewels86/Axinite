@@ -5,6 +5,8 @@ Axinite uses a derivative of the **semantic versioning system** to record change
 - Patch increments represent bug fixes, modifications that don't directly affect users, progress towards a milestone/goal, or other small changes.
 
 Although releases are only created for every minor or major increment, patch increments are still uploaded to PyPI.
+## 1.23.1 (2/14/25)
+- Fixed bug where changing deltas or limits caused random crashes
 ## 1.23.0 (2/5/25)
 - Error handling in `axtools` and `axinite`
 ## 1.22.17 (2/5/25)

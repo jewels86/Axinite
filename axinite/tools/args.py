@@ -63,6 +63,43 @@ class AxiniteArgs:
 
         self.action_frequency: int = None
         "The frequency at which the action function should be called."
+    
+    def set_limit(self, limit: np.float64) -> None:
+        """
+        Sets the limit of the simulation.
+
+        Args:
+            limit (np.float64): The length of the simulation in seconds.
+        """
+        _bodies = []
+        self.limit = limit
+        for body in self.bodies:
+            body = axtools.Body(body.name, body.mass, limit, self.delta, body._inner["r"][0], body._inner["v"][0])
+            for i, r in enumerate(body._inner["r"]):
+                body._inner["r"][i] = r
+            for i, v in enumerate(body._inner["v"]):
+                body._inner["v"][i] = v
+            _bodies.append(body)
+        self.bodies = _bodies
+    
+    def set_delta(self, delta: np.float64) -> None:
+        """
+        Sets the delta of the simulation.
+
+        Args:
+            delta (np.float64): The frequency at which the simulation should be computed in seconds.
+        """
+        _bodies = []
+        self.delta = delta
+        self.set_limit(ax.round_limit(self.limit, delta))
+        for body in self.bodies:
+            body = axtools.Body(body.name, body.mass, self.limit, delta, body._inner["r"][0], body._inner["v"][0])
+            for i, r in enumerate(body._inner["r"]):
+                body._inner["r"][i] = r
+            for i, v in enumerate(body._inner["v"]):
+                body._inner["v"][i] = v
+            _bodies.append(body)
+        self.bodies = _bodies
 
     def unpack(self) -> tuple[np.float64, np.float64, 'function', '*tuple[axtools.Body, ...]']:
         """
