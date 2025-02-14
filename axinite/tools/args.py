@@ -75,10 +75,6 @@ class AxiniteArgs:
         self.limit = limit
         for body in self.bodies:
             body = axtools.Body(body.name, body.mass, limit, self.delta, body._inner["r"][0], body._inner["v"][0])
-            for i, r in enumerate(body._inner["r"]):
-                body._inner["r"][i] = r
-            for i, v in enumerate(body._inner["v"]):
-                body._inner["v"][i] = v
             _bodies.append(body)
         self.bodies = _bodies
     
@@ -94,10 +90,6 @@ class AxiniteArgs:
         self.set_limit(ax.round_limit(self.limit, delta))
         for body in self.bodies:
             body = axtools.Body(body.name, body.mass, self.limit, delta, body._inner["r"][0], body._inner["v"][0])
-            for i, r in enumerate(body._inner["r"]):
-                body._inner["r"][i] = r
-            for i, v in enumerate(body._inner["v"]):
-                body._inner["v"][i] = v
             _bodies.append(body)
         self.bodies = _bodies
 
