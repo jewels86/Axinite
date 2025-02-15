@@ -9,7 +9,7 @@ color_cycle = cycle(['r', 'b', 'g', 'orange', 'purple', 'yellow', 'gray', 'black
 def mpl_frontend(args: axtools.AxiniteArgs, mode: str, type: str = "2D", **kwargs):
     if type == "2D" and mode == "show":
         return mpl_2d_static(args, **kwargs)
-    elif type == "2D" and mode == "live":
+    elif type == "2D" and (mode == "live" or mode == "run"):
         return mpl_2d_live(args, **kwargs)
     elif type == "3D" and mode == "show":
         return mpl_3d_static(args, **kwargs)
