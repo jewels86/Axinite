@@ -72,10 +72,11 @@ def string_to_color(color_name: str, frontend: Literal['vpython', 'mpl', 'plotly
             'purple': vp.color.purple,
             'yellow': vp.color.yellow,
             'white': vp.color.white,
-            'gray': vp.color.gray(0.5)
+            'gray': vp.color.gray(0.5),
+            'black': vp.color.black
         }
         return color_map.get(color_name, vp.color.white)
-    elif frontend == "matplotlib":
+    elif frontend == "mpl":
         color_map = {
             'red': 'r',
             'blue': 'b',
@@ -84,9 +85,10 @@ def string_to_color(color_name: str, frontend: Literal['vpython', 'mpl', 'plotly
             'purple': 'purple',
             'yellow': 'yellow',
             'white': 'white',
-            'gray': 'gray'
+            'gray': 'gray',
+            'black': 'black'
         }
-        return color_map.get(color_name, 'white')
+        return color_map.get(color_name, 'black')
 
 def create_sphere(pos: np.ndarray, radius: np.float64, n=20) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Generates the vertices of a sphere.
