@@ -186,7 +186,7 @@ def interpret_time(string: str) -> np.float64:
     try:
         return safe_eval(string)
     except:
-        units = {"s": 1, "min": 60, "hr": 3600, "d": 86400, "yr": 31536000}
+        units = {"s": 1, "min": 60, "hr": 3600, "d": 86400, "w": 604800, "mo": 2628000, "yr": 31536000}
         total_time = 0
         for part in string.split('+'):
             part = part.strip()
@@ -246,7 +246,10 @@ def interpret_distance(string: str) -> np.float64:
     try:
         return safe_eval(string)
     except:
-        units = {"m": 1, "km": 1000, "cm": 1/100, "mm": 1/1000, "μm": 1/1000000, "nm": 1/1000000000}
+        units = {
+            "m": 1, "km": 1000, "cm": 1/100, "mm": 1/1000, "μm": 1/1000000, "nm": 1/1000000000,
+            "ft": 0.3048, "yard": 0.9144, "mile": 1609.34, "in": 0.0254
+        }
         total_distance = 0
         for part in string.split('+'):
             part = part.strip()
@@ -280,6 +283,10 @@ def time_to(time: np.float64, unit: str, round_digits: int=-1) -> str:
         converted_time = time / 3600
     elif unit == "d":
         converted_time = time / 86400
+    elif unit == "w":
+        converted_time = time / 604800
+    elif unit == "mo":
+        converted_time = time / 2628000
     elif unit == "yr":
         converted_time = time / 31536000
     else:
@@ -334,6 +341,12 @@ def distance_to(distance: np.float64, unit: str, round_digits: int=-1) -> str:
         converted_distance = distance * 1000000
     elif unit == "nm":
         converted_distance = distance * 1000000000
+    elif unit == "ft":
+        converted_distance = distance / 0.3048
+    elif unit == "yard":
+        converted_distance = distance / 0.9144
+    elif unit == "mile":
+        converted_distance = distance / 1609.34
     else:
         converted_distance = distance
 
