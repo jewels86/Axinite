@@ -18,6 +18,8 @@ For developers looking to deploy Axinite-powered applications, check out [the Py
 
 For students, engineers, physicists, and anyone else in the field of astrophysics who want to simulate gravitational interactions, you can check out the [command line interface](https://github.com/jewels86/axcli).
 ## Supporting Axinite
+## Giving Feedback
+The biggest way you can help Axinite's development is by giving feedback. Reporting bugs, proposing ideas, and raising issues really help make the library better.
 ### Contributing
 Feel free to open up a [pull request](https://github.com/jewels86/Axinite/pulls) or an [issue](https://github.com/jewels86/Axinite/issues) if there are any changes you'd like introduced to Axinite.
 Any help will be appreciated!
