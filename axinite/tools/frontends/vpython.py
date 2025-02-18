@@ -93,7 +93,7 @@ def vpython_live(args: axtools.AxiniteArgs, s=1):
             labels[body.name].pos = spheres[body.name].pos
             try: lights[body.name].pos = spheres[body.name].pos
             except: pass
-        if kwargs['n'] % 200 == 1:print(f"t = {t}, n = {kwargs['n']}", end='\r')
+        if kwargs['n'] % 200 == 1:print(f"t = {t}, n = {kwargs['n']}, s = {_s}, rate = {_rate}", end='\r')
         if pause: 
             while pause: rate(10)
 
