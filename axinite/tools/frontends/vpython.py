@@ -26,11 +26,13 @@ def vpython_frontend(args: axtools.AxiniteArgs, mode: str, **kwargs):
         function: A function to stop the visualization in 'live' or 'run' mode.
     """
     if mode == "live" or mode == "run":
+        if kwargs["s"] is None:
+            kwargs["s"] = max(1, len(args.bodies[0].rs) // 1000)
         return vpython_live(args, **kwargs)
     elif mode == "show":
         return vpython_static(args, **kwargs)
     
-def vpython_live(args: axtools.AxiniteArgs):
+def vpython_live(args: axtools.AxiniteArgs, s=1):
     if args.rate is None:
         args.rate = 100
     if args.radius_multiplier is None:
@@ -71,6 +73,7 @@ def vpython_live(args: axtools.AxiniteArgs):
             attach_light(spheres[body.name], lights[body.name])
 
     def fn(bodies, t, **kwargs):
+        if (kwargs["n"] + 1) % s != 0: return
         bodies = ax.create_outer_bodies(bodies, kwargs["limit"], kwargs["delta"])
         global _rate, pause
         rate(_rate)
