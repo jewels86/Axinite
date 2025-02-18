@@ -27,7 +27,7 @@ def vpython_frontend(args: axtools.AxiniteArgs, mode: str, **kwargs):
     """
     if mode == "live" or mode == "run":
         if "s" not in kwargs:
-            kwargs["s"] = max(1, len(args.bodies[0].rs) // 500)
+            kwargs["s"] = max(1, len(args.bodies[0].rs) // 1000)
         return vpython_live(args, **kwargs)
     elif mode == "show":
         return vpython_static(args, **kwargs)
@@ -56,8 +56,18 @@ def vpython_live(args: axtools.AxiniteArgs, s=1):
     def rate_hander(evt):
         global _rate
         _rate = evt.value
+
+    global _s
+    _s = s
+    def s_handler(evt):
+        global _s
+        _s = int(10 ** evt.value)
+
     button(text='Pause', bind=pause_handler, pos=scene.caption_anchor)
-    slider(bind=rate_hander, min=1, max=1000, value=+_rate, step=1, right=15, length=200, pos=scene.caption_anchor)
+    slider(bind=rate_hander, min=1, max=1000, value=+_rate, step=1, right=15, length=300, pos=scene.caption_anchor)
+    wtext(text='Rate Slider', pos=scene.caption_anchor)
+    slider(bind=s_handler, min=0, max=2, value=1, step=0.01, right=15, length=300, pos=scene.caption_anchor)
+    wtext(text='S Value Slider', pos=scene.caption_anchor)
 
     spheres = {}
     labels = {}
@@ -73,7 +83,7 @@ def vpython_live(args: axtools.AxiniteArgs, s=1):
             attach_light(spheres[body.name], lights[body.name])
 
     def fn(bodies, t, **kwargs):
-        if (kwargs["n"] + 1) % s != 0: return
+        if (kwargs["n"] + 1) % _s != 0: return
         bodies = ax.create_outer_bodies(bodies, kwargs["limit"], kwargs["delta"])
         global _rate, pause
         rate(_rate)
