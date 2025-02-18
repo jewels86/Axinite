@@ -26,7 +26,7 @@ def vpython_frontend(args: axtools.AxiniteArgs, mode: str, **kwargs):
         function: A function to stop the visualization in 'live' or 'run' mode.
     """
     if mode == "live" or mode == "run":
-        if "s" not in kwargs:
+        if "s" not in kwargs or kwargs["s"] == -1:
             n_timesteps = ax.timesteps(args.limit, args.delta)
             kwargs["s"] = ceil((1 / 2 * n_timesteps) * log(n_timesteps / args.delta, 10))
         return vpython_live(args, **kwargs)
