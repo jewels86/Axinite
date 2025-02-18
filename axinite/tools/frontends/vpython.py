@@ -27,7 +27,8 @@ def vpython_frontend(args: axtools.AxiniteArgs, mode: str, **kwargs):
     """
     if mode == "live" or mode == "run":
         if "s" not in kwargs:
-            kwargs["s"] = max(1, len(args.bodies[0].rs) // 1000)
+            n_timesteps = ax.timesteps(args.limit, args.delta)
+            kwargs["s"] = ceil((1 / 2 * n_timesteps) * log(n_timesteps / args.delta, 10))
         return vpython_live(args, **kwargs)
     elif mode == "show":
         return vpython_static(args, **kwargs)
@@ -83,7 +84,7 @@ def vpython_live(args: axtools.AxiniteArgs, s=1):
             attach_light(spheres[body.name], lights[body.name])
 
     def fn(bodies, t, **kwargs):
-        if (kwargs["n"] + 1) % _s != 0: return
+        if (kwargs["n"]) % _s != 0: return
         bodies = ax.create_outer_bodies(bodies, kwargs["limit"], kwargs["delta"])
         global _rate, pause
         rate(_rate)
