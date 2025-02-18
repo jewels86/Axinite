@@ -27,7 +27,7 @@ def vpython_frontend(args: axtools.AxiniteArgs, mode: str, **kwargs):
     """
     if mode == "live" or mode == "run":
         if "s" not in kwargs:
-            kwargs["s"] = max(1, len(args.bodies[0].rs) // 1000)
+            kwargs["s"] = max(1, len(args.bodies[0].rs) // 500)
         return vpython_live(args, **kwargs)
     elif mode == "show":
         return vpython_static(args, **kwargs)
