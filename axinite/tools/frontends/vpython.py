@@ -28,7 +28,7 @@ def vpython_frontend(args: axtools.AxiniteArgs, mode: str, **kwargs):
     if mode == "live" or mode == "run":
         if "s" not in kwargs or kwargs["s"] == -1:
             n_timesteps = ax.timesteps(args.limit, args.delta)
-            kwargs["s"] = ceil((1 / abs(2 * sin(n_timesteps))) * log(n_timesteps / args.delta, 10))
+            kwargs["s"] = ceil((1 / abs(2 * sin(n_timesteps))) * log(n_timesteps / args.delta))
         return vpython_live(args, **kwargs)
     elif mode == "show":
         return vpython_static(args, **kwargs)
