@@ -16,8 +16,10 @@ def live(args: axtools.AxiniteArgs, frontend: 'function') -> None:
        args.retain = 200
 
     t = 0
+    n = 0
     inner = ax.get_inner_bodies(args.bodies)
     while t < args.limit:
-        frontend[0](inner, t, limit=args.limit, delta=args.delta, n=int(t / args.delta))
+        frontend[0](inner, t, limit=args.limit, delta=args.delta, n=n)
         t += args.delta
+        n += 1
     frontend[1]()

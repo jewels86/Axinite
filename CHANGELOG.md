@@ -5,7 +5,9 @@ Axinite uses a derivative of the **semantic versioning system** to record change
 - Patch increments represent bug fixes, modifications that don't directly affect users, progress towards a milestone/goal, or other small changes.
 
 Although releases are only created for every minor or major increment, patch increments are still uploaded to PyPI.
-## 1.24.3-1.24.9 (1/18/25)
+## 1.24.10 (2/19/25)
+- Fixed timestep scaling
+## 1.24.3-1.24.9 (2/18/25)
 - Implemented timestep scaling in `vpython_frontend`
 ## 1.24.2 (2/16/25)
 - Added imperial units and time units to interpret and conversion functions
