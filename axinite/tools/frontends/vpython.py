@@ -67,7 +67,7 @@ def vpython_live(args: axtools.AxiniteArgs, s=1):
     button(text='Pause', bind=pause_handler, pos=scene.caption_anchor)
     slider(bind=rate_hander, min=1, max=1000, value=+_rate, step=1, right=15, length=300, pos=scene.caption_anchor)
     wtext(text='Rate Slider', pos=scene.caption_anchor)
-    slider(bind=s_handler, min=0, max=2, value=1, step=0.01, right=15, length=300, pos=scene.caption_anchor)
+    slider(bind=s_handler, min=0, max=2, value=log10(_s), step=0.01, right=15, length=300, pos=scene.caption_anchor)
     wtext(text='S Value Slider', pos=scene.caption_anchor)
 
     spheres = {}
