@@ -3,6 +3,7 @@ import axinite as ax
 import matplotlib.pyplot as plt
 import os, signal
 from itertools import cycle
+from numpy import sin, log, ceil
 
 color_cycle = cycle(['r', 'b', 'g', 'orange', 'purple', 'yellow', 'gray', 'black'])
 
@@ -10,6 +11,9 @@ def mpl_frontend(args: axtools.AxiniteArgs, mode: str, type: str = "2D", **kwarg
     if type == "2D" and mode == "show":
         return mpl_2d_static(args, **kwargs)
     elif type == "2D" and (mode == "live" or mode == "run"):
+        if "s" not in kwargs or kwargs["s"] == -1:
+            n_timesteps = ax.timesteps(args.limit, args.delta)
+            kwargs["s"] = ceil((1 / abs(2 * sin(n_timesteps))) * log(n_timesteps / args.delta))
         return mpl_2d_live(args, **kwargs)
     elif type == "3D" and mode == "show":
         return mpl_3d_static(args, **kwargs)
@@ -116,6 +120,7 @@ def mpl_2d_live(args: axtools.AxiniteArgs, **kwargs):
         plt.tight_layout()
 
     def update_plot(bodies, t, **kwargs):
+        if kwargs["n"] % kwargs["s"] != 0: return
         try:
             axs[0, 0].clear()
             axs[0, 1].clear()
