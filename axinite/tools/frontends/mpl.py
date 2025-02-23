@@ -14,7 +14,7 @@ def mpl_frontend(args: axtools.AxiniteArgs, mode: str, type: str = "2D", **kwarg
         if "s" not in kwargs or kwargs["s"] == -1:
             n_timesteps = ax.timesteps(args.limit, args.delta)
             kwargs["s"] = ceil((1 / abs(2 * sin(n_timesteps))) * log(n_timesteps / args.delta))
-        return mpl_2d_live(args, **kwargs)
+        return mpl_2d_live(args, **kwargs, s=kwargs["s"])
     elif type == "3D" and mode == "show":
         return mpl_3d_static(args, **kwargs)
     else:
