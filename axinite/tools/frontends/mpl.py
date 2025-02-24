@@ -118,9 +118,11 @@ def mpl_2d_live(args: axtools.AxiniteArgs, **kwargs):
         axs[1, 0].set_ylabel('Z')
 
         plt.tight_layout()
+    
+    s = kwargs["s"]
 
     def update_plot(bodies, t, **kwargs):
-        if kwargs["n"] % kwargs["s"] != 0: return
+        if kwargs["n"] % s != 0: return
         try:
             axs[0, 0].clear()
             axs[0, 1].clear()
