@@ -5,7 +5,7 @@ import numpy as np
 
 path = "inner-solar-system.tmpl.ax"
 t_start = ax.interpret_time("686d") * 60
-t_end = ax.interpret_time("686d") * 60
+t_end = ax.interpret_time("686d") * 100
 backend = ax.verlet_backend
 
 source = "Earth"
@@ -22,12 +22,15 @@ def mass(t):
 
 logger = logging.getLogger('rocket-logger')
 logging.basicConfig(level=logging.INFO)
-logger.info(f"Logger started with t_start of {t_start} and {t_end}, whatever those mean")
+logger.info(f"Logger started with t_start of {t_start} and {t_end}, whatever those mean (they are in seconds).")
 
 try:
     args = axtools.read(path)
-    args.limit = t_end
+    args.set_limit(t_end)
     args.backend = backend
+
+    logger.info(f"Loading bodies from {path} with limit {args.limit} (from {t_end} - may have been rounded)...")
+
     axtools.load(args, verbose=True)
 
     def get_body(name):
@@ -42,54 +45,60 @@ try:
     logger.info(f"Finished! {args.limit/args.delta} timesteps computed.")
     logger.info(f"Setting up simulation...")
 
-    r_source = lambda n: source_body._inner["r"][n]
-    v_source = lambda n: source_body._inner["v"][n]
-    r_dest = lambda n: dest_body._inner["r"][n]
-    v_dest = lambda n: dest_body._inner["v"][n]
-    d = args.delta  # time step
+    _r_source = source_body._inner["r"]
+    _v_source = source_body._inner["v"]
+    _r_dest = dest_body._inner["r"]
+    _v_dest = dest_body._inner["v"]
+    r_source = njit(lambda n: _r_source[n])
+    v_source = njit(lambda n: _v_source[n])
+    r_dest = njit(lambda n: _r_dest[n])
+    v_dest = njit(lambda n: _v_dest[n])
+    d = args.delta 
 
     t_start = ax.round_limit(t_start, d)
     t_end = ax.round_limit(t_end, d)
+    inners = [body._inner for body in args.bodies]
 
-    def compute_gravity(n, r):
+    @njit
+    def compute_gravity(n, r, inners):
         F_total = np.zeros(3)
-        for body in args.bodies:
-            r_body = body._inner["r"][n]
+        for body in inners:
+            r_body = body["r"][n]
             F_total += ax.gravitational_force_jit(
-                body._inner["m"], mass(n * d), r_body - r
+                body["m"], mass(n * d), r_body - r
             )
         return F_total
 
+    @njit
     def thrust_toward_target(n, r):
         direction = r_dest(n) - r
         unit = direction / np.linalg.norm(direction)
         return max_thrust * unit
 
-    def simulate_rocket(n_start, n_end):
+    @njit
+    def simulate_rocket(n_start, n_end, inners):
         r = np.copy(r_source(n_start))
         v = np.copy(v_source(n_start))
         traj = [r.copy()]
         for n in range(n_start, n_end):
-            F_g = compute_gravity(n, r)
+            F_g = compute_gravity(n, r, inners)
             F_t = thrust_toward_target(n, r)
             a = (F_g + F_t) / mass(n * d)
             v += a * d
             r += v * d
             traj.append(r.copy())
 
-            # Intercept detection (optional)
             dist = np.linalg.norm(r - r_dest(n))
             if dist < 1e6:
-                logger.info(f"Close approach at step {n}, distance: {dist}")
+                print("Intercept detected! Following data is in (seconds, n)", n*d, n)
                 break
 
         return traj
 
-    # Example run
-    start_index = int(t_start / d)
-    end_index = int(t_end / d)
-    logger.info("Simulating trajectory...")
-    trajectory = simulate_rocket(start_index, end_index)
+    start_index = int(ax.round_limit(t_start, d) / d)
+    end_index = int(ax.round_limit(t_end, d) / d)
+    logger.info(f"Simulating trajectory from {start_index}n to {end_index}n...")
+    trajectory = simulate_rocket(start_index, end_index - 1, inners)
 
     logger.info("Simulation complete.")
 
@@ -97,4 +106,5 @@ try:
 except Exception as e:
     logger.error(f"Could not read from {path}, got error: {e}")
     logger.info(f"Make sure you download the required files first- 'axcli catalog' can help")
+    # raise e
     sys.exit(-1)

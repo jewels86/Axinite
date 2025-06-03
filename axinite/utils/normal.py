@@ -16,7 +16,7 @@ def normal_force_modifier():
             distance_vector = other["r"][n-1] - body["r"][n-1]
             distance = np.linalg.norm(distance_vector)
             normal_vector = distance_vector / distance
-            force_magnitude = body["m"] * other["m"] * ax.G / distance**2
+            force_magnitude = np.dot(body["v"][n-1], normal_vector) * body["m"] / delta
             f += force_magnitude * normal_vector
         
         return f
