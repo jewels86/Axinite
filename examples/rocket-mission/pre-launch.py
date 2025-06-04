@@ -25,13 +25,22 @@ logging.basicConfig(level=logging.INFO)
 logger.info(f"Logger started with t_start of {t_start} and {t_end}, whatever those mean (they are in seconds).")
 
 try:
-    args = axtools.read(path)
-    args.set_limit(t_end)
-    args.backend = backend
+    if path.endswith(".tmpl.ax"):
+        logger.info(f"Loading template file {path}...")
+        args = axtools.read(path)
+        args.set_limit(t_end)
+        args.backend = backend
 
-    logger.info(f"Loading bodies from {path} with limit {args.limit} (from {t_end} - may have been rounded)...")
+        logger.info(f"Loading bodies from {path} with limit {args.limit} (from {t_end} - may have been rounded)...")
 
-    axtools.load(args, verbose=True)
+        axtools.load(args, verbose=True)
+        axtools.save(args, path.replace(".tmpl.ax", ".ax"))
+        logger.info(f"Template file loaded and saved as {path.replace('.tmpl.ax', '.ax')}.")
+    else:
+        logger.info(f"Loading file {path}...")
+        args = axtools.read(path)
+        args.set_limit(t_end)
+        args.backend = backend
 
     def get_body(name):
         for body in args.bodies:

@@ -5,6 +5,8 @@ Axinite uses a derivative of the **semantic versioning system** to record change
 - Patch increments represent bug fixes, modifications that don't directly affect users, progress towards a milestone/goal, or other small changes.
 
 Although releases are only created for every minor or major increment, patch increments are still uploaded to PyPI.
+## 1.24.18 (6/4/2025)
+- Better `axana.intercept` function
 ## 1.24.14-1.24.17 (2/23/2025)
 - Scaling for MPL frontend
 ## 1.24.10-1.24.13 (2/19/25)
