@@ -36,6 +36,8 @@ Any help will be appreciated!
 
 ## Community Todo List
 I have begun to work on other projects, so I may not finish these for a while. Feel free to do it yourself!
+- [ ] Secure file operations (no deserialization of anything untrusted)
 - [ ] Graceful load function exiting
 - [ ] Fix weird euler loading error where first positions are always the origin
 - [ ] Add context objects for backends with modifiers and actions
+- [ ] Marketplace expansion (more files, and maybe signing if it works out)
