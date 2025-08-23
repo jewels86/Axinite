@@ -1,8 +1,0 @@
-meta/earth-system.meta.ax
-meta/jupiter-moons.meta.ax
-meta/solar-system.meta.ax
-meta/binary-star-system.meta.ax
-meta/mars-moons.meta.ax
-meta/saturn-moons.meta.ax
-meta/three-body.meta.ax
-meta/inner-solar-system.meta.ax
