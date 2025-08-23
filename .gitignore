@@ -1,13 +1,2 @@
-**/__pycache__
-.vs
-.vscode
-.venv
-venv
-./*.ax
-test.py
-*.egg
-*.egg-info/
-dist/
-build/
-bin
-test2.py
+/target/
+**/Cargo.lock
