@@ -1,2 +1,6 @@
 /target/
+/debug/
+**/*.rs.bk
 **/Cargo.lock
+.idea/
+**/*/pdb
