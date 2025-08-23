@@ -1,0 +1,12 @@
+# Design
+- Instead of storing arrays of vectors like in V1, we store functions.
+- Bodies are simplified to position & velocity functions + metadata (string -> string)
+- Templates store initial conditions
+  - Simulation metadata (name, final time, delta time, etc)
+  - Body metadata (name, starting position, starting velocity, etc)
+- Axinite will compile the simulation:
+  - Each body's position/velocity function will be compiled into a bytecode sequence. 
+  - If the solution can be represented analytically, it will create a mathematical function.
+  - If the solution can be represented in terms of the other bodies, it will create a sequence of code.
+  - If the solution can't be represented with either or neither is possible, it will create a piecewise function with the evaluated arrays of vectors.
+- When a simulation is read from a file, the bytecode functions are compiled into Rust closures at runtime.
