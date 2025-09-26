@@ -10,11 +10,11 @@ You can use it to design your own solar systems, predict trajectories of rockets
 
 Check out the docs [here](https://jewels86.gitbook.io/axinite/axinite/getting-started).
 ### What is `axtools`?
-`axtools` is a library to help abstract and simplify Axinite. With `axtools`, Developers can deploy Axinite powered applications with ease. 
+`axtools` is a library to help abstract and simplify Axinite. With `axtools`, developers can deploy Axinite powered applications with ease. 
 You can find the docs [here](https://jewels86.gitbook.io/axinite/axtools/quickstart).
 
 ## How can I use Axinite?
-For developers looking to deploy Axinite-powered applications, check out [the Python package](https://pypi.org/project/axinite/).
+For developers looking to deploy applications with Axinite, check out [the Python package](https://pypi.org/project/axinite/).
 
 For students, engineers, physicists, and anyone else in the field of astrophysics who want to simulate gravitational interactions, you can check out the [command line interface](https://github.com/jewels86/axcli).
 ## Supporting Axinite
