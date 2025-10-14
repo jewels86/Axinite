@@ -28,6 +28,8 @@ def mpl_2d_static(args: axtools.AxiniteArgs, **kwargs):
     if args.retain is None:
        args.retain = 200
 
+    update_extra = kwargs.get("update_extra", None)
+
     fig, axs = plt.subplots(2, 2, figsize=(15, 15))
     plt.ion()
     fig.show()
@@ -59,6 +61,8 @@ def mpl_2d_static(args: axtools.AxiniteArgs, **kwargs):
             axs[0, 0].plot(trajectory_x[-1], trajectory_y[-1], 'x', color=color)
             axs[0, 1].plot(trajectory_x[-1], trajectory_z[-1], 'x', color=color)
             axs[1, 0].plot(trajectory_y[-1], trajectory_z[-1], 'x', color=color)
+
+        if update_extra is not None: update_extra(axs, body, args, kwargs)
 
         axs[0, 0].set_xlabel('X')
         axs[0, 0].set_ylabel('Y')
@@ -95,6 +99,9 @@ def mpl_2d_live(args: axtools.AxiniteArgs, **kwargs):
     if args.retain is None:
        args.retain = 200
 
+    update_extra = kwargs.get("update_extra", None)
+    setup_extra = kwargs.get("setup_extra", None)
+
     fig, axs = plt.subplots(2, 2, figsize=(15, 15))
     plt.ion()
     fig.show()
@@ -116,6 +123,7 @@ def mpl_2d_live(args: axtools.AxiniteArgs, **kwargs):
         axs[0, 1].set_ylabel('Z')
         axs[1, 0].set_xlabel('Y')
         axs[1, 0].set_ylabel('Z')
+        if setup_extra is not None: setup_extra(axs, args)
 
         plt.tight_layout()
     
@@ -153,6 +161,8 @@ def mpl_2d_live(args: axtools.AxiniteArgs, **kwargs):
             axs[0, 0].legend()
             axs[0, 1].legend()
             axs[1, 0].legend()
+
+            if update_extra is not None: update_extra(axs, bodies, t, args, kwargs)
 
             setup_plot()
 
